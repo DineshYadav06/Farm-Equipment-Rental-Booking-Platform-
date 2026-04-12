@@ -1,0 +1,17 @@
+# Dependencies
+node_modules
+client/node_modules
+server/node_modules
+
+# Environment Variables
+.env
+server/.env
+client/.env
+
+# Build outputs
+client/dist
+server/dist
+
+# Other
+.DS_Store
+*.log
