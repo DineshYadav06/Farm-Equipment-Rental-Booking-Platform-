@@ -1,32 +1,56 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaMapMarkerAlt, FaRupeeSign } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaRupeeSign, FaStar, FaTractor } from 'react-icons/fa';
 
 const EquipmentCard = ({ equipment }) => {
+  const eq = equipment;
   return (
-    <div className="glass-card card-hover">
-      <img
-        src={equipment.image || 'https://via.placeholder.com/300x200?text=AgroLink+Equipment'}
-        alt={equipment.name}
-        className="img-fluid mb-2"
-        style={{ width: '100%', height: '200px', objectFit: 'cover' }}
-      />
-      <div className="flex justify-between items-center mb-1">
-        <span className="badge badge-success">{equipment.type}</span>
-        {equipment.distance && (
-          <span className="text-sm text-muted flex items-center gap-1">
-            <FaMapMarkerAlt /> {equipment.distance} km away
-          </span>
-        )}
+    <div className="eq-card glass-card card-hover">
+      {/* Image */}
+      <div className="eq-card-img-wrap">
+        <img
+          src={eq.image || 'https://images.unsplash.com/photo-1592982537447-6f2a6a0c5c11?w=400&h=260&fit=crop'}
+          alt={eq.name}
+          className="eq-card-img"
+        />
+        <div className="eq-card-overlay" />
+        <span className={`eq-status-badge ${eq.status === 'booked' ? 'eq-status-booked' : 'eq-status-avail'}`}>
+          {eq.status === 'booked' ? '🔴 Booked' : '✅ Available'}
+        </span>
+        <span className="eq-type-chip">{eq.type || 'Equipment'}</span>
       </div>
-      <h3 className="text-xl mb-1">{equipment.name}</h3>
-      <div className="flex justify-between items-center mt-2">
-        <div className="text-gradient font-bold flex items-center">
-          <FaRupeeSign /> {equipment.ratePerHour}/hr
+
+      {/* Body */}
+      <div className="eq-card-body">
+        <h3 className="eq-card-title">{eq.name}</h3>
+
+        <div className="eq-card-meta">
+          {eq.distance && (
+            <span className="eq-meta-item">
+              <FaMapMarkerAlt style={{ color: '#3498db' }} /> {eq.distance} km
+            </span>
+          )}
+          {eq.rating && (
+            <span className="eq-meta-item">
+              <FaStar style={{ color: '#f1c40f' }} /> {eq.rating}
+            </span>
+          )}
+          {eq.owner && (
+            <span className="eq-meta-item">
+              <FaTractor style={{ color: '#2ecc71' }} /> {eq.owner}
+            </span>
+          )}
         </div>
-        <Link to={`/equipment/${equipment._id}`} className="btn btn-secondary text-sm">
-          View Details
-        </Link>
+
+        <div className="eq-card-footer">
+          <div className="eq-price">
+            <span className="eq-price-val text-gradient">₹{eq.ratePerHour || eq.price}</span>
+            <span className="eq-price-unit">/hr</span>
+          </div>
+          <Link to={`/browse`} className="eq-book-btn">
+            Book Now
+          </Link>
+        </div>
       </div>
     </div>
   );
