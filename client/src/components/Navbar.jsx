@@ -5,7 +5,10 @@ import { FaUserCircle, FaMoon, FaSun, FaBars, FaTimes, FaLeaf } from 'react-icon
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -16,6 +19,7 @@ const Navbar = () => {
     } else {
       document.body.classList.remove('dark-mode');
     }
+    localStorage.setItem('theme', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
   useEffect(() => {
@@ -115,7 +119,7 @@ const Navbar = () => {
 
             <Link to="/login" className="login-btn">
               <FaUserCircle />
-              <span>{t('login')} / {t('register') || 'Register'}</span>
+              <span>{t('login')}</span>
             </Link>
           </div>
 
@@ -164,7 +168,7 @@ const Navbar = () => {
             </button>
             <Link to="/login" className="login-btn flex-1" onClick={() => setIsMobileMenuOpen(false)}>
               <FaUserCircle />
-              <span>Login / Register</span>
+              <span>{t('login')}</span>
             </Link>
           </div>
         </div>
