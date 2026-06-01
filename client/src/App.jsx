@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Browse from './pages/Browse';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import CropStudy from './pages/CropStudy';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/search" element={<MapSearch />} />
             <Route path="/browse" element={<Browse />} />
+            <Route path="/study" element={<CropStudy />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/dashboard" element={<Dashboard />} />

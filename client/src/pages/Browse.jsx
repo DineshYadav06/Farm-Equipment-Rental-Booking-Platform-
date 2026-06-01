@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { FaFilter, FaTractor, FaMapMarkerAlt, FaStar, FaCheckCircle, FaTimesCircle, FaTag, FaSearch } from 'react-icons/fa';
 
 const MOCK_EQUIPMENT = [
@@ -82,8 +83,12 @@ const EquipmentCard = ({ eq }) => (
 );
 
 const Browse = () => {
-  const [search, setSearch] = useState('');
-  const [typeFilter, setTypeFilter] = useState('All');
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get('search') || '';
+  const initialType = searchParams.get('type') || 'All';
+
+  const [search, setSearch] = useState(initialSearch);
+  const [typeFilter, setTypeFilter] = useState(initialType);
   const [statusFilter, setStatusFilter] = useState('all');
   const [maxPrice, setMaxPrice] = useState(2500);
   const [maxDist, setMaxDist] = useState(10);

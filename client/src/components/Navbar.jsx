@@ -30,6 +30,7 @@ const Navbar = () => {
       <div className="mobile-nav-links">
         <Link to="/" className="nav-link text-xl mb-3" onClick={() => setIsMobileMenuOpen(false)}>{t('home')}</Link>
         <Link to="/browse" className="nav-link text-xl mb-3" onClick={() => setIsMobileMenuOpen(false)}>{t('browse')}</Link>
+        <Link to="/study" className="nav-link text-xl mb-3" onClick={() => setIsMobileMenuOpen(false)}>{t('crop_guide')}</Link>
         <Link to="/search" className="nav-link text-xl mb-3" onClick={() => setIsMobileMenuOpen(false)}>📍 {t('nearby')}</Link>
         <Link to="/about" className="nav-link text-xl mb-3" onClick={() => setIsMobileMenuOpen(false)}>{t('about')}</Link>
         <Link to="/contact" className="nav-link text-xl mb-4" onClick={() => setIsMobileMenuOpen(false)}>{t('contact')}</Link>
@@ -65,6 +66,7 @@ const Navbar = () => {
         <div className="nav-links hide-on-mobile">
           <Link to="/" className="nav-link">{t('home')}</Link>
           <Link to="/browse" className="nav-link">{t('browse')}</Link>
+          <Link to="/study" className="nav-link">{t('crop_guide')}</Link>
           <Link to="/search" className="nav-link flex items-center gap-1" style={{ color: 'var(--primary-blue)' }}>
             📍 {t('nearby')}
           </Link>

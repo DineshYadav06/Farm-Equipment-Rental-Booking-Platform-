@@ -39,8 +39,9 @@ const Home = () => {
           </div>
           
           <div className="mt-4 flex flex-wrap gap-2">
+             <Link to="/study" className="btn btn-primary">{t('crop_guide')}</Link>
              <Link to="/search" className="btn btn-secondary">{t('explore_btn')}</Link>
-             <Link to="/login" className="btn" style={{ borderBottom: '1px solid var(--primary-green)', borderRadius: 0 }}>List your Equipment</Link>
+             <Link to="/login" className="btn" style={{ borderBottom: '1px solid var(--primary-green)', borderRadius: 0, paddingLeft: 10, paddingRight: 10 }}>List your Equipment</Link>
           </div>
         </div>
       </section>
@@ -67,6 +68,12 @@ const Home = () => {
             <div style={{ fontSize: '2.5rem', color: 'var(--accent-color)', marginBottom: '15px' }}><FaClock /></div>
             <h3 className="text-xl mb-1">Instant Booking</h3>
             <p className="text-muted text-sm">Check real-time availability and confirm your machinery in seconds.</p>
+          </div>
+          <div className="glass-card card-hover">
+            <div style={{ fontSize: '2.5rem', color: 'var(--success)', marginBottom: '15px' }}><FaLeaf style={{ color: 'var(--primary-green)' }} /></div>
+            <h3 className="text-xl mb-1">Seasonal Crop Guide</h3>
+            <p className="text-muted text-sm">Learn crop cycles, check live weather, and rent matched machinery instantly.</p>
+            <Link to="/study" className="text-gradient font-bold text-sm" style={{ display: 'inline-block', marginTop: '10px' }}>Explore Guide &rarr;</Link>
           </div>
         </div>
       </section>
