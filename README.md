@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
 ![React](https://img.shields.io/badge/Frontend-React_19-blue?style=for-the-badge)
 ![Node](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge)
-
+   
 MCAET AgroLink is an advanced, full-stack web application developed to bridge the gap between agricultural equipment owners and farmers who need access to high-quality machinery. By democratizing access to expensive farming equipment, the platform aims to empower the agricultural community, enhance productivity, and promote sustainable resource sharing.
 
 ---
