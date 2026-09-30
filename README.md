@@ -1,4 +1,4 @@
-# MCAET AgroLink: Smart Agricultural Equipment Rental Platform
+# MCAET AgroLink: Smart Agricultural Equipment Rental Platform for smart india
 
 ![MCAET AgroLink Banner](https://img.shields.io/badge/Project-AgroLink-brightgreen?style=for-the-badge)
 ![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue?style=for-the-badge)
