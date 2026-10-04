@@ -1,188 +1,155 @@
-# MCAET AgroLink: Smart Agricultural Equipment Rental Platform for smart india
+# FarmRentHub: Agricultural Equipment Rental & Booking Platform
 
-![MCAET AgroLink Banner](https://img.shields.io/badge/Project-AgroLink-brightgreen?style=for-the-badge)
-![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
-![React](https://img.shields.io/badge/Frontend-React_19-blue?style=for-the-badge)
-![Node](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge)
-   
-MCAET AgroLink is an advanced, full-stack web application developed to bridge the gap between agricultural equipment owners and farmers who need access to high-quality machinery. By democratizing access to expensive farming equipment, the platform aims to empower the agricultural community, enhance productivity, and promote sustainable resource sharing.
+> **"Rent the Right Equipment. Grow with Ease."**
 
----
-
-## 📖 About The Project
-
-### The Problem
-Small-scale and marginal farmers often struggle to afford modern, expensive agricultural machinery like tractors, harvesters, or specialized plows. On the other hand, equipment owners often have machinery sitting idle when not in use on their own farms. There has traditionally been no centralized, trustworthy platform for these two parties to connect efficiently.
-
-### The Solution: MCAET AgroLink
-MCAET AgroLink acts as a centralized marketplace. Equipment owners can list their machinery, setting availability dates and pricing. Farmers can search for equipment based on location, type, and availability, and book them seamlessly. This model reduces capital expenditure for farmers, generates additional income for equipment owners, and optimizes the use of agricultural resources.
-
----
-
-## 🌟 Core Features in Detail
-
-1. **Robust User Authentication & Authorization:**
-   - Secure Login/Signup with robust password hashing (Bcrypt).
-   - JWT (JSON Web Token) implementation for secure, stateless user sessions.
-   - Role-based access (Farmers vs. Equipment Owners/Admins).
-
-2. **Advanced Equipment Marketplace:**
-   - **Listings:** View rich details of available equipment including images, specifications, hourly/daily rates, and owner terms.
-   - **Search & Filter:** Advanced search algorithms to find equipment by category, location, or price boundaries.
-   
-3. **Interactive Geo-Location Services:**
-   - Integration with `react-leaflet` allows users to view the exact locations of available equipment on an interactive map.
-   - Helps farmers find the nearest available machinery to reduce transportation costs.
-
-4. **Multi-Lingual Support (i18next):**
-   - Agriculture is deeply local. Our platform supports multiple geographic languages out of the box using `i18next`, ensuring that the UI is accessible to farmers in their native tongue.
-
-5. **Cloud Integrated Architecture:**
-   - Integration with `google-spreadsheet` and `google-auth-library` allows administrators and users to maintain structured backup records and export analytical data easily.
-
-6. **Modern, Responsive UI/UX:**
-   - Designed using Tailwind CSS, ensuring the platform looks and functions flawlessly across all devices—from desktop monitors down to mobile phones used primarily in the field.
+FarmRentHub is a modern, production-grade agricultural equipment rental platform built to empower Indian farmers by connecting them directly with nearby agricultural machinery owners. The platform simplifies machinery discovery, live availability tracking, price comparison, escrow-backed online booking, and fleet management.
 
 ---
 
 ## 🏗️ Architecture & Technology Stack
 
-The application is built using the industry-standard **MERN Stack** with modern, high-performance libraries.
+```text
+                    FARMRENTHUB
+                         │
+             ┌───────────┴───────────┐
+             │                       │
+          FARMER                  OWNER
+             │                       │
+      Find Equipment            List Equipment
+             │                       │
+      Nearby Search             Availability
+             │                       │
+       Compare Price            Booking Request
+             │                       │
+        Book Equipment ←────── Accept Booking
+             │                       │
+          Payment                  Earnings
+             │                       │
+             └───────────┬───────────┘
+                         │
+                    FASTAPI BACKEND
+                         │
+              ┌──────────┼──────────┐
+              │          │          │
+           MongoDB    Payments    Maps/GPS
+```
 
-### Frontend (Client-side)
-- **Core Library:** React.js (v19) powered by Vite for lightning-fast Hot Module Replacement (HMR).
-- **Styling & UI:** Tailwind CSS for a utility-first, fully responsive design system.
-- **Routing:** React Router DOM (v7) for seamless Single Page Application (SPA) navigation.
-- **Mapping:** Leaflet and React-Leaflet for interactive map rendering.
-- **Network Requests:** Axios for efficient, Promise-based HTTP requests to the backend API.
-- **State & Translations:** React Context API and `react-i18next`.
+### Frontend
+- **Framework:** Next.js 16 (App Router) + React 19 + TypeScript
+- **Styling:** Tailwind CSS 4 with custom Agri-Tech design system (Emerald green `#16a34a`, wheat/amber `#d97706`, clean whites)
+- **Icons:** Lucide React
+- **Internationalization:** Dual English + Hindi support
+- **Components:** Interactive GPS map discovery, 5-step booking flow, transparent price calculator, equipment detail modals, role switcher (Farmer vs. Owner view).
 
-### Backend (Server-side)
-- **Runtime Environment:** Node.js.
-- **Web Framework:** Express.js for handling RESTful API routing and custom middleware.
-- **Database:** MongoDB, utilizing Mongoose as the Object Data Modeling (ODM) library for strict schema enforcement.
-- **Security:** `bcrypt` for password encryption and `jsonwebtoken` for secure API token verification. CORS middleware to restrict cross-origin requests.
+### Backend
+- **Framework:** FastAPI (Python 3.10+)
+- **Database:** MongoDB with Motor (AsyncIO driver) and resilient in-memory fallback
+- **Authentication:** JWT (JSON Web Tokens), Password Hashing (Bcrypt), OTP verification
+- **Location & Search:** Haversine formula distance calculation for accurate radius searching
+- **Documentation:** Interactive OpenAPI Swagger UI (`/api/docs`) and ReDoc (`/api/redoc`)
 
 ---
 
-## 📁 Detailed Directory Structure
+## 📁 Repository Directory Structure
 
 ```text
-MCAET-AgroLink/
-├── client/                      # ⚛️ Frontend React Application
-│   ├── public/                  # Raw static assets (images, icons)
-│   ├── src/                     # Core React logic
-│   │   ├── components/          # Reusable UI components (Navbar, Footer, Cards)
-│   │   ├── pages/               # Main route pages (Home, About, Dashboard)
-│   │   ├── assets/              # Processed assets
-│   │   ├── App.jsx              # Root component & Route definitions
-│   │   └── index.css            # Global Tailwind imports & custom CSS
-│   ├── package.json             # Client dependencies and scripts
-│   ├── tailwind.config.js       # Tailwind theme and plugin configuration
-│   └── vite.config.js           # Vite bundler configurations
+FarmRentHub/
+├── frontend/                         # Next.js + TypeScript + Tailwind
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── (auth)/
+│   │   │   │   ├── login/page.tsx
+│   │   │   │   └── register/page.tsx
+│   │   │   ├── farmer/dashboard/page.tsx
+│   │   │   ├── owner/dashboard/page.tsx
+│   │   │   ├── equipment/
+│   │   │   │   ├── page.tsx
+│   │   │   │   └── [id]/page.tsx
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── components/
+│   │   │   ├── ui/ (Logo.tsx, NotificationDrawer.tsx)
+│   │   │   ├── layout/ (Navbar.tsx, Footer.tsx)
+│   │   │   ├── equipment/ (EquipmentCard.tsx, CategoryCard.tsx)
+│   │   │   ├── booking/ (BookingModal.tsx, EquipmentDetailsModal.tsx)
+│   │   │   ├── map/ (MapDiscovery.tsx)
+│   │   │   ├── owner/ (ListEquipmentModal.tsx)
+│   │   │   └── dashboard/ (FarmerDashboardView.tsx, OwnerDashboardView.tsx)
+│   │   ├── services/ (api.ts)
+│   │   ├── constants/ (data.ts)
+│   │   └── types/ (index.ts)
+│   ├── package.json
+│   └── .env.local
 │
-├── server/                      # ⚙️ Backend API Node.js Application
-│   ├── src/                     # Core Backend logic
-│   │   ├── controllers/         # Handles business logic (Booking, Auth, etc.)
-│   │   ├── models/              # Mongoose DB Schemas (User, Equipment, etc.)
-│   │   ├── routes/              # Express API endpoints definition
-│   │   ├── middleware/          # JWT Verification, Error Handling
-│   │   └── server.js            # Express application entry point
-│   ├── .env                     # Environment variables (Ignored by Git)
-│   └── package.json             # Server dependencies and run scripts
+├── backend/                          # FastAPI + Python
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── core/ (config.py, database.py, security.py, logging.py, exceptions.py)
+│   │   ├── models/ (user.py, equipment.py, booking.py, payment.py, review.py)
+│   │   ├── schemas/ (auth.py, equipment.py, booking.py, payment.py, review.py, user.py)
+│   │   ├── repositories/ (equipment_repository.py, user_repository.py, booking_repository.py, payment_repository.py, review_repository.py)
+│   │   ├── services/ (equipment_service.py)
+│   │   ├── api/v1/ (router.py, auth, equipment, bookings, payments, reviews, recommendations, users)
+│   │   ├── middleware/ (error_handler.py)
+│   │   └── utils/ (distance.py, pagination.py, helpers.py)
+│   ├── requirements.txt
+│   └── .env
 │
-├── .gitignore                   # Standard Git ignore file
-├── render.yaml                  # Configuration for deploying backend to Render 
-├── vercel.json                  # Configuration for deploying frontend to Vercel
-└── start_project.bat            # 1-Click developer startup script for Windows
+├── docker-compose.yml
+├── start_project.bat
+└── README.md
 ```
 
 ---
 
-## 🚀 Getting Started (Installation Guide)
+## 🚀 Quick Start Guide
 
-Follow these instructions to set up the project locally on your machine.
+### Option 1: Automatic 1-Click Launch (Windows)
+Double-click `start_project.bat` in the root folder, or run in terminal:
+```bash
+.\start_project.bat
+```
 
-### Prerequisites
-- [Node.js](https://nodejs.org/en/) (v16.x or higher recommended)
-- npm (Comes installed with Node.js)
-- A local MongoDB instance OR a free [MongoDB Atlas Database URI](https://www.mongodb.com/cloud/atlas).
+### Option 2: Manual Setup
 
-### Step-by-step Setup
+#### 1. Backend (FastAPI)
+```bash
+cd backend
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
+```
+- API Docs: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+- Health Check: [http://localhost:8000/health](http://localhost:8000/health)
 
-1. **Clone the Source Code**
-   ```bash
-   git clone https://github.com/your-username/MCAET-AgroLink.git
-   cd MCAET-AgroLink
-   ```
-
-2. **Configure Environment Variables**
-   Navigate to the `server/` directory and create a file named `.env`. Provide the necessary configuration keys:
-   ```env
-   PORT=5000
-   MONGODB_URI=your_mongodb_cluster_connection_uri_here
-   JWT_SECRET=a_very_secure_randomly_generated_string
-   ```
-
-3. **Launch the Application**
-   For Windows users, we have created an automated startup script. Double-click the file named `start_project.bat` in the root folder, or run it through the terminal:
-   ```bash
-   .\start_project.bat
-   ```
-   *This script automatically installs all dependencies in both the `client/` and `server/` directories and launches two terminals running standard development servers concurrently.*
-
-   **Manual Execution (Mac/Linux/Windows):**
-   - *Backend:* `cd server && npm install && npm run dev`
-   - *Frontend:* `cd client && npm install && npm run dev`
+#### 2. Frontend (Next.js)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+- Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔮 Future Goals & Roadmap
+## 🌟 Core MVP Features Implemented
 
-MCAET AgroLink is continuously evolving. Our roadmap outlines the major architectural and functional upgrades planned for future releases.
+1. **Original Brand Identity:**
+   - Custom tractor & sprout leaf logo emblem.
+   - Professional, trustworthy Indian Agri-tech theme (green/wheat palette).
+   - Bilingual support with on-the-fly English ⇄ Hindi toggle.
 
-### 1. Payment Gateway Integration
-- **Objective:** Enable end-to-end financial transactions directly within the platform.
-- **Tech Details:** Integration with Razorpay or Stripe APIs to allow farmers to pay equipment security deposits and rental fees securely. Includes automated invoicing and payment receipt generation.
+2. **Marketplace & GPS Discovery:**
+   - 8 major machinery categories (Tractor, Harvester, Rotavator, Seed Drill, Sprayer, Irrigation, Thresher, Cultivator).
+   - Location cluster filtering (Ludhiana, Karnal, Meerut, Nashik, Patiala).
+   - Real-time GPS distance calculation and interactive agricultural radar map.
 
-### 2. AI-Powered Recommendations & Demand Forecasting
-- **Objective:** Utilize Machine Learning to make the platform smarter.
-- **Tech Details:** Implement predictive models using Python/Flask microservices to suggest equipment based on seasonal crop cycles and weather data. Predict surges in equipment demand to notify owners in advance.
+3. **Transparent 5-Step Booking Flow:**
+   - Daily vs. Hourly rental selection with driver option.
+   - Live availability checking.
+   - Transparent price summary with rental fee, ₹99 platform fee, and refundable security deposit.
+   - Escrow payment simulation and instant printable booking receipt.
 
-### 3. Dedicated Mobile Applications
-- **Objective:** Reach farmers directly in the field where laptops/desktops are unavailable.
-- **Tech Details:** Migrate the core logic to build native mobile applications for Android and iOS utilizing **React Native**, ensuring complete sync with the existing Node.js backend.
-
-### 4. Advanced Telematics & IoT Tracking
-- **Objective:** Provide real-time tracking and health monitoring of rented machinery.
-- **Tech Details:** Interface with IoT-enabled GPS trackers on the physical hardware. Owners will have a dashboard displaying live machine coordinates, engine temperature, and usage hours directly transmitted via MQTT protocols to the platform.
-
-### 5. Review & Reputation System
-- **Objective:** Build trust among the community.
-- **Tech Details:** Implement a robust dual-rating system where farmers can review equipment quality, and owners can review the farmers regarding how the machinery was handled during the rental period.
-
----
-
-## ☁️ Deployment Architecture
-
-The application is built keeping modern Serverless and PaaS deployments in mind:
-- **Frontend Hosting:** Configured for Vercel. Push changes to GitHub, and Vercel automatically deploys the frontend utilizing the instructions in `vercel.json`.
-- **Backend Hosting:** Configured for Render. The `render.yaml` file dictates the environment setup, automatically starting the Node/Express server and connecting to external databases.
-
----
-
-## 🤝 Contribution Guidelines
-Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project.
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
-
-## 📄 License
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 📚 Acknowledgments
-This real-time project implementation draws inspiration from the architecture mentioned in the research methodology PDFs attached in the repository regarding "Smart Agricultural Equipment Rental Systems."
+4. **Dedicated Dashboards:**
+   - **Farmer Dashboard:** Active machine arrival tracker, upcoming rentals, payment history, and invoices.
+   - **Owner Dashboard:** Fleet availability toggles, incoming booking request approval, and monthly earnings tracker.
+   - **Earnings Estimator:** Interactive monthly calculator for prospective machine owners.
