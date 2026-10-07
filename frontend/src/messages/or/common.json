@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "or", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "ସଠିକ୍ ଯନ୍ତ୍ରପାତି, ସହଜ ଚାଷ",
+    "portalType": "ଜାତୀୟ କୃଷି ଯନ୍ତ୍ରପାତି ଭଡ଼ା ପୋର୍ଟାଲ"
+  },
+  "utility": {
+    "skipToContent": "ମୁଖ୍ୟ ବିଷୟବସ୍ତୁକୁ ଯାଆନ୍ତୁ",
+    "textSize": "ଅକ୍ଷର ଆକାର",
+    "highContrast": "ହାଇ କଣ୍ଟ୍ରାଷ୍ଟ",
+    "normalContrast": "ସାଧାରଣ",
+    "language": "ଭାଷା ବାଛନ୍ତୁ",
+    "helplineLabel": "କୃଷକ ହେଲ୍ପଲାଇନ୍ (ନିଃଶୁଳ୍କ)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "ସଂଖ୍ୟା ଶୈଳୀ"
+  },
+  "nav": {
+    "home": "ହୋମ୍",
+    "equipment": "ଯନ୍ତ୍ରପାତି ତାଲିକା",
+    "map": "ମାନଚିତ୍ରରେ ଖୋଜନ୍ତୁ",
+    "howItWorks": "ଏହା କିପରି କାମ କରେ",
+    "schemes": "ସରକାରୀ ଯୋଜନା ଓ ସବସିଡି",
+    "listEquipment": "ଆପଣଙ୍କ ମେସିନ୍ ଯୋଡ଼ନ୍ତୁ",
+    "farmerDashboard": "ଚାଷୀ ଡ୍ୟାସବୋର୍ଡ",
+    "ownerDashboard": "ମାଲିକ ଡ୍ୟାସବୋର୍ଡ",
+    "login": "ଲଗ୍ ଇନ୍",
+    "register": "ପଞ୍ଜୀକରଣ",
+    "settings": "ସେଟିଂସ୍",
+    "notifications": "ସୂଚନା",
+    "profile": "ପ୍ରୋଫାଇଲ୍"
+  },
+  "actions": {
+    "search": "ଖୋଜନ୍ତୁ",
+    "bookNow": "ଭଡ଼ାରେ ନିଅନ୍ତୁ",
+    "viewDetails": "ବିବରଣୀ ଦେଖନ୍ତୁ",
+    "confirm": "ନିଶ୍ଚିତ କରନ୍ତୁ",
+    "cancel": "ବାତିଲ୍ କରନ୍ତୁ",
+    "apply": "ଲାଗୁ କରନ୍ତୁ",
+    "reset": "ପୁନଃସେଟ୍",
+    "save": "ସଂରକ୍ଷଣ କରନ୍ତୁ",
+    "back": "ପଛକୁ",
+    "next": "ଆଗକୁ",
+    "translate": "ଅନୁବାଦ କରନ୍ତୁ",
+    "listen": "ଶୁଣନ୍ତୁ (ଭଏସ୍)",
+    "stopListening": "ଭଏସ୍ ବନ୍ଦ କରନ୍ତୁ",
+    "voiceSearch": "ଭଏସ୍ ସର୍ଚ୍ଚ"
+  },
+  "badges": {
+    "verifiedOwner": "ଯାଞ୍ଚ ହୋଇଥିବା ମାଲିକ",
+    "verifiedMachine": "ଯାଞ୍ଚ ହୋଇଥିବା ମେସିନ୍",
+    "escrowProtected": "ସୁରକ୍ଷିତ ପେମେଣ୍ଟ",
+    "withDriver": "ଡ୍ରାଇଭର ସହିତ",
+    "withoutDriver": "ଡ୍ରାଇଭର ବିନା",
+    "sampleData": "ନମୁନା ତଥ୍ୟ (ଡେମୋ)"
+  },
+  "units": {
+    "perHour": "ଘଣ୍ଟା ପ୍ରତି",
+    "perDay": "ଦିନ ପ୍ରତି",
+    "perAcre": "ଏକର ପ୍ରତି",
+    "perQuintal": "କ୍ୱିଣ୍ଟାଲ୍ ପ୍ରତି",
+    "hp": "ଏଚ୍.ପି.",
+    "km": "କି.ମି.",
+    "hours": "ଘଣ୍ଟା"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub ଏକ ଘରୋଇ ପ୍ଲାଟଫର୍ମ ଏବଂ ଏହା କୌଣସି ସରକାରୀ ୱେବସାଇଟ୍ ନୁହେଁ।",
+    "grievanceTitle": "ଅଭିଯୋଗ ନିବାରଣ ଅଧିକାରୀ",
+    "grievanceName": "ସୁନୀଲ ଶର୍ମା",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "ଓଡ଼ିଶାର ଚାଷୀମାନଙ୍କୁ ଧାନ ରୋପଣ, ଟ୍ରାକ୍ଟର ଓ ପାୱାର ୱିଡର ଭଳି ଆଧୁନିକ ଯନ୍ତ୍ରପାତି ଭଡ଼ାରେ ଯୋଗାଇବାର ବିଶ୍ୱସ୍ତ ମାଧ୍ୟମ।",
+    "quickLinks": "ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଲିଙ୍କ୍",
+    "officialPortals": "ସରକାରୀ କୃଷି ପୋର୍ଟାଲ୍",
+    "allRightsReserved": "ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ।"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "gu", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "સાચું સાધન, સરળ ખેતી",
+    "portalType": "રાષ્ટ્રીય કૃષિ સાધનો ભાડા પ્લેટફોર્મ"
+  },
+  "utility": {
+    "skipToContent": "મુખ્ય સામગ્રી પર જાઓ",
+    "textSize": "અક્ષર કદ",
+    "highContrast": "હાઈ કોન્ટ્રાસ્ટ",
+    "normalContrast": "સામાન્ય",
+    "language": "ભાષા પસંદ કરો",
+    "helplineLabel": "કિસાન હેલ્પલાઇન (ટોલ-ફ્રી)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "અંક શૈલી"
+  },
+  "nav": {
+    "home": "હોમ",
+    "equipment": "સાધનોની યાદી",
+    "map": "નકશા પર શોધો",
+    "howItWorks": "કેવી રીતે કામ કરે છે",
+    "schemes": "સરકારી યોજનાઓ અને સબસિડી",
+    "listEquipment": "તમારું મશીન ઉમેરો",
+    "farmerDashboard": "ખેડૂત ડેશબોર્ડ",
+    "ownerDashboard": "માલિક ડેશબોર્ડ",
+    "login": "લૉગ ઇન",
+    "register": "નોંધણી",
+    "settings": "સેટિંગ્સ",
+    "notifications": "સૂચનાઓ",
+    "profile": "પ્રોફાઇલ"
+  },
+  "actions": {
+    "search": "શોધો",
+    "bookNow": "ભાડે લો",
+    "viewDetails": "વિગત જુઓ",
+    "confirm": "પુષ્ટિ કરો",
+    "cancel": "રદ કરો",
+    "apply": "લાગુ કરો",
+    "reset": "રીસેટ",
+    "save": "સાચવો",
+    "back": "પાછળ",
+    "next": "આગળ",
+    "translate": "અનુવાદ કરો",
+    "listen": "સાંભળો",
+    "stopListening": "અવાજ બંધ કરો",
+    "voiceSearch": "બોલીને શોધો"
+  },
+  "badges": {
+    "verifiedOwner": "ચકાસાયેલ માલિક",
+    "verifiedMachine": "ચકાસાયેલ મશીન",
+    "escrowProtected": "સુરક્ષિત ચુકવણી",
+    "withDriver": "ડ્રાઈવર સાથે ઉપલબ્ધ",
+    "withoutDriver": "ડ્રાઈવર વગર",
+    "sampleData": "નમૂના ડેટા (ડેમો)"
+  },
+  "units": {
+    "perHour": "કલાક દીઠ",
+    "perDay": "દિવસ દીઠ",
+    "perAcre": "એકર દીઠ",
+    "perQuintal": "ક્વિન્ટલ દીઠ",
+    "hp": "એચ.પી.",
+    "km": "કિ.મી.",
+    "hours": "કલાક"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub એ એક ખાનગી પ્લેટફોર્મ છે અને તે કોઈ સરકારી વેબસાઇટ નથી.",
+    "grievanceTitle": "ફરિયાદ નિવારણ અધિકારી",
+    "grievanceName": "સુનીલ શર્મા",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "ગુજરાતના ખેડૂતો માટે ટ્રેક્ટર, કપાસ વીણવા અને મગફળી ખોદવાના આધુનિક સાધનો ભાડે મેળવવાનું વિશ્વસનીય પ્લેટફોર્મ.",
+    "quickLinks": "ઝડપી લિંક્સ",
+    "officialPortals": "સરકારી કૃષિ પોર્ટલ",
+    "allRightsReserved": "સર્વહક સ્વાધીન."
+  }
+}

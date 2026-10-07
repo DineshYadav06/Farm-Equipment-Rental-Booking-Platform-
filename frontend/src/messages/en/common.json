@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "en", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "Rent the Right Equipment. Grow with Ease.",
+    "portalType": "National Farm Equipment Rental Platform"
+  },
+  "utility": {
+    "skipToContent": "Skip to main content",
+    "textSize": "Text Size",
+    "highContrast": "High Contrast",
+    "normalContrast": "Normal Contrast",
+    "language": "Select Language",
+    "helplineLabel": "Kisan Helpline (Toll-Free)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "Digit Style"
+  },
+  "nav": {
+    "home": "Home",
+    "equipment": "Equipment Catalog",
+    "map": "Search on Map",
+    "howItWorks": "How It Works",
+    "schemes": "Government Schemes & Subsidies",
+    "listEquipment": "List Your Equipment",
+    "farmerDashboard": "Farmer Dashboard",
+    "ownerDashboard": "Owner Dashboard",
+    "login": "Sign In",
+    "register": "Register",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "profile": "Profile"
+  },
+  "actions": {
+    "search": "Search",
+    "bookNow": "Rent Now",
+    "viewDetails": "View Details",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "reset": "Reset",
+    "save": "Save",
+    "back": "Back",
+    "next": "Next",
+    "translate": "Translate",
+    "listen": "Listen (Read Aloud)",
+    "stopListening": "Stop Voice",
+    "voiceSearch": "Voice Search"
+  },
+  "badges": {
+    "verifiedOwner": "Verified Owner",
+    "verifiedMachine": "Verified Machine",
+    "escrowProtected": "Escrow Protected",
+    "withDriver": "Driver Available",
+    "withoutDriver": "Without Driver",
+    "sampleData": "Sample Data (Demo)"
+  },
+  "units": {
+    "perHour": "per hour",
+    "perDay": "per day",
+    "perAcre": "per acre",
+    "perQuintal": "per quintal",
+    "hp": "HP",
+    "km": "km",
+    "hours": "hours"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub is a private platform and is not a government website.",
+    "grievanceTitle": "Grievance Redressal Officer",
+    "grievanceName": "Sunil Sharma",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "Transparent rental platform connecting Indian farmers with modern machinery, combine harvesters, rotavators, and verified Custom Hiring Centres.",
+    "quickLinks": "Quick Links",
+    "officialPortals": "Official Agricultural Portals",
+    "allRightsReserved": "All rights reserved."
+  }
+}

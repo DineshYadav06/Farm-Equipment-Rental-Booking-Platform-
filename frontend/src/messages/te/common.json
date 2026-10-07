@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "te", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "సరైన యంత్రం, సులభమైన సాగు",
+    "portalType": "జాతీయ వ్యవసాయ పరికరాల అద్దె వేదిక"
+  },
+  "utility": {
+    "skipToContent": "ప్రధాన కంటెంట్‌కు వెళ్లండి",
+    "textSize": "అక్షరాల పరిమాణం",
+    "highContrast": "హై కాంట్రాస్ట్",
+    "normalContrast": "సాధారణ కాంట్రాస్ట్",
+    "language": "భాషను ఎంచుకోండి",
+    "helplineLabel": "కిసాన్ హెల్ప్‌లైన్ (ఉచితం)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "అంకెల శైలి"
+  },
+  "nav": {
+    "home": "హోమ్",
+    "equipment": "పరికరాల జాబితా",
+    "map": "మ్యాప్‌లో శోధించండి",
+    "howItWorks": "ఇది ఎలా పనిచేస్తుంది",
+    "schemes": "ప్రభుత్వ పథకాలు & రాయితీలు",
+    "listEquipment": "మీ యంత్రాన్ని జోడించండి",
+    "farmerDashboard": "రైతు డ్యాష్‌బోర్డ్",
+    "ownerDashboard": "యజమాని డ్యాష్‌బోర్డ్",
+    "login": "లాగిన్",
+    "register": "రిజిస్టర్",
+    "settings": "సెట్టింగ్‌లు",
+    "notifications": "నోటిఫికేషన్‌లు",
+    "profile": "ప్రొఫైల్"
+  },
+  "actions": {
+    "search": "వెతకండి",
+    "bookNow": "అద్దెకు తీసుకోండి",
+    "viewDetails": "వివరాలు చూడండి",
+    "confirm": "నిర్ధారించండి",
+    "cancel": "రద్దు చేయండి",
+    "apply": "వర్తింపజేయండి",
+    "reset": "రీసెట్ చేయండి",
+    "save": "భద్రపరచండి",
+    "back": "వెనుకకు",
+    "next": "తదుపరి",
+    "translate": "అనువదించండి",
+    "listen": "వినండి (వాయిస్)",
+    "stopListening": "వాయిస్ ఆపండి",
+    "voiceSearch": "వాయిస్ ద్వారా వెతకండి"
+  },
+  "badges": {
+    "verifiedOwner": "ధృవీకరించబడిన యజమాని",
+    "verifiedMachine": "ధృవీకరించబడిన యంత్రం",
+    "escrowProtected": "సురక్షిత చెల్లింపు",
+    "withDriver": "డ్రైవర్‌తో లభ్యం",
+    "withoutDriver": "డ్రైవర్ లేకుండా",
+    "sampleData": "నమూనా డేటా (డెమో)"
+  },
+  "units": {
+    "perHour": "గంటకు",
+    "perDay": "రోజుకు",
+    "perAcre": "ఎకరానికి",
+    "perQuintal": "క్వింటాల్‌కు",
+    "hp": "హెచ్.పి.",
+    "km": "కి.మీ.",
+    "hours": "గంటలు"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub అనేది ఒక ప్రైవేట్ వేదిక మరియు ఇది ఎటువంటి ప్రభుత్వ వెబ్‌సైట్ కాదు.",
+    "grievanceTitle": "ఫిర్యాదుల పరిష్కార అధికారి",
+    "grievanceName": "సునీల్ శర్మ",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "రైతులకు ట్రాక్టర్లు, వరి కోత యంత్రాలు, రోటావటర్లు సులభంగా అద్దెకు అందించే విశ్వసనీయ వేదిక.",
+    "quickLinks": "ముఖ్యమైన లింకులు",
+    "officialPortals": "అధికారిక ప్రభుత్వ పోర్టల్స్",
+    "allRightsReserved": "సర్వహక్కులు ప్రత్యేకించబడ్డాయి."
+  }
+}

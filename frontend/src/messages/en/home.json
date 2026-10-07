@@ -1,0 +1,56 @@
+{
+  "_meta": { "locale": "en", "status": "reviewed" },
+  "hero": {
+    "title": "Modern Agricultural Machinery, Delivered Directly to Your Farm",
+    "subtitle": "Rent tractors, combine harvesters, rotavators, and laser levellers from verified local owners at fair rates. Zero middlemen, with secure escrow payments.",
+    "badge": "Custom Hiring Centre & Verified Owner Network"
+  },
+  "search": {
+    "categoryPlaceholder": "Equipment Type (Tractor, Harvester, Rotavator...)",
+    "locationPlaceholder": "Enter your district or pincode",
+    "datePlaceholder": "Work Date",
+    "button": "Find Available Equipment",
+    "listeningText": "Please speak, listening now..."
+  },
+  "ticker": {
+    "advisoryTitle": "Farmer Advisory & Updates:",
+    "item1": "Wheat Harvest Season 2026: Up to 10% advance booking discounts on combine harvesters and super seeders.",
+    "item2": "SMAM Scheme: 40-50% subsidy for setting up Custom Hiring Centres. Verify details on official portal farmech.dac.gov.in.",
+    "item3": "Crop Residue Management: Happy seeders and balers available on rent — avoid stubble burning, enrich your soil."
+  },
+  "categories": {
+    "sectionTitle": "Key Agricultural Equipment Categories",
+    "sectionSubtitle": "From seedbed preparation to planting, plant protection, and harvesting — 14 specialized categories"
+  },
+  "howItWorks": {
+    "sectionTitle": "How It Works",
+    "sectionSubtitle": "Reliable farm mechanization in 3 simple steps",
+    "step1Title": "1. Choose Equipment & Location",
+    "step1Desc": "Search verified tractors or harvesters within a 50 km radius. Choose with-driver or without-driver.",
+    "step2Title": "2. Book & Secure Payment",
+    "step2Desc": "Your advance payment is held safely in escrow. Released to the owner only upon verified, satisfactory work completion.",
+    "step3Title": "3. Timely Farm Execution",
+    "step3Desc": "The owner delivers the machinery to your field or you pick it up. Download your instant multilingual digital receipt."
+  },
+  "stats": {
+    "sectionTitle": "Transparent Platform Stats (Pilot Progress)",
+    "districts": "Pilot Districts",
+    "machines": "Verified Machines",
+    "hours": "Completed Operational Hours",
+    "savings": "Average Savings per Acre"
+  },
+  "ownerCta": {
+    "title": "Do you own a tractor or agricultural machinery?",
+    "subtitle": "Earn an extra ₹25,000 to ₹60,000 every month by renting your idle equipment to neighboring farmers. Direct bank transfers.",
+    "button": "Register as Equipment Owner"
+  },
+  "trust": {
+    "title": "Why Farmers Trust FarmRentHub",
+    "point1Title": "Physical & RC Inspection",
+    "point1Desc": "Registration certificate and owner credentials verified before any machine goes live.",
+    "point2Title": "100% Escrow Protection",
+    "point2Desc": "Your advance is completely protected until work is satisfactorily finished on your land.",
+    "point3Title": "24x7 Helpline in Your Language",
+    "point3Desc": "Toll-free customer assistance in 12 Indian regional languages."
+  }
+}

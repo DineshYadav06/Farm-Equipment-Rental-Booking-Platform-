@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "ml", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "ശരിയായ യന്ത്രം, എളുപ്പമുള്ള കൃഷി",
+    "portalType": "ദേശീയ കാർഷിക യന്ത്ര വാടക പ്ലാറ്റ്‌ഫോം"
+  },
+  "utility": {
+    "skipToContent": "പ്രധാന ഉള്ളടക്കത്തിലേക്ക് പോകുക",
+    "textSize": "അക്ഷര വലിപ്പം",
+    "highContrast": "ഹൈ കോൺട്രാസ്റ്റ്",
+    "normalContrast": "സാധാരണ",
+    "language": "ഭാഷ തിരഞ്ഞെടുക്കുക",
+    "helplineLabel": "കർഷക ഹെൽപ്പ് ലൈൻ (സൗജന്യം)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "അക്കങ്ങളുടെ ശൈലി"
+  },
+  "nav": {
+    "home": "ഹോം",
+    "equipment": "ഉപകരണങ്ങളുടെ പട്ടിക",
+    "map": "മാപ്പിൽ തിരയുക",
+    "howItWorks": "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു",
+    "schemes": "സർക്കാർ പദ്ധതികളും സബ്‌സിഡിയും",
+    "listEquipment": "നിങ്ങളുടെ യന്ത്രം ചേർക്കുക",
+    "farmerDashboard": "കർഷക ഡാഷ്‌ബോർഡ്",
+    "ownerDashboard": "ഉടമ ഡാഷ്‌ബോർഡ്",
+    "login": "ലോഗിൻ",
+    "register": "രജിസ്ട്രേഷൻ",
+    "settings": "ക്രമീകരണങ്ങൾ",
+    "notifications": "അറിയിപ്പുകൾ",
+    "profile": "പ്രൊഫൈൽ"
+  },
+  "actions": {
+    "search": "തിരയുക",
+    "bookNow": "വാടകയ്‌ക്കെടുക്കുക",
+    "viewDetails": "വിശദാംശങ്ങൾ കാണുക",
+    "confirm": "സ്ഥിരീകരിക്കുക",
+    "cancel": "റദ്ദാക്കുക",
+    "apply": "ബാധകമാക്കുക",
+    "reset": "പുനഃസജ്ജമാക്കുക",
+    "save": "സംരക്ഷിക്കുക",
+    "back": "പിന്നോട്ട്",
+    "next": "അടുത്തത്",
+    "translate": "വിവർത്തനം ചെയ്യുക",
+    "listen": "കേൾക്കുക (ശബ്ദം)",
+    "stopListening": "ശബ്ദം നിർത്തുക",
+    "voiceSearch": "ശബ്ദത്തിലൂടെ തിരയുക"
+  },
+  "badges": {
+    "verifiedOwner": "പരിശോധിച്ചുറപ്പിച്ച ഉടമ",
+    "verifiedMachine": "പരിശോധിച്ചുറപ്പിച്ച യന്ത്രം",
+    "escrowProtected": "സുരക്ഷിത പേയ്‌മെന്റ്",
+    "withDriver": "ഡ്രൈവർ സഹിതം ലഭ്യമാണ്",
+    "withoutDriver": "ഡ്രൈവർ ഇല്ലാതെ",
+    "sampleData": "മാതൃകാ ഡാറ്റ (ഡെമോ)"
+  },
+  "units": {
+    "perHour": "മണിക്കൂറിന്",
+    "perDay": "പ്രതിദിനം",
+    "perAcre": "ഏക്കറിന്",
+    "perQuintal": "ക്വിന്റലിന്",
+    "hp": "എച്ച്.പി.",
+    "km": "കി.മീ.",
+    "hours": "മണിക്കൂർ"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub ഒരു സ്വകാര്യ പ്ലാറ്റ്‌ഫോമാണ്, ഇത് ഏതെങ്കിലും സർക്കാർ വെബ്‌സൈറ്റല്ല.",
+    "grievanceTitle": "പരാതി പരിഹാര ഓഫീസർ",
+    "grievanceName": "സുനിൽ ശർമ്മ",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "കേരളത്തിലെ കർഷകർക്ക് മിനി ടില്ലർ, തെങ്ങ് കയറ്റ യന്ത്രങ്ങൾ, കൊയ്ത്തുയന്ത്രങ്ങൾ എളുപ്പത്തിൽ വാടകയ്ക്ക് നൽകുന്ന സുതാര്യമായ പ്ലാറ്റ്‌ഫോം.",
+    "quickLinks": "പ്രധാന ലിങ്കുകൾ",
+    "officialPortals": "ഔദ്യോഗിക സർക്കാർ പോർട്ടലുകൾ",
+    "allRightsReserved": "എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം."
+  }
+}

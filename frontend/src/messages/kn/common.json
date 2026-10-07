@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "kn", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "ಸರಿಯಾದ ಯಂತ್ರ, ಸುಲಭ ಬೇಸಾಯ",
+    "portalType": "ರಾಷ್ಟ್ರೀಯ ಕೃಷಿ ಸಲಕರಣೆಗಳ ಬಾಡಿಗೆ ವೇದಿಕೆ"
+  },
+  "utility": {
+    "skipToContent": "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ",
+    "textSize": "ಅಕ್ಷರ ಗಾತ್ರ",
+    "highContrast": "ಹೆಚ್ಚಿನ ಕಾಂಟ್ರಾಸ್ಟ್",
+    "normalContrast": "ಸಾಮಾನ್ಯ",
+    "language": "ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ",
+    "helplineLabel": "ರೈತ ಸಹಾಯವಾಣಿ (ಉಚಿತ)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "ಅಂಕಿ ಶೈಲಿ"
+  },
+  "nav": {
+    "home": "ಮುಖಪುಟ",
+    "equipment": "ಉಪಕರಣಗಳ ಪಟ್ಟಿ",
+    "map": "ನಕ್ಷೆಯಲ್ಲಿ ಹುಡುಕಿ",
+    "howItWorks": "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
+    "schemes": "ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು ಮತ್ತು ಸಬ್ಸಿಡಿ",
+    "listEquipment": "ನಿಮ್ಮ ಯಂತ್ರ ಸೇರಿಸಿ",
+    "farmerDashboard": "ರೈತ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "ownerDashboard": "ಮಾಲೀಕ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "login": "ಲಾಗಿನ್",
+    "register": "ನೋಂದಣಿ",
+    "settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "notifications": "ಸೂಚನೆಗಳು",
+    "profile": "ಪ್ರೊಫೈಲ್"
+  },
+  "actions": {
+    "search": "ಹುಡುಕಿ",
+    "bookNow": "ಬಾಡಿಗೆ ಪಡೆಯಿರಿ",
+    "viewDetails": "ವಿವರ ನೋಡಿ",
+    "confirm": "ದೃಢೀಕರಿಸಿ",
+    "cancel": "ರದ್ದುಮಾಡಿ",
+    "apply": "ಅನ್ವಯಿಸಿ",
+    "reset": "ಮರುಹೊಂದಿಸಿ",
+    "save": "ಉಳಿಸಿ",
+    "back": "ಹಿಂದಕ್ಕೆ",
+    "next": "ಮುಂದೆ",
+    "translate": "ಅನುವಾದಿಸಿ",
+    "listen": "ಆಲಿಸಿ (ಧ್ವನಿ)",
+    "stopListening": "ಧ್ವನಿ ನಿಲ್ಲಿಸಿ",
+    "voiceSearch": "ಧ್ವನಿ ಮೂಲಕ ಹುಡುಕಿ"
+  },
+  "badges": {
+    "verifiedOwner": "ಪರಿಶೀಲಿಸಿದ ಮಾಲೀಕ",
+    "verifiedMachine": "ಪರಿಶೀಲಿಸಿದ ಯಂತ್ರ",
+    "escrowProtected": "ಸುರಕ್ಷಿತ ಪಾವತಿ",
+    "withDriver": "ಚಾಲಕನೊಂದಿಗೆ ಲಭ್ಯ",
+    "withoutDriver": "ಚಾಲಕನಿಲ್ಲದೆ",
+    "sampleData": "ಮಾದರಿ ಡೇಟಾ (ಡೆಮೊ)"
+  },
+  "units": {
+    "perHour": "ಪ್ರತಿ ಗಂಟೆಗೆ",
+    "perDay": "ಪ್ರತಿ ದಿನಕ್ಕೆ",
+    "perAcre": "ಪ್ರತಿ ಎಕರೆಗೆ",
+    "perQuintal": "ಪ್ರತಿ ಕ್ವಿಂಟಾಲ್‌ಗೆ",
+    "hp": "ಹೆಚ್.ಪಿ.",
+    "km": "ಕಿ.ಮೀ.",
+    "hours": "ಗಂಟೆಗಳು"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub ಒಂದು ಖಾಸಗಿ ವೇದಿಕೆಯಾಗಿದೆ ಮತ್ತು ಇದು ಯಾವುದೇ ಸರ್ಕಾರಿ ವೆಬ್‌ಸೈಟ್ ಅಲ್ಲ.",
+    "grievanceTitle": "ಕುಂದುಕೊರತೆ ನಿವಾರಣಾಧಿಕಾರಿ",
+    "grievanceName": "ಸುನಿಲ್ ಶರ್ಮಾ",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "ಕರ್ನಾಟಕದ ರೈತರಿಗೆ ಟ್ರ್ಯಾಕ್ಟರ್, ಕಬ್ಬು ಕಟಾವು ಹಾಗೂ ಅಡಿಕೆ ಸಿಂಪಡಣೆ ಯಂತ್ರಗಳನ್ನು ಸುಲಭವಾಗಿ ಬಾಡಿಗೆಗೆ ಒದಗಿಸುವ ವೇದಿಕೆ.",
+    "quickLinks": "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
+    "officialPortals": "ಅಧಿಕೃತ ಸರ್ಕಾರಿ ಪೋರ್ಟಲ್‌ಗಳು",
+    "allRightsReserved": "ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ."
+  }
+}

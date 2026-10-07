@@ -1,86 +1,150 @@
 import React from "react";
 
 interface LogoProps {
+  variant?: "horizontal" | "icon" | "print";
+  size?: "sm" | "md" | "lg" | "xl";
+  tagline?: string;
   className?: string;
-  showTagline?: boolean;
-  size?: "sm" | "md" | "lg";
+  textColor?: string;
 }
 
+/**
+ * Original FarmRentHub Logo Icon:
+ * - A rising sun (golden amber #d97706)
+ * - A tractor wheel (hub & tread) in deep green (#14532d)
+ * - 4 stylized golden wheat grains rising from the center
+ * Readable at 32px, flat, 2-3 colors, zero text inside icon.
+ */
+export const FarmRentHubIcon: React.FC<{
+  size?: number;
+  monochrome?: boolean;
+  className?: string;
+}> = ({ size = 36, monochrome = false, className = "" }) => {
+  const sunColor = monochrome ? "#000000" : "#d97706";
+  const wheelColor = monochrome ? "#000000" : "#14532d";
+  const wheatColor = monochrome ? "#000000" : "#f59e0b";
+  const hubColor = monochrome ? "#ffffff" : "#ffffff";
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`shrink-0 ${className}`}
+      aria-label="FarmRentHub Logo Icon"
+      role="img"
+    >
+      {/* 1. Rising Sun Behind Wheel & Wheat */}
+      <circle cx="32" cy="24" r="14" fill={sunColor} opacity={monochrome ? 0.3 : 0.85} />
+      {/* Sun rays */}
+      <path
+        d="M32 4V8M16 11L19 14M48 11L45 14M10 24H14M50 24H54"
+        stroke={sunColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
+      {/* 2. Tractor Wheel (Bottom Half / Rim) */}
+      <path
+        d="M12 44C12 55.0457 20.9543 64 32 64C43.0457 64 52 55.0457 52 44C52 35.8 47.1 28.7 40 25.6V30C44.7 32.8 48 38 48 44C48 52.8366 40.8366 60 32 60C23.1634 60 16 52.8366 16 44C16 38 19.3 32.8 24 30V25.6C16.9 28.7 12 35.8 12 44Z"
+        fill={wheelColor}
+      />
+      
+      {/* Tractor Tire Deep Tread Grooves */}
+      <path d="M10 44H16M13 52L18 49M20 59L23 54M44 59L41 54M51 52L46 49M54 44H48" stroke={wheelColor} strokeWidth="3" strokeLinecap="round" />
+      
+      {/* Wheel Hub Center */}
+      <circle cx="32" cy="44" r="6" fill={wheelColor} />
+      <circle cx="32" cy="44" r="2.5" fill={hubColor} />
+
+      {/* 3. Rising Wheat Grains (4 golden grains sprouting vertically) */}
+      {/* Central Stem */}
+      <path d="M32 44V12" stroke={wheatColor} strokeWidth="2.5" strokeLinecap="round" />
+      {/* Bottom Grain Left & Right */}
+      <path
+        d="M32 30C28 27 25 28 26 33C27 35 32 35 32 35"
+        fill={wheatColor}
+      />
+      <path
+        d="M32 30C36 27 39 28 38 33C37 35 32 35 32 35"
+        fill={wheatColor}
+      />
+      {/* Upper Grain Left & Right */}
+      <path
+        d="M32 21C27 18 25 20 26 24C27 26 32 26 32 26"
+        fill={wheatColor}
+      />
+      <path
+        d="M32 21C37 18 39 20 38 24C37 26 32 26 32 26"
+        fill={wheatColor}
+      />
+      {/* Top Spire Grain */}
+      <path
+        d="M32 12C30 9 32 7 32 5C32 7 34 9 32 12Z"
+        fill={wheatColor}
+      />
+    </svg>
+  );
+};
+
 export const Logo: React.FC<LogoProps> = ({
+  variant = "horizontal",
+  size = "md",
+  tagline,
   className = "",
-  showTagline = false,
-  size = "md"
+  textColor = "text-[#14532d]"
 }) => {
-  const iconSizes = {
-    sm: "w-8 h-8",
-    md: "w-10 h-10",
-    lg: "w-14 h-14"
+  const pixelSizes = {
+    sm: 28,
+    md: 38,
+    lg: 48,
+    xl: 60
   };
 
   const textSizes = {
     sm: "text-lg",
-    md: "text-2xl",
-    lg: "text-3xl"
+    md: "text-xl",
+    lg: "text-2xl",
+    xl: "text-3xl"
   };
 
-  return (
-    <div className={`flex items-center gap-2.5 select-none ${className}`}>
-      {/* Custom Original FarmRentHub Icon: Modern Tractor + Green Sprout Leaf */}
-      <div
-        className={`relative flex items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 via-green-600 to-emerald-700 text-white shadow-sm ring-1 ring-emerald-700/20 shrink-0 ${iconSizes[size]}`}
-      >
-        <svg
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-[68%] h-[68%] drop-shadow-xs"
-        >
-          {/* Tractor Hood and Cabin */}
-          <path
-            d="M6 18H16L18 13H11L6 18Z"
-            fill="currentColor"
-            fillOpacity="0.9"
-          />
-          <path
-            d="M17 13H21C22.1 13 23 13.9 23 15V18H17V13Z"
-            fill="#FEF08A"
-          />
-          <path
-            d="M19 14.5H21.5V16.5H19V14.5Z"
-            fill="#15803D"
-          />
-          {/* Exhaust Pipe with small leaf plume */}
-          <rect x="9" y="10" width="1.5" height="4" rx="0.5" fill="#FEF08A" />
-          {/* Sprout Leaf Element Growing from Front */}
-          <path
-            d="M9 10C9 7 13 7 13 7C13 10 9 10 9 10Z"
-            fill="#86EFAC"
-          />
-          {/* Big Rear Tractor Wheel */}
-          <circle cx="21" cy="21" r="5" fill="#1F2937" stroke="#FEF08A" strokeWidth="1.2" />
-          <circle cx="21" cy="21" r="2.2" fill="#9CA3AF" />
-          {/* Front Small Wheel */}
-          <circle cx="9" cy="22" r="3.2" fill="#1F2937" stroke="#FEF08A" strokeWidth="1" />
-          <circle cx="9" cy="22" r="1.4" fill="#9CA3AF" />
-          {/* Hitch bar */}
-          <path d="M26 21H23" stroke="#FEF08A" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+  if (variant === "icon") {
+    return <FarmRentHubIcon size={pixelSizes[size]} className={className} />;
+  }
 
-        {/* Small subtle wheat grain badge on top-right corner */}
-        <span className="absolute -top-1 -right-1 flex h-3 w-3 items-center justify-center rounded-full bg-amber-400 text-[8px] font-bold text-amber-950 ring-2 ring-white">
-          ★
-        </span>
-      </div>
-
-      <div className="flex flex-col">
-        <div className="flex items-center tracking-tight font-extrabold leading-none">
-          <span className={`text-slate-900 ${textSizes[size]}`}>Farm</span>
-          <span className={`text-emerald-700 ${textSizes[size]}`}>Rent</span>
-          <span className={`text-amber-600 ${textSizes[size]}`}>Hub</span>
+  if (variant === "print") {
+    return (
+      <div className={`inline-flex items-center gap-3 ${className}`}>
+        <FarmRentHubIcon size={pixelSizes[size]} monochrome={true} />
+        <div>
+          <span className="font-serif font-black tracking-tight text-black text-xl">
+            FarmRentHub
+          </span>
+          <div className="text-[10px] uppercase tracking-wider text-black font-semibold">
+            OFFICIAL RENTAL RECEIPT
+          </div>
         </div>
-        {showTagline && (
-          <span className="text-[10px] sm:text-xs font-medium text-slate-500 tracking-tight mt-0.5">
-            Rent the Right Equipment. Grow with Ease.
+      </div>
+    );
+  }
+
+  return (
+    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
+      <FarmRentHubIcon size={pixelSizes[size]} />
+      <div className="flex flex-col">
+        <div className="flex items-center gap-1.5 leading-none">
+          <span
+            className={`font-serif font-black tracking-tight ${textColor} ${textSizes[size]}`}
+            style={{ fontFamily: "'Roboto Slab', 'Merriweather', serif" }}
+          >
+            FarmRent<span className="text-[#d97706]">Hub</span>
+          </span>
+        </div>
+        {tagline && (
+          <span className="text-[11px] sm:text-xs font-semibold text-[#44403c] tracking-normal mt-0.5 leading-tight">
+            {tagline}
           </span>
         )}
       </div>

@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "pa", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "ਸਹੀ ਮਸ਼ੀਨ, ਸੌਖੀ ਖੇਤੀ",
+    "portalType": "ਰਾਸ਼ਟਰੀ ਖੇਤੀਬਾੜੀ ਮਸ਼ੀਨਰੀ ਕਿਰਾਇਆ ਪੋਰਟਲ"
+  },
+  "utility": {
+    "skipToContent": "ਮੁੱਖ ਸਮੱਗਰੀ 'ਤੇ ਜਾਓ",
+    "textSize": "ਅੱਖਰਾਂ ਦਾ ਆਕਾਰ",
+    "highContrast": "ਹਾਈ ਕੰਟ੍ਰਾਸਟ",
+    "normalContrast": "ਆਮ ਕੰਟ੍ਰਾਸਟ",
+    "language": "ਭਾਸ਼ਾ ਚੁਣੋ",
+    "helplineLabel": "ਕਿਸਾਨ ਹੈਲਪਲਾਈਨ (ਮੁਫ਼ਤ)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "ਅੰਕ ਸ਼ੈਲੀ"
+  },
+  "nav": {
+    "home": "ਹੋਮ",
+    "equipment": "ਮਸ਼ੀਨਰੀ ਸੂਚੀ",
+    "map": "ਨਕਸ਼ੇ 'ਤੇ ਖੋਜੋ",
+    "howItWorks": "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
+    "schemes": "ਸਰਕਾਰੀ ਸਕੀਮਾਂ ਤੇ ਸਬਸਿਡੀ",
+    "listEquipment": "ਆਪਣੀ ਮਸ਼ੀਨ ਦਰਜ ਕਰੋ",
+    "farmerDashboard": "ਕਿਸਾਨ ਡੈਸ਼ਬੋਰਡ",
+    "ownerDashboard": "ਮਾਲਕ ਡੈਸ਼ਬੋਰਡ",
+    "login": "ਲਾਗ ਇਨ",
+    "register": "ਰਜਿਸਟਰ",
+    "settings": "ਸੈਟਿੰਗਜ਼",
+    "notifications": "ਸੂਚਨਾਵਾਂ",
+    "profile": "ਪ੍ਰੋਫ਼ਾਈਲ"
+  },
+  "actions": {
+    "search": "ਖੋਜੋ",
+    "bookNow": "ਕਿਰਾਏ 'ਤੇ ਲਵੋ",
+    "viewDetails": "ਵੇਰਵਾ ਵੇਖੋ",
+    "confirm": "ਪੁਸ਼ਟੀ ਕਰੋ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "apply": "ਲਾਗੂ ਕਰੋ",
+    "reset": "ਮੁੜ ਸੈੱਟ ਕਰੋ",
+    "save": "ਸੰਭਾਲੋ",
+    "back": "ਪਿੱਛੇ",
+    "next": "ਅੱਗੇ ਵਧੋ",
+    "translate": "ਅਨੁਵਾਦ ਕਰੋ",
+    "listen": "ਸੁਣੋ (ਬੋਲ ਕੇ ਦੱਸੋ)",
+    "stopListening": "ਆਵਾਜ਼ ਬੰਦ ਕਰੋ",
+    "voiceSearch": "ਬੋਲ ਕੇ ਖੋਜੋ"
+  },
+  "badges": {
+    "verifiedOwner": "ਤਸਦੀਕਸ਼ੁਦਾ ਮਾਲਕ",
+    "verifiedMachine": "ਤਸਦੀਕਸ਼ੁਦਾ ਮਸ਼ੀਨ",
+    "escrowProtected": "ਸੁਰੱਖਿਅਤ ਭੁਗਤਾਨ",
+    "withDriver": "ਡਰਾਈਵਰ ਸਮੇਤ",
+    "withoutDriver": "ਬਿਨਾਂ ਡਰਾਈਵਰ",
+    "sampleData": "ਨਮੂਨਾ ਡਾਟਾ (ਡੈਮੋ)"
+  },
+  "units": {
+    "perHour": "ਪ੍ਰਤੀ ਘੰਟਾ",
+    "perDay": "ਪ੍ਰਤੀ ਦਿਨ",
+    "perAcre": "ਪ੍ਰਤੀ ਏਕੜ",
+    "perQuintal": "ਪ੍ਰਤੀ ਕੁਇੰਟਲ",
+    "hp": "ਐਚ.ਪੀ.",
+    "km": "ਕਿ.ਮੀ.",
+    "hours": "ਘੰਟੇ"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub ਇੱਕ ਨਿੱਜੀ ਪਲੇਟਫਾਰਮ ਹੈ ਅਤੇ ਇਹ ਕੋਈ ਸਰਕਾਰੀ ਵੈੱਬਸਾਈਟ ਨਹੀਂ ਹੈ।",
+    "grievanceTitle": "ਸ਼ਿਕਾਇਤ ਨਿਵਾਰਣ ਅਧਿਕਾਰੀ",
+    "grievanceName": "ਸੁਨੀਲ ਸ਼ਰਮਾ",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "ਕਿਸਾਨਾਂ ਨੂੰ ਆਧੁਨਿਕ ਟਰੈਕਟਰ, ਕੰਬਾਈਨ, ਸੁਪਰ ਸੀਡਰ ਅਤੇ ਬੇਲਰ ਨਾਲ ਜੋੜਨ ਵਾਲਾ ਭਰੋਸੇਯੋਗ ਮੰਚ।",
+    "quickLinks": "ਜ਼ਰੂਰੀ ਲਿੰਕ",
+    "officialPortals": "ਅਧਿਕਾਰਤ ਸਰਕਾਰੀ ਪੋਰਟਲ",
+    "allRightsReserved": "ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।"
+  }
+}

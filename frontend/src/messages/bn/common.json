@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "bn", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "সঠিক সরঞ্জাম, সহজ চাষাবাদ",
+    "portalType": "জাতীয় কৃষি যন্ত্রপাতি ভাড়া পোর্টাল"
+  },
+  "utility": {
+    "skipToContent": "মূল বিষয়বস্তুতে যান",
+    "textSize": "অক্ষরের আকার",
+    "highContrast": "উচ্চ বৈসাদৃশ্য",
+    "normalContrast": "স্বাভাবিক রং",
+    "language": "ভাষা নির্বাচন করুন",
+    "helplineLabel": "কৃষক হেল্পলাইন (টোল-ফ্রি)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "সংখ্যার ধরন"
+  },
+  "nav": {
+    "home": "হোম",
+    "equipment": "যন্ত্রপাতির তালিকা",
+    "map": "মানচিত্রে খুঁজুন",
+    "howItWorks": "কীভাবে কাজ করে",
+    "schemes": "সরকারি প্রকল্প ও ভর্তুকি",
+    "listEquipment": "আপনার মেশিন যোগ করুন",
+    "farmerDashboard": "কৃষক ড্যাশবোর্ড",
+    "ownerDashboard": "মালিক ড্যাশবোর্ড",
+    "login": "লগ ইন",
+    "register": "নিবন্ধন",
+    "settings": "সেটিংস",
+    "notifications": "বিজ্ঞপ্তি",
+    "profile": "প্রোফাইল"
+  },
+  "actions": {
+    "search": "অনুসন্ধান",
+    "bookNow": "ভাড়া নিন",
+    "viewDetails": "বিস্তারিত দেখুন",
+    "confirm": "নিশ্চিত করুন",
+    "cancel": "বাতিল করুন",
+    "apply": "প্রয়োগ করুন",
+    "reset": "পুনরায় সেট",
+    "save": "সংরক্ষণ করুন",
+    "back": "পিছনে",
+    "next": "পরবর্তী",
+    "translate": "অনুবাদ করুন",
+    "listen": "শুনুন (ভয়েস)",
+    "stopListening": "ভয়েস বন্ধ করুন",
+    "voiceSearch": "ভয়েস অনুসন্ধান"
+  },
+  "badges": {
+    "verifiedOwner": "যাচাইকৃত মালিক",
+    "verifiedMachine": "যাচাইকৃত মেশিন",
+    "escrowProtected": "সুরক্ষিত লেনদেন",
+    "withDriver": "চালক সহ উপলব্ধ",
+    "withoutDriver": "চালক ছাড়া",
+    "sampleData": "নমুনা তথ্য (ডেমো)"
+  },
+  "units": {
+    "perHour": "প্রতি ঘণ্টা",
+    "perDay": "প্রতি দিন",
+    "perAcre": "প্রতি একর",
+    "perQuintal": "প্রতি কুইন্টাল",
+    "hp": "এইচ.পি.",
+    "km": "কি.মি.",
+    "hours": "ঘণ্টা"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub একটি বেসরকারি প্ল্যাটফর্ম এবং এটি কোনো সরকারি ওয়েবসাইট নয়।",
+    "grievanceTitle": "অভিযোগ প্রতিকার কর্মকর্তা",
+    "grievanceName": "সুনীল শর্মা",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "বাংলার কৃষকদের পাওয়ার টিলার, ধান রোপণ ও কাটার আধুনিক মেশিন সুলভে ভাড়ায় পাওয়ার নির্ভরযোগ্য ঠিকানা।",
+    "quickLinks": "প্রয়োজনীয় লিঙ্ক",
+    "officialPortals": "সরকারি কৃষি পোর্টাল",
+    "allRightsReserved": "সর্বস্বত্ব সংরক্ষিত।"
+  }
+}

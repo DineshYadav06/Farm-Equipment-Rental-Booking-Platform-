@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "hi", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "सही मशीन, आसान खेती",
+    "portalType": "राष्ट्रीय कृषि उपकरण किराया मंच"
+  },
+  "utility": {
+    "skipToContent": "मुख्य सामग्री पर जाएं",
+    "textSize": "अक्षर आकार",
+    "highContrast": "उच्च कंट्रास्ट",
+    "normalContrast": "सामान्य कंट्रास्ट",
+    "language": "भाषा चुनें",
+    "helplineLabel": "किसान हेल्पलाइन (निःशुल्क)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "अंक शैली"
+  },
+  "nav": {
+    "home": "होम",
+    "equipment": "उपकरण सूची",
+    "map": "नक्शे पर खोजें",
+    "howItWorks": "यह कैसे काम करता है",
+    "schemes": "सरकारी योजनाएं व सब्सिडी",
+    "listEquipment": "अपना उपकरण जोड़ें",
+    "farmerDashboard": "किसान डैशबोर्ड",
+    "ownerDashboard": "मालिक डैशबोर्ड",
+    "login": "लॉग इन",
+    "register": "पंजीकरण",
+    "settings": "सेटिंग्स",
+    "notifications": "सूचनाएं",
+    "profile": "प्रोफ़ाइल"
+  },
+  "actions": {
+    "search": "खोजें",
+    "bookNow": "किराए पर लें",
+    "viewDetails": "विवरण देखें",
+    "confirm": "पुष्टि करें",
+    "cancel": "रद्द करें",
+    "apply": "लागू करें",
+    "reset": "रीसेट करें",
+    "save": "सुरक्षित करें",
+    "back": "वापस",
+    "next": "आगे बढ़ें",
+    "translate": "अनुवाद करें",
+    "listen": "सुनें (बोलकर सुनाएं)",
+    "stopListening": "आवाज बंद करें",
+    "voiceSearch": "बोलकर खोजें"
+  },
+  "badges": {
+    "verifiedOwner": "सत्यापित मालिक",
+    "verifiedMachine": "सत्यापित मशीन",
+    "escrowProtected": "सुरक्षित भुगतान (एस्क्रो)",
+    "withDriver": "चालक सहित उपलब्ध",
+    "withoutDriver": "बिना चालक",
+    "sampleData": "नमूना डेटा (डेमो)"
+  },
+  "units": {
+    "perHour": "प्रति घंटा",
+    "perDay": "प्रति दिन",
+    "perAcre": "प्रति एकड़",
+    "perQuintal": "प्रति क्विंटल",
+    "hp": "एच.पी.",
+    "km": "कि.मी.",
+    "hours": "घंटे"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub एक निजी कृषि सेवा मंच है और यह किसी भी सरकारी विभाग की वेबसाइट नहीं है।",
+    "grievanceTitle": "शिकायत निवारण अधिकारी",
+    "grievanceName": "सुनील शर्मा",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "भारतीय किसानों को आधुनिक कृषि मशीनरी, कंबाइन, रोटावेटर और कस्टम हायरिंग सेंटर्स से जोड़ने वाला पारदर्शी मंच।",
+    "quickLinks": "त्वरित लिंक",
+    "officialPortals": "महत्वपूर्ण सरकारी पोर्टल",
+    "allRightsReserved": "सर्वाधिकार सुरक्षित।"
+  }
+}

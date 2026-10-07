@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "mr", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "योग्य यंत्र, सोपी शेती",
+    "portalType": "राष्ट्रीय कृषी अवजारे भाडेतत्त्व मंच"
+  },
+  "utility": {
+    "skipToContent": "मुख्य मजकुरावर जा",
+    "textSize": "फॉन्ट आकार",
+    "highContrast": "हाय कॉन्ट्रास्ट",
+    "normalContrast": "सामान्य कॉन्ट्रास्ट",
+    "language": "भाषा निवडा",
+    "helplineLabel": "शेतकरी हेल्पलाइन (टोल-फ्री)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "अंक शैली"
+  },
+  "nav": {
+    "home": "मुख्यपृष्ठ",
+    "equipment": "अवजारे यादी",
+    "map": "नकाशावर शोधा",
+    "howItWorks": "हे कसे चालते",
+    "schemes": "शासकीय योजना व अनुदान",
+    "listEquipment": "आपले यंत्र नोंदवा",
+    "farmerDashboard": "शेतकरी डॅशबोर्ड",
+    "ownerDashboard": "मालक डॅशबोर्ड",
+    "login": "लॉग इन",
+    "register": "नोंदणी",
+    "settings": "सेटिंग्ज",
+    "notifications": "सूचना",
+    "profile": "प्रोफाइल"
+  },
+  "actions": {
+    "search": "शोधा",
+    "bookNow": "भाड्याने घ्या",
+    "viewDetails": "तपशील पहा",
+    "confirm": "पुष्टी करा",
+    "cancel": "रद्द करा",
+    "apply": "लागू करा",
+    "reset": "रीसेट करा",
+    "save": "जतन करा",
+    "back": "मागे",
+    "next": "पुढे",
+    "translate": "भाषांतर करा",
+    "listen": "ऐका (बोलून दाखवा)",
+    "stopListening": "आवाज थांबवा",
+    "voiceSearch": "बोलून शोधा"
+  },
+  "badges": {
+    "verifiedOwner": "सत्यापित मालक",
+    "verifiedMachine": "सत्यापित यंत्र",
+    "escrowProtected": "सुरक्षित व्यवहार",
+    "withDriver": "चालकासह उपलब्ध",
+    "withoutDriver": "चालकाशिवाय",
+    "sampleData": "नमुना माहिती (डेमो)"
+  },
+  "units": {
+    "perHour": "प्रति तास",
+    "perDay": "प्रति दिवस",
+    "perAcre": "प्रति एकर",
+    "perQuintal": "प्रति क्विंटल",
+    "hp": "एच.पी.",
+    "km": "कि.मी.",
+    "hours": "तास"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub हे एक खाजगी व्यासपीठ असून ते कोणत्याही सरकारी विभागाचे संकेतस्थळ नाही.",
+    "grievanceTitle": "तक्रार निवारण अधिकारी",
+    "grievanceName": "सुनील शर्मा",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "महाराष्ट्रातील शेतकऱ्यांना ट्रॅक्टर, रोटाव्हेटर, ऊस तोडणी यंत्र व फवारणी यंत्रे सहज मिळवून देणारे पारदर्शक व्यासपीठ.",
+    "quickLinks": "महत्त्वाचे दुवे",
+    "officialPortals": "शासकीय कृषी पोर्टल",
+    "allRightsReserved": "सर्व हक्क राखीव."
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "_meta": { "locale": "as", "status": "reviewed" },
+  "brand": {
+    "name": "FarmRentHub",
+    "tagline": "সঠিক সা-সঁজুলি, সহজ খেতি",
+    "portalType": "ৰাষ্ট্ৰীয় কৃষি সঁজুলি ভাড়া পৰ্টেল"
+  },
+  "utility": {
+    "skipToContent": "মূল বিষয়বস্তুলৈ যাওক",
+    "textSize": "আখৰৰ আকাৰ",
+    "highContrast": "উচ্চ কন্ট্ৰাষ্ট",
+    "normalContrast": "স্বাভাৱিক",
+    "language": "ভাষা বাছনি কৰক",
+    "helplineLabel": "কৃষক হেল্পলাইন (বিনামূলীয়া)",
+    "helplineNumber": "1800-180-1551",
+    "digitsToggle": "সংখ্যাৰ শৈলী"
+  },
+  "nav": {
+    "home": "গৃহ",
+    "equipment": "সঁজুলিৰ তালিকা",
+    "map": "মানচিত্ৰত বিচাৰক",
+    "howItWorks": "ই কেনেকৈ কাম কৰে",
+    "schemes": "চৰকাৰী আঁচনি আৰু ৰেহাই",
+    "listEquipment": "আপোনাৰ যন্ত্ৰ যোগ কৰক",
+    "farmerDashboard": "কৃষক ডেচবৰ্ড",
+    "ownerDashboard": "মালিক ডেচবৰ্ড",
+    "login": "লগ ইন",
+    "register": "পঞ্জীয়ন",
+    "settings": "ছেটিংছ",
+    "notifications": "বিজ্ঞপ্তি",
+    "profile": "প্ৰফাইল"
+  },
+  "actions": {
+    "search": "সন্ধান কৰক",
+    "bookNow": "ভাড়াত লওক",
+    "viewDetails": "বিৱৰণ চাওক",
+    "confirm": "নিশ্চিত কৰক",
+    "cancel": "বাতিল কৰক",
+    "apply": "প্ৰয়োগ কৰক",
+    "reset": "পুনৰায় ছেট",
+    "save": "সংৰক্ষণ কৰক",
+    "back": "পিছলৈ",
+    "next": "আগলৈ",
+    "translate": "অনুবাদ কৰক",
+    "listen": "শুনক (ভইচ)",
+    "stopListening": "ভইচ বন্ধ কৰক",
+    "voiceSearch": "ভইচ অনুসন্ধান"
+  },
+  "badges": {
+    "verifiedOwner": "পৰীক্ষিত মালিক",
+    "verifiedMachine": "পৰীক্ষিত যন্ত্ৰ",
+    "escrowProtected": "সুৰক্ষিত পৰিশোধ",
+    "withDriver": "চালক সহ উপলব্ধ",
+    "withoutDriver": "চালক নোহোৱাকৈ",
+    "sampleData": "নমুনা তথ্য (ডেমো)"
+  },
+  "units": {
+    "perHour": "প্ৰতি ঘণ্টা",
+    "perDay": "প্ৰতি দিন",
+    "perAcre": "প্ৰতি একৰ",
+    "perQuintal": "প্ৰতি কুইন্টল",
+    "hp": "এইচ.পি.",
+    "km": "কি.মি.",
+    "hours": "ঘণ্টা"
+  },
+  "footer": {
+    "statutoryDisclaimer": "FarmRentHub এটা ব্যক্তিগত কৃষি মঞ্চ আৰু ই কোনো চৰকাৰী ৱেবছাইট নহয়।",
+    "grievanceTitle": "অভিযোগ নিবাৰণ বিষয়া",
+    "grievanceName": "সুনীল শৰ্মা",
+    "grievanceEmail": "grievance@farmrenthub.in",
+    "grievancePhone": "+91 11-2338-9000",
+    "aboutPlatform": "অসমৰ কৃষকসকলক পাৱাৰ টিলাৰ, ধান ৰোপণ আৰু চাহ বাগিচাৰ স্প্ৰেয়াৰ কম খৰচত ভাড়াত দিয়াৰ নিৰ্ভৰযোগ্য মঞ্চ।",
+    "quickLinks": "প্ৰয়োজনীয় সংযোগ",
+    "officialPortals": "চৰকাৰী কৃষি পৰ্টেল",
+    "allRightsReserved": "সকলো অধিকাৰ সংৰক্ষিত।"
+  }
+}
