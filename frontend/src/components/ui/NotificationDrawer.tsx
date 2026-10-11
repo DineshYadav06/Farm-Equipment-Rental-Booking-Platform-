@@ -2,7 +2,8 @@
 
 import React from "react";
 import { UserNotification } from "@/types";
-import { X, CheckCircle2, Clock, Bell, AlertCircle, ArrowRight } from "lucide-react";
+import { AppImage } from "@/components/ui/AppImage";
+import { X, CheckCircle2, Clock, Bell } from "lucide-react";
 
 interface NotificationDrawerProps {
   isOpen: boolean;
@@ -24,7 +25,6 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
   const getIcon = (type: string) => {
     switch (type) {
       case "booking":
-        return <CheckCircle2 className="w-4 h-4 text-emerald-600" />;
       case "payment":
         return <CheckCircle2 className="w-4 h-4 text-emerald-600" />;
       case "reminder":
@@ -46,40 +46,59 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1 text-slate-400 hover:text-slate-700 rounded-full"
+            className="p-1 text-slate-400 hover:text-slate-700 rounded-full cursor-pointer"
+            aria-label="Close notifications drawer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <div className="p-4 flex-1 overflow-y-auto space-y-3">
-          {notifications.map((n) => (
-            <div
-              key={n.id}
-              className={`p-3.5 rounded-2xl border text-xs transition-colors ${
-                !n.read
-                  ? "bg-emerald-50/50 border-emerald-200"
-                  : "bg-white border-slate-200"
-              }`}
-            >
-              <div className="flex items-start gap-2.5">
-                <div className="mt-0.5 shrink-0">{getIcon(n.type)}</div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-slate-900">{n.title}</span>
-                    <span className="text-[10px] text-slate-400">{n.time}</span>
+          {notifications.length === 0 ? (
+            <div className="py-12 px-4 text-center space-y-3">
+              <div className="w-48 max-w-full mx-auto">
+                <AppImage
+                  imageId="illustration-empty-notifications"
+                  className="w-full"
+                  showCredit={false}
+                />
+              </div>
+              <p className="text-xs font-semibold text-slate-700">
+                {isHi ? "कोई नई सूचना नहीं है" : "No new notifications"}
+              </p>
+              <p className="text-[11px] text-slate-500">
+                {isHi ? "आपकी सभी कृषि बुकिंग अपडेट यहाँ दिखाई देंगी" : "All your rental activity updates will appear here"}
+              </p>
+            </div>
+          ) : (
+            notifications.map((n) => (
+              <div
+                key={n.id}
+                className={`p-3.5 rounded-2xl border text-xs transition-colors ${
+                  !n.read
+                    ? "bg-emerald-50/50 border-emerald-200"
+                    : "bg-white border-slate-200"
+                }`}
+              >
+                <div className="flex items-start gap-2.5">
+                  <div className="mt-0.5 shrink-0">{getIcon(n.type)}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-slate-900">{n.title}</span>
+                      <span className="text-[10px] text-slate-400">{n.time}</span>
+                    </div>
+                    <p className="text-slate-600 mt-1 leading-relaxed">{n.message}</p>
                   </div>
-                  <p className="text-slate-600 mt-1 leading-relaxed">{n.message}</p>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         <div className="p-4 border-t border-slate-100 bg-slate-50">
           <button
             onClick={onClose}
-            className="w-full py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl text-xs font-bold transition-colors"
+            className="w-full py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl text-xs font-bold transition-colors cursor-pointer"
           >
             {isHi ? "बंद करें" : "Mark All as Read & Close"}
           </button>
