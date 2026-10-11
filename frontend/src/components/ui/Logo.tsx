@@ -4,6 +4,7 @@ interface LogoProps {
   variant?: "horizontal" | "icon" | "print";
   size?: "sm" | "md" | "lg" | "xl";
   tagline?: string;
+  showTagline?: boolean;
   className?: string;
   textColor?: string;
 }
