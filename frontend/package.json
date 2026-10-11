@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "i18n:check": "node scripts/i18n-check.mjs",
+    "content:check": "node scripts/content-check.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "images:check": "node scripts/images-check.mjs",
+    "seed": "node scripts/seed.mjs",
+    "seed:clear": "node -e \"const fs=require('fs'); const p='src/content/sample-listings.json'; if(fs.existsSync(p)) fs.writeFileSync(p, '[]')\"",
+    "test:header": "node tests/verify-header.mjs"
   },
   "dependencies": {
     "framer-motion": "^14.0.0",
@@ -22,6 +29,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
