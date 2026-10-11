@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" fill="none" role="img" aria-hidden="true">
+  <rect width="400" height="300" rx="16" fill="#fafaf5"/>
+  
+  <!-- Peaceful Farm Bell -->
+  <g transform="translate(145, 55)">
+    <!-- Bell Top loop -->
+    <circle cx="55" cy="25" r="14" stroke="#d97706" stroke-width="4" fill="none"/>
+    <!-- Bell Body -->
+    <path d="M 32 45 C 32 30, 78 30, 78 45 C 78 75, 105 100, 105 115 L 5 115 C 5 100, 32 75, 32 45 Z" fill="#1e3a5f"/>
+    <!-- Bell Rim -->
+    <rect x="0" y="115" width="110" height="12" rx="6" fill="#14532d"/>
+    <!-- Clapper -->
+    <circle cx="55" cy="132" r="9" fill="#d97706"/>
+    
+    <!-- Sprout emerging upward from bell top -->
+    <g transform="translate(45, -10)">
+      <path d="M10 20 Q 10 5 10 -5" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M10 5 C 0 -2, -6 10, 10 15" fill="#16a34a"/>
+      <path d="M10 0 C 20 -7, 26 5, 10 10" fill="#14532d"/>
+    </g>
+  </g>
+  
+  <!-- Soft ground wave -->
+  <path d="M110 235 Q 200 220 290 235" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+</svg>
