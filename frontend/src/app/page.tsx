@@ -1,1001 +1,555 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "@/i18n/context";
+import { EQUIPMENT_TAXONOMY, EquipmentCategoryTaxonomy } from "@/content/equipment-taxonomy";
 import { CategoryCard } from "@/components/equipment/CategoryCard";
 import { EquipmentCard } from "@/components/equipment/EquipmentCard";
 import { BookingModal } from "@/components/booking/BookingModal";
 import { EquipmentDetailsModal } from "@/components/booking/EquipmentDetailsModal";
-import { MapDiscovery } from "@/components/map/MapDiscovery";
-import { ListEquipmentModal } from "@/components/owner/ListEquipmentModal";
-import { FarmerDashboardView } from "@/components/dashboard/FarmerDashboardView";
-import { OwnerDashboardView } from "@/components/dashboard/OwnerDashboardView";
-import { NotificationDrawer } from "@/components/ui/NotificationDrawer";
-import {
-  CATEGORIES,
-  MOCK_EQUIPMENT,
-  MOCK_REVIEWS,
-  MOCK_RECOMMENDATIONS,
-  MOCK_NOTIFICATIONS,
-  HOW_IT_WORKS_STEPS
-} from "@/constants/data";
+import { SourceNote } from "@/components/ui/SourceNote";
+import { AppImage } from "@/components/ui/AppImage";
+import { fetchEquipmentList } from "@/services/api";
 import { Equipment } from "@/types";
+
+function getRegionImageId(location: string, locale: string): string {
+  const locLower = (location || "").toLowerCase();
+  if (locLower.includes("punjab") || locale === "pa") return "region-punjab-wheat";
+  if (locLower.includes("maharashtra") || locale === "mr") return "region-maharashtra-sugarcane";
+  if (locLower.includes("tamil") || locale === "ta") return "region-tamilnadu-paddy";
+  if (locLower.includes("assam") || locale === "as") return "region-assam-tea";
+  if (locLower.includes("uttar pradesh") || locLower.includes("up")) return "region-up";
+  if (locLower.includes("gujarat") || locale === "gu") return "region-gujarat";
+  if (locLower.includes("bengal") || locale === "bn") return "region-westbengal";
+  if (locLower.includes("karnataka") || locale === "kn") return "region-karnataka";
+  if (locLower.includes("kerala") || locale === "ml") return "region-kerala";
+  if (locLower.includes("odisha") || locale === "or") return "region-odisha";
+  if (locLower.includes("telangana") || locale === "te") return "region-telangana";
+  return "region-punjab-wheat";
+}
 import {
   Search,
   MapPin,
   Calendar,
-  SlidersHorizontal,
+  Mic,
   ShieldCheck,
-  Star,
   CheckCircle2,
   Clock,
   ArrowRight,
   TrendingUp,
+  Volume2,
+  UserCheck,
   Award,
   Sparkles,
   PhoneCall,
-  UserCheck,
-  Users,
-  Tractor,
-  Layers,
   ChevronRight,
-  Zap,
-  Tag
+  Layers,
+  HelpCircle,
+  AlertCircle
 } from "lucide-react";
 
-export default function Home() {
-  // App Global State
-  const [lang, setLang] = useState<"en" | "hi">("en");
-  const [activeRole, setActiveRole] = useState<"farmer" | "owner">("farmer");
-  const [selectedCity, setSelectedCity] = useState<string>("Ludhiana, Punjab");
-  const [equipmentList, setEquipmentList] = useState<Equipment[]>(MOCK_EQUIPMENT);
+export default function HomePage() {
+  const router = useRouter();
+  const {
+    t,
+    locale,
+    localeMeta,
+    formatNumber,
+    formatPrice,
+    speak,
+    simpleMode
+  } = useTranslation();
 
-  // Search & Filter State
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [maxPriceFilter, setMaxPriceFilter] = useState<number>(15000);
-  const [selectedRadius, setSelectedRadius] = useState<number>(50);
-  const [selectedMinRating, setSelectedMinRating] = useState<number>(0);
-  const [availabilityOnly, setAvailabilityOnly] = useState<boolean>(false);
+  // Search State
+  const [searchQuery, setSearchQuery] = useState("");
+  const [locationQuery, setLocationQuery] = useState("Ludhiana, Punjab");
+  const [dateQuery, setDateQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [isListening, setIsListening] = useState(false);
 
-  // Recommendation Crop Selector
-  const [selectedCrop, setSelectedCrop] = useState<string>("Wheat");
+  // Equipment List State
+  const [equipmentItems, setEquipmentItems] = useState<Equipment[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Modals & Drawers
-  const [bookingModalOpen, setBookingModalOpen] = useState<boolean>(false);
-  const [selectedEquipmentForBooking, setSelectedEquipmentForBooking] = useState<Equipment | null>(null);
+  // Modals State
+  const [selectedBookingEq, setSelectedBookingEq] = useState<Equipment | null>(null);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [selectedDetailsEq, setSelectedDetailsEq] = useState<Equipment | null>(null);
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
-  const [detailsModalOpen, setDetailsModalOpen] = useState<boolean>(false);
-  const [selectedEquipmentForDetails, setSelectedEquipmentForDetails] = useState<Equipment | null>(null);
+  useEffect(() => {
+    let mounted = true;
+    fetchEquipmentList("all", "")
+      .then((data) => {
+        if (mounted) {
+          setEquipmentItems(data.slice(0, 6)); // Top 6 for featured
+          setLoading(false);
+        }
+      })
+      .catch(() => setLoading(false));
 
-  const [listEquipmentModalOpen, setListEquipmentModalOpen] = useState<boolean>(false);
-  const [notificationsOpen, setNotificationsOpen] = useState<boolean>(false);
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
-  // Owner Calculator State
-  const [calcMachineType, setCalcMachineType] = useState<string>("Tractor");
-  const [calcDaysPerMonth, setCalcDaysPerMonth] = useState<number>(18);
+  // Web Speech API Voice Search handler
+  const handleVoiceSearch = () => {
+    if (typeof window === "undefined") return;
 
-  const isHi = lang === "hi";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const windowObj = window as any;
+    const SpeechRecognition = windowObj.SpeechRecognition || windowObj.webkitSpeechRecognition;
 
-  // Filtered Equipment in Marketplace
-  const filteredEquipment = useMemo(() => {
-    return equipmentList.filter((item) => {
-      const matchCategory =
-        selectedCategory === "All" || item.category.toLowerCase() === selectedCategory.toLowerCase();
-      const matchQuery =
-        !searchQuery ||
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.city.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchPrice = item.daily_rate <= maxPriceFilter;
-      const matchDistance = (item.distance_km || 0) <= selectedRadius;
-      const matchRating = item.average_rating >= selectedMinRating;
-      const matchAvail = !availabilityOnly || item.is_available;
+    if (!SpeechRecognition) {
+      alert("Voice search is not supported in this browser. Please type your query.");
+      return;
+    }
 
-      return matchCategory && matchQuery && matchPrice && matchDistance && matchRating && matchAvail;
-    });
-  }, [equipmentList, selectedCategory, searchQuery, maxPriceFilter, selectedRadius, selectedMinRating, availabilityOnly]);
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = localeMeta.speechLang || "hi-IN";
+      recognition.interimResults = false;
 
-  const handleBookNow = (eq: Equipment) => {
-    setSelectedEquipmentForBooking(eq);
-    setBookingModalOpen(true);
-  };
+      recognition.onstart = () => setIsListening(true);
+      recognition.onend = () => setIsListening(false);
+      recognition.onerror = () => setIsListening(false);
 
-  const handleViewDetails = (eq: Equipment) => {
-    setSelectedEquipmentForDetails(eq);
-    setDetailsModalOpen(true);
-  };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognition.onresult = (event: any) => {
+        const transcript = event.results?.[0]?.[0]?.transcript;
+        if (transcript) {
+          setSearchQuery(transcript);
+          router.push(`/equipment?q=${encodeURIComponent(transcript)}`);
+        }
+      };
 
-  const handleNewEquipmentAdded = (newEq: Equipment) => {
-    setEquipmentList((prev) => [newEq, ...prev]);
-  };
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      recognition.start();
+    } catch {
+      setIsListening(false);
     }
   };
 
-  // Owner earnings estimate
-  const estimatedEarnings = useMemo(() => {
-    const dailyMap: Record<string, number> = {
-      Tractor: 3200,
-      Harvester: 14000,
-      Rotavator: 2200,
-      "Seed Drill": 2800,
-      Sprayer: 2100
-    };
-    const rate = dailyMap[calcMachineType] || 2500;
-    return rate * calcDaysPerMonth;
-  }, [calcMachineType, calcDaysPerMonth]);
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push(
+      `/equipment?q=${encodeURIComponent(searchQuery)}&city=${encodeURIComponent(locationQuery)}${
+        dateQuery ? `&date=${encodeURIComponent(dateQuery)}` : ""
+      }`
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50/70 font-sans text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900">
-      {/* ── 1. GLOBAL NAVBAR ── */}
-      <Navbar
-        currentLang={lang}
-        onToggleLang={() => setLang(lang === "en" ? "hi" : "en")}
-        activeRole={activeRole}
-        onToggleRole={setActiveRole}
-        selectedCity={selectedCity}
-        onSelectCity={setSelectedCity}
-        onOpenNotifications={() => setNotificationsOpen(true)}
-        onOpenListEquipment={() => setListEquipmentModalOpen(true)}
-        onScrollToSection={scrollToSection}
-        unreadCount={2}
-      />
+    <div className="flex-col flex flex-1">
+      {/* 1. HERO SECTION: TWO-COLUMN OFF-WHITE #fafaf5 */}
+      <section className="bg-[#fafaf5] border-b border-[#e5e5df] pt-8 pb-12 sm:pt-12 sm:pb-16 px-4 sm:px-6 lg:px-8 select-none">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Navy Headline + Clean Search Bar + Popular Chips */}
+          <div className="lg:col-span-7 space-y-5">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1e3a5f] tracking-tight leading-[1.15]">
+              {t("home", "hero.title")}
+            </h1>
 
-      {/* Role View Conditional Rendering: If Owner View is selected, show Owner Dashboard */}
-      {activeRole === "owner" ? (
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-          <OwnerDashboardView
-            onOpenListEquipment={() => setListEquipmentModalOpen(true)}
-            lang={lang}
-          />
-        </main>
-      ) : (
-        <main>
-          {/* ── 2. HERO SECTION ── */}
-          <section
-            id="hero"
-            className="relative bg-gradient-to-b from-white via-emerald-50/30 to-slate-50 pt-8 sm:pt-14 pb-14 sm:pb-20 border-b border-slate-200/80 overflow-hidden"
-          >
-            {/* Subtle background field contours */}
-            <div className="absolute inset-0 pointer-events-none opacity-40">
-              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient id="field-glow" cx="50%" cy="30%" r="50%">
-                    <stop offset="0%" stopColor="#dcfce7" stopOpacity="0.8" />
-                    <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-                  </radialGradient>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#field-glow)" />
-              </svg>
-            </div>
+            <p className="text-sm sm:text-base text-[#44403c] font-normal leading-relaxed max-w-xl">
+              {t("home", "hero.subtitle")}
+            </p>
 
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                {/* Left Column: Headlines & Value Prop */}
-                <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                  {/* Trust Pill */}
-                  <div className="inline-flex items-center gap-2 bg-emerald-100/80 border border-emerald-300/80 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-900 shadow-2xs">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-                    <span>
-                      {isHi
-                        ? "सत्यापित कृषि उपकरण साझाकरण मंच"
-                        : "Verified Agricultural Equipment Rental Network"}
-                    </span>
-                  </div>
-
-                  {/* Main Headline */}
-                  <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
-                    {isHi ? (
-                      <>
-                        सही कृषि उपकरण किराए पर लें।{" "}
-                        <span className="text-emerald-700 underline decoration-amber-400 decoration-wavy decoration-3">
-                          आसानी से उपज बढ़ाएं।
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        Rent the Right Farm Equipment.{" "}
-                        <span className="text-emerald-700">Grow with Ease.</span>
-                      </>
-                    )}
-                  </h1>
-
-                  {/* Subheadline */}
-                  <p className="text-sm sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                    {isHi
-                      ? "अपने आसपास की विश्वसनीय कृषि मशीनें खोजें, लाइव उपलब्धता जांचें, दरों की तुलना करें और सत्यापित मालिकों से आसानी से बुक करें।"
-                      : "Find reliable agricultural machines near you, check availability, compare prices and book equipment from verified owners."}
-                  </p>
-
-                  {/* Primary & Secondary CTAs */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
-                    <button
-                      onClick={() => scrollToSection("equipment-section")}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-sm sm:text-base px-7 py-3.5 rounded-2xl shadow-sm hover:shadow-md transition-all active:scale-98"
-                    >
-                      <span>{isHi ? "उपकरण खोजें" : "Find Equipment"}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-
-                    <button
-                      onClick={() => setListEquipmentModalOpen(true)}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm sm:text-base px-6 py-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-600 transition-all active:scale-98"
-                    >
-                      <Tractor className="w-4 h-4 text-emerald-700" />
-                      <span>{isHi ? "अपनी मशीन लिस्ट करें" : "List Your Equipment"}</span>
-                    </button>
-                  </div>
-
-                  {/* Metrics Badge Row */}
-                  <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-200/80 max-w-lg mx-auto lg:mx-0">
-                    <div>
-                      <div className="text-xl sm:text-2xl font-black text-slate-900">12,500+</div>
-                      <div className="text-[11px] font-medium text-slate-500">
-                        {isHi ? "सक्रिय किसान" : "Farmers Connected"}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-xl sm:text-2xl font-black text-emerald-700">4,800+</div>
-                      <div className="text-[11px] font-medium text-slate-500">
-                        {isHi ? "सत्यापित मशीनें" : "Verified Machines"}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-xl sm:text-2xl font-black text-amber-600">4.9 / 5</div>
-                      <div className="text-[11px] font-medium text-slate-500">
-                        {isHi ? "संतुष्टि रेटिंग" : "Farmer Trust Score"}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Column: Hero Visual Graphic */}
-                <div className="lg:col-span-5 relative">
-                  <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
-                    <img
-                      src="https://images.unsplash.com/photo-1592982537447-6f2a6a0c5c1c?auto=format&fit=crop&w=1000&q=85"
-                      alt="Modern tractor working on green agricultural farm field"
-                      className="w-full h-84 sm:h-100 object-cover group-hover:scale-103 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-
-                    {/* Floating GPS Location Pin Badge */}
-                    <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-2xl shadow-lg border border-slate-200">
-                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping" />
-                      <div className="text-left">
-                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">
-                          Active Cluster
-                        </div>
-                        <div className="text-xs font-extrabold text-slate-900">
-                          {selectedCity}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Floating Rental Cue Badge Bottom */}
-                    <div className="absolute bottom-4 left-4 right-4 bg-emerald-950/90 backdrop-blur-md p-3.5 rounded-2xl border border-emerald-700/50 text-white flex items-center justify-between gap-3 shadow-xl">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0">
-                          <CheckCircle2 className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold leading-tight">
-                            Mahindra 575 DI (47 HP)
-                          </div>
-                          <div className="text-[11px] text-emerald-200">
-                            Available 2.8 km away • ₹3,200/day
-                          </div>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => handleBookNow(MOCK_EQUIPMENT[0])}
-                        className="bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold text-xs px-3 py-1.5 rounded-xl shrink-0 transition-colors"
-                      >
-                        {isHi ? "बुक करें" : "Book"}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* ── Comprehensive Interactive Search Bar ── */}
-              <div className="mt-10 bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/90 shadow-xl shadow-slate-200/60">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                  {/* Category Field */}
-                  <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-200">
-                    <label className="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-0.5">
-                      {isHi ? "उपकरण श्रेणी" : "Equipment Type"}
-                    </label>
-                    <select
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="w-full bg-transparent text-xs font-bold text-slate-900 focus:outline-hidden cursor-pointer"
-                    >
-                      <option value="All">All Categories (सभी श्रेणियां)</option>
-                      {CATEGORIES.map((cat) => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name} ({cat.count} available)
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Location Field */}
-                  <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
-                    <div className="flex-1 min-w-0 pr-1">
-                      <label className="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-0.5">
-                        {isHi ? "खेत / गांव का स्थान" : "Your Farm Area"}
-                      </label>
-                      <input
-                        type="text"
-                        value={selectedCity}
-                        onChange={(e) => setSelectedCity(e.target.value)}
-                        placeholder="Village / Tehsil"
-                        className="w-full bg-transparent text-xs font-bold text-slate-900 focus:outline-hidden"
-                      />
-                    </div>
-                    <button
-                      onClick={() => alert(`GPS Location auto-detected: ${selectedCity}`)}
-                      title="Use My GPS Location"
-                      className="p-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-xl transition-colors shrink-0"
-                    >
-                      <MapPin className="w-4 h-4" />
-                    </button>
-                  </div>
-
-                  {/* Search Keyword */}
-                  <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-200">
-                    <label className="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-0.5">
-                      {isHi ? "खोजें (ब्रांड / मॉडल)" : "Machine / Brand / Model"}
-                    </label>
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="e.g. John Deere, Rotavator, 50 HP"
-                      className="w-full bg-transparent text-xs font-bold text-slate-900 focus:outline-hidden"
-                    />
-                  </div>
-
-                  {/* Search Action CTA */}
-                  <div className="flex items-center">
-                    <button
-                      onClick={() => scrollToSection("equipment-section")}
-                      className="w-full h-full min-h-[46px] flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm rounded-2xl shadow-xs hover:shadow transition-all"
-                    >
-                      <Search className="w-4 h-4" />
-                      <span>{isHi ? "उपलब्ध मशीनें खोजें" : "Search Machines"}</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* ── 3. EQUIPMENT CATEGORIES ── */}
-          <section id="categories-section" className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-              <div>
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                  {isHi ? "कृषि मशीन श्रेणियां" : "Equipment Categories"}
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
-                  {isHi ? "खेती के हर काम के लिए सही मशीन" : "Machinery for Every Farm Operation"}
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-                  {isHi
-                    ? "जुताई, बुवाई, खरपतवार नियंत्रण, सिंचाई से लेकर कटाई और थ्रेशिंग तक आधुनिक मशीनों का विशाल संग्रह।"
-                    : "From primary tillage and sowing to emergency irrigation, spraying and grain harvesting."}
-                </p>
-              </div>
-
-              {selectedCategory !== "All" && (
-                <button
-                  onClick={() => setSelectedCategory("All")}
-                  className="text-xs font-bold text-emerald-700 hover:text-emerald-800 self-start md:self-auto"
-                >
-                  {isHi ? "सभी श्रेणियां दिखाएं (Reset)" : "Show All Categories"}
-                </button>
-              )}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {CATEGORIES.map((cat) => (
-                <CategoryCard
-                  key={cat.id}
-                  id={cat.id}
-                  name={cat.name}
-                  nameHi={cat.nameHi}
-                  description={cat.description}
-                  descriptionHi={cat.descriptionHi}
-                  count={cat.count}
-                  image={cat.image}
-                  badge={cat.badge}
-                  isSelected={selectedCategory.toLowerCase() === cat.id.toLowerCase()}
-                  onSelect={(id) => {
-                    setSelectedCategory(id);
-                    scrollToSection("equipment-section");
-                  }}
-                  lang={lang}
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* ── 4. HOW IT WORKS ── */}
-          <section id="how-it-works" className="py-14 sm:py-20 bg-white border-y border-slate-200/80">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                  {isHi ? "सरल 4-चरण प्रक्रिया" : "How It Works"}
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
-                  {isHi ? "किराए पर लेना बिल्कुल आसान है" : "Rent Farm Equipment in 4 Simple Steps"}
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                  {isHi
-                    ? "कोई बिचौलिया नहीं, सीधे सत्यापित मशीन मालिक से बुकिंग और पारदर्शी एस्क्रो सुरक्षा।"
-                    : "Zero middlemen. Connect directly with verified equipment owners with escrow protection."}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {HOW_IT_WORKS_STEPS.map((step, idx) => (
-                  <div
-                    key={step.step}
-                    className="relative flex flex-col p-6 rounded-3xl bg-slate-50/70 border border-slate-200/90 hover:border-emerald-300 transition-all hover:shadow-sm"
-                  >
-                    <div className="text-3xl font-black text-emerald-800/20 font-mono mb-2">
-                      {step.step}
-                    </div>
-                    <h3 className="font-extrabold text-slate-900 text-base mb-2">
-                      {isHi ? step.titleHi : step.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {isHi ? step.descHi : step.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* ── 5. FARMER FEATURES HIGHLIGHT ── */}
-          <section className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                {isHi ? "किसान-हितैषी सुविधाएं" : "Built Exclusively for Indian Farmers"}
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
-                {isHi ? "आधुनिक तकनीक, स्थानीय विश्वास" : "Smart Technology with Rural Trust"}
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {[
-                { title: "GPS Discovery", desc: "Locate machines within 5 km to 50 km radius" },
-                { title: "Availability Calendar", desc: "Live slot verification for sowing and harvest" },
-                { title: "Hourly & Daily Rental", desc: "Flexible billing to match exact field hours" },
-                { title: "Transparent Pricing", desc: "Zero hidden charges, compare rates upfront" },
-                { title: "Verified Machine Owners", desc: "RC, KYC, and machinery physical audit" },
-                { title: "Real Farmer Reviews", desc: "Read performance feedback from peer farmers" },
-                { title: "Secure Escrow Payment", desc: "Money held safely until work is completed" },
-                { title: "SMS & WhatsApp Alerts", desc: "Operator arrival reminders on your phone" }
-              ].map((feat, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-emerald-300 transition-colors"
-                >
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-xs mb-2.5">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm">{feat.title}</h4>
-                  <p className="text-[11px] text-slate-500 mt-1 leading-snug">{feat.desc}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── 6. NEARBY EQUIPMENT MARKETPLACE ── */}
-          <section id="equipment-section" className="py-14 sm:py-20 bg-slate-100/60 border-y border-slate-200/80">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              {/* Marketplace Header */}
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-600 animate-ping" />
-                    <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-800">
-                      {isHi ? "उपकरण आपके निकट" : "Equipment Near You"}
-                    </span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-                    {isHi ? `${selectedCity} में उपलब्ध कृषि मशीनें` : `Machinery Available Near ${selectedCity}`}
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                    {filteredEquipment.length} {isHi ? "मशीनें किराए के लिए तैयार हैं" : "machines ready for immediate booking"}
-                  </p>
-                </div>
-
-                {/* Quick Category Filter Pills */}
-                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full">
-                  {["All", "Tractor", "Harvester", "Rotavator", "Seed Drill", "Sprayer"].map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                        selectedCategory.toLowerCase() === cat.toLowerCase()
-                          ? "bg-emerald-800 text-white shadow-xs"
-                          : "bg-white text-slate-700 hover:bg-slate-200 border border-slate-200"
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Filters Bar: Distance, Price, Availability */}
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 mb-8 flex flex-wrap items-center justify-between gap-4 text-xs">
-                {/* Distance Slider */}
-                <div className="flex items-center gap-3">
-                  <span className="font-bold text-slate-700">{isHi ? "दूरी दायरा:" : "Max Distance:"}</span>
+            {/* Integrated Search Bar with Volume Button */}
+            <div className="flex items-center gap-2 pt-1">
+              <form
+                onSubmit={handleSearchSubmit}
+                className="flex-1 bg-white p-2 rounded-2xl sm:rounded-3xl shadow-sm border border-[#e5e5df] flex flex-col md:flex-row items-center gap-2"
+              >
+                {/* Equipment Type Input with Voice Mic */}
+                <div className="flex-1 flex items-center gap-2 px-3 py-1.5 w-full border-b md:border-b-0 md:border-e border-[#e5e5df]">
+                  <Search className="w-4 h-4 text-[#14532d] shrink-0" aria-hidden="true" />
                   <input
-                    type="range"
-                    min="5"
-                    max="50"
-                    step="5"
-                    value={selectedRadius}
-                    onChange={(e) => setSelectedRadius(Number(e.target.value))}
-                    className="w-28 accent-emerald-600 cursor-pointer"
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={t("home", "search.categoryPlaceholder")}
+                    className="w-full text-xs sm:text-sm font-medium focus:outline-hidden placeholder:text-[#a8a29e] text-[#1e3a5f]"
                   />
-                  <span className="font-extrabold text-emerald-800">{selectedRadius} km</span>
-                </div>
-
-                {/* Max Price Slider */}
-                <div className="flex items-center gap-3">
-                  <span className="font-bold text-slate-700">{isHi ? "अधिकतम दर:" : "Max Daily Rate:"}</span>
-                  <input
-                    type="range"
-                    min="1500"
-                    max="15000"
-                    step="500"
-                    value={maxPriceFilter}
-                    onChange={(e) => setMaxPriceFilter(Number(e.target.value))}
-                    className="w-28 accent-emerald-600 cursor-pointer"
-                  />
-                  <span className="font-extrabold text-emerald-800">₹{maxPriceFilter.toLocaleString("en-IN")}</span>
-                </div>
-
-                {/* Availability Toggle */}
-                <label className="flex items-center gap-2 cursor-pointer font-bold text-slate-700">
-                  <input
-                    type="checkbox"
-                    checked={availabilityOnly}
-                    onChange={(e) => setAvailabilityOnly(e.target.checked)}
-                    className="rounded accent-emerald-600 w-4 h-4 cursor-pointer"
-                  />
-                  <span>{isHi ? "केवल तत्काल उपलब्ध" : "Available Now Only"}</span>
-                </label>
-              </div>
-
-              {/* Machinery Grid */}
-              {filteredEquipment.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredEquipment.map((eq) => (
-                    <EquipmentCard
-                      key={eq.id}
-                      equipment={eq}
-                      onBookNow={handleBookNow}
-                      onViewDetails={handleViewDetails}
-                      lang={lang}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-16 bg-white rounded-3xl border border-slate-200">
-                  <Tractor className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                  <h3 className="font-bold text-slate-800 text-base">
-                    {isHi ? "कोई मशीन नहीं मिली" : "No Machinery Matches Filters"}
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-                    Try expanding your search radius or selecting &quot;All Categories&quot;.
-                  </p>
                   <button
-                    onClick={() => {
-                      setSelectedCategory("All");
-                      setSelectedRadius(50);
-                      setMaxPriceFilter(15000);
-                      setSearchQuery("");
-                    }}
-                    className="mt-4 px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold"
+                    type="button"
+                    onClick={handleVoiceSearch}
+                    className={`p-1.5 rounded-full transition-colors ${
+                      isListening
+                        ? "bg-red-600 text-white animate-pulse"
+                        : "text-[#78716c] hover:text-[#14532d] hover:bg-[#f3f4f0]"
+                    }`}
+                    title={t("common", "actions.voiceSearch")}
+                    aria-label="Voice Search"
                   >
-                    Reset Filters
+                    <Mic className="w-4 h-4" />
                   </button>
                 </div>
-              )}
-            </div>
-          </section>
 
-          {/* ── 7. AI RECOMMENDATIONS SECTION ── */}
-          <section className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-green-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl">
-              <div className="max-w-3xl mb-8">
-                <div className="inline-flex items-center gap-1.5 bg-emerald-700/80 text-emerald-200 px-3 py-1 rounded-full text-xs font-bold mb-3 border border-emerald-500/40">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                  <span>Smart Agri-Match Engine</span>
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                  {isHi ? "आपके खेत के लिए अनुशंसित उपकरण" : "Equipment Recommended for Your Farm"}
-                </h2>
-                <p className="text-xs sm:text-sm text-emerald-100 mt-2 leading-relaxed">
-                  FarmRentHub recommends equipment based on your location, crop, season, previous bookings, availability, distance, price and owner ratings.
-                </p>
-
-                {/* Crop Filter Tabs */}
-                <div className="flex flex-wrap items-center gap-2 mt-5">
-                  <span className="text-xs font-bold text-emerald-200 mr-1">Select Crop:</span>
-                  {["Wheat", "Paddy", "Sugarcane", "Mustard", "Cotton"].map((crop) => (
-                    <button
-                      key={crop}
-                      onClick={() => setSelectedCrop(crop)}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
-                        selectedCrop === crop
-                          ? "bg-amber-400 text-amber-950 shadow-xs"
-                          : "bg-emerald-950/60 text-emerald-100 hover:bg-emerald-700"
-                      }`}
-                    >
-                      {crop}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 3 Recommendation Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {MOCK_RECOMMENDATIONS.map((rec) => (
-                  <div
-                    key={rec.equipment_id}
-                    className="bg-white rounded-2xl p-4 text-slate-800 flex flex-col justify-between shadow-lg"
-                  >
-                    <div>
-                      <div className="relative h-36 rounded-xl overflow-hidden mb-3">
-                        <img
-                          src={rec.image_url}
-                          alt={rec.title}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute top-2 right-2 bg-emerald-700 text-white text-[11px] font-extrabold px-2 py-0.5 rounded-full shadow-xs">
-                          {rec.match_score}% Match
-                        </div>
-                      </div>
-
-                      <div className="text-[10px] font-bold uppercase text-emerald-700 tracking-wider">
-                        {rec.category} • For {rec.best_for_crop}
-                      </div>
-
-                      <h4 className="font-extrabold text-slate-900 text-sm mt-0.5">
-                        {rec.title}
-                      </h4>
-
-                      <p className="text-[11px] text-slate-600 mt-2 bg-emerald-50/70 p-2 rounded-lg border border-emerald-100">
-                        {rec.recommended_reason}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                      <div>
-                        <div className="text-base font-extrabold text-emerald-800">
-                          ₹{rec.daily_rate}
-                          <span className="text-xs text-slate-500 font-normal">/day</span>
-                        </div>
-                        <div className="text-[10px] text-slate-400">{rec.distance_km} km away</div>
-                      </div>
-
-                      <button
-                        onClick={() => {
-                          const target = equipmentList.find((e) => e.id === rec.equipment_id);
-                          if (target) handleBookNow(target);
-                        }}
-                        className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition-colors"
-                      >
-                        Book Machine
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* ── 8. INTERACTIVE GPS MAP DISCOVERY ── */}
-          <section id="map-section" className="py-14 sm:py-20 bg-white border-y border-slate-200/80">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-2xl mx-auto mb-8">
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                  {isHi ? "मानचित्र पर खोजें" : "Live Map Discovery"}
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
-                  {isHi ? "नक्शे पर देखें नजदीकी मशीनें और दूरी" : "Interactive Equipment Radar & GPS Pinning"}
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                  {isHi
-                    ? "अपने खेत के आसपास पिन किए गए ट्रैक्टर, हार्वेस्टर और रोटावेटर को सीधे नक्शे पर चुनें।"
-                    : "Tap any machine pin on the cluster radar to inspect owner ratings, rates, and dispatch status."}
-                </p>
-              </div>
-
-              <MapDiscovery
-                equipmentList={equipmentList}
-                selectedCity={selectedCity}
-                onBookNow={handleBookNow}
-                lang={lang}
-              />
-            </div>
-          </section>
-
-          {/* ── 9. OWNER SECTION & EARNINGS ESTIMATOR ── */}
-          <section className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-7 space-y-4">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-amber-400 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-800/40">
-                    {isHi ? "कृषि मशीन मालिकों के लिए" : "For Equipment Owners"}
-                  </span>
-                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-                    {isHi ? "कृषि उपकरण हैं? कमाई शुरू करें।" : "Have Farming Equipment? Earn from It."}
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
-                    {isHi
-                      ? "फार्मरेंटहब पर अपने कृषि उपकरण लिस्ट करें और नजदीकी किसानों से जुड़ें। जब आपकी मशीनें खाली हों, तब उन्हें किराए पर देकर अतिरिक्त आय अर्जित करें।"
-                      : "List your agricultural equipment on FarmRentHub and connect with nearby farmers. Turn idle tractor and harvester hours into guaranteed monthly earnings."}
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-3 pt-2 text-xs">
-                    {[
-                      "Add Equipment with Photos",
-                      "Set Your Own Hourly & Daily Price",
-                      "Manage Availability on Calendar",
-                      "Accept/Decline Booking Requests",
-                      "Automatic Escrow Payouts to Bank",
-                      "Transit Damage Insurance"
-                    ].map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-slate-200">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-4">
-                    <button
-                      onClick={() => setListEquipmentModalOpen(true)}
-                      className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm px-7 py-3.5 rounded-2xl shadow-lg transition-all"
-                    >
-                      {isHi ? "अपनी मशीन लिस्ट करें" : "List Your Equipment"}
-                    </button>
-                  </div>
+                {/* Location Input */}
+                <div className="flex-1 flex items-center gap-2 px-3 py-1.5 w-full border-b md:border-b-0 md:border-e border-[#e5e5df]">
+                  <MapPin className="w-4 h-4 text-[#d97706] shrink-0" aria-hidden="true" />
+                  <input
+                    type="text"
+                    value={locationQuery}
+                    onChange={(e) => setLocationQuery(e.target.value)}
+                    placeholder={t("home", "search.locationPlaceholder")}
+                    className="w-full text-xs sm:text-sm font-medium focus:outline-hidden placeholder:text-[#a8a29e] text-[#1e3a5f]"
+                  />
                 </div>
 
-                {/* Right: Interactive Earnings Calculator */}
-                <div className="lg:col-span-5 bg-slate-800/80 backdrop-blur-md p-6 rounded-2xl border border-slate-700 space-y-4">
-                  <h3 className="font-extrabold text-white text-base border-b border-slate-700 pb-2">
-                    {isHi ? "मासिक कमाई कैलकुलेटर" : "Monthly Earnings Estimator"}
-                  </h3>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-400 mb-1">Select Machinery Type:</label>
-                    <select
-                      value={calcMachineType}
-                      onChange={(e) => setCalcMachineType(e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-hidden"
-                    >
-                      <option value="Tractor">Tractor (45-55 HP)</option>
-                      <option value="Harvester">Combine Harvester</option>
-                      <option value="Rotavator">Rotavator (7-8 Ft)</option>
-                      <option value="Seed Drill">Happy Seeder / Drill</option>
-                      <option value="Sprayer">Boom Sprayer (600L)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between text-xs font-bold text-slate-400 mb-1">
-                      <span>Rented Days per Month:</span>
-                      <span className="text-emerald-400">{calcDaysPerMonth} days</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="5"
-                      max="28"
-                      value={calcDaysPerMonth}
-                      onChange={(e) => setCalcDaysPerMonth(Number(e.target.value))}
-                      className="w-full accent-emerald-500 cursor-pointer"
-                    />
-                  </div>
-
-                  <div className="bg-emerald-950/60 p-4 rounded-xl border border-emerald-800/40 text-center">
-                    <div className="text-[10px] text-emerald-300 uppercase font-bold tracking-wider">
-                      Estimated Monthly Rental Income
-                    </div>
-                    <div className="text-3xl font-black text-amber-300 mt-1">
-                      ₹{estimatedEarnings.toLocaleString("en-IN")}
-                    </div>
-                    <div className="text-[10px] text-slate-400 mt-0.5">
-                      Directly deposited to your bank account via Escrow
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* ── 10. TRUST & VERIFICATION SECTION ── */}
-          <section className="py-14 sm:py-20 bg-white border-y border-slate-200/80">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                  {isHi ? "सुरक्षा व सत्यापन" : "Trust & Transparency"}
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
-                  {isHi ? "सत्यापित किसान और उपकरण मालिक" : "Verified Farmers & Equipment Owners"}
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                  User verification helps create a safer, trusted agricultural rental marketplace where both farmers and owners work with complete peace of mind.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3">
-                  <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center mx-auto">
-                    <UserCheck className="w-6 h-6" />
-                  </div>
-                  <h4 className="font-extrabold text-slate-900 text-base">Aadhaar & KYC Verified</h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Identity authentication ensures all renting farmers and equipment providers are authentic local community members.
-                  </p>
+                {/* Date Input */}
+                <div className="flex items-center gap-2 px-3 py-1.5 w-full md:w-auto border-b md:border-b-0 border-[#e5e5df]">
+                  <Calendar className="w-4 h-4 text-[#78716c] shrink-0" aria-hidden="true" />
+                  <input
+                    type="date"
+                    value={dateQuery}
+                    onChange={(e) => setDateQuery(e.target.value)}
+                    className="text-xs font-medium focus:outline-hidden text-[#1e3a5f] bg-transparent"
+                  />
                 </div>
 
-                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3">
-                  <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center mx-auto">
-                    <ShieldCheck className="w-6 h-6" />
-                  </div>
-                  <h4 className="font-extrabold text-slate-900 text-base">Machinery RC & Fitness Check</h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Every listed tractor and combine harvester undergoes serial number and mechanical condition verification before booking.
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3">
-                  <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center mx-auto">
-                    <Award className="w-6 h-6" />
-                  </div>
-                  <h4 className="font-extrabold text-slate-900 text-base">Escrow Guarantee</h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Rental funds and refundable security deposits remain safely in escrow until the field task is inspected and certified complete.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* ── 11. RATINGS & REVIEWS SECTION ── */}
-          <section id="reviews-section" className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-              <div>
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                  {isHi ? "किसानों की राय" : "Farmer Testimonials"}
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
-                  {isHi ? "सच्चे अनुभव, प्रमाणित बुकिंग" : "Real Experiences from Verified Bookings"}
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                  Over 12,000 farmers rely on FarmRentHub each sowing and harvesting cycle.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-800 bg-white px-3.5 py-2 rounded-2xl border border-slate-200 shadow-2xs">
-                <Star className="w-4 h-4 fill-amber-400 text-amber-500" />
-                <span>4.9 Overall Community Rating (1,400+ Reviews)</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {MOCK_REVIEWS.map((rev) => (
-                <div
-                  key={rev.id}
-                  className="bg-white p-6 rounded-3xl border border-slate-200 shadow-2xs space-y-4 hover:border-emerald-300 transition-colors"
+                {/* Green Find Equipment Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full md:w-auto px-5 py-2.5 bg-[#14532d] hover:bg-[#16a34a] text-white font-bold text-xs sm:text-sm rounded-xl sm:rounded-2xl shadow-xs transition-colors shrink-0 flex items-center justify-center gap-2"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-900 font-extrabold flex items-center justify-center text-xs">
-                        {rev.farmer_name.split(" ").map((n) => n[0]).join("")}
-                      </div>
-                      <div>
-                        <h4 className="font-extrabold text-slate-900 text-sm">{rev.farmer_name}</h4>
-                        <div className="text-[11px] text-slate-500">{rev.farmer_location}</div>
-                      </div>
-                    </div>
+                  <span>{t("home", "search.button")}</span>
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </button>
+              </form>
 
-                    <div className="flex items-center gap-0.5 text-amber-500">
-                      {[...Array(rev.rating)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                      ))}
-                    </div>
-                  </div>
+              {/* Read Aloud Single Volume Button beside search bar */}
+              <button
+                type="button"
+                onClick={() =>
+                  speak(`${t("home", "hero.title")}. ${t("home", "hero.subtitle")}`)
+                }
+                className="hidden sm:flex p-3 rounded-2xl bg-white border border-[#e5e5df] text-[#1e3a5f] hover:bg-[#f3f4f0] hover:text-[#14532d] transition-colors shrink-0"
+                title={t("common", "actions.listen")}
+                aria-label={t("common", "actions.listen")}
+              >
+                <Volume2 className="w-4 h-4 text-[#14532d]" aria-hidden="true" />
+              </button>
+            </div>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed italic">
-                    &quot;{rev.comment}&quot;
-                  </p>
-
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-[11px] text-slate-400">
-                    <span className="flex items-center gap-1 text-emerald-800 font-semibold">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                      Verified Booking
-                    </span>
-                    <span>{rev.created_at}</span>
-                  </div>
-                </div>
+            {/* Popular Category Chips in Neutral Style */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-[#78716c]">
+              <span className="font-semibold text-[#1e3a5f]">Popular:</span>
+              {["Tractor", "Harvester", "Rotavator", "Seed Drill"].map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => router.push(`/equipment?category=${encodeURIComponent(cat)}`)}
+                  className="px-3 py-1 rounded-full bg-[#f3f4f0] hover:bg-[#e5e5df] border border-[#e5e5df] text-[#1e3a5f] font-medium transition-colors"
+                >
+                  {cat}
+                </button>
               ))}
             </div>
-          </section>
+          </div>
 
-          {/* ── 12. ABOUT SECTION ── */}
-          <section className="py-14 sm:py-20 bg-emerald-900 text-white border-y border-emerald-950">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-300 bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-700/50">
-                {isHi ? "हमारा मिशन" : "Our Mission"}
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-                Making Farm Equipment Accessible
-              </h2>
-              <p className="text-xs sm:text-base text-emerald-100 leading-relaxed max-w-2xl mx-auto">
-                FarmRentHub helps farmers access the right agricultural machinery when they need it, while helping equipment owners earn from their machines. By democratizing modern mechanized tools, we reduce capital overheads for smallholder cultivators and accelerate farm productivity across India.
-              </p>
+          {/* Right Column: Documentary-Style Photo via AppImage */}
+          <div className="lg:col-span-5">
+            <AppImage
+              imageId="hero-field-tractor"
+              priority
+              className="w-full shadow-md rounded-3xl overflow-hidden"
+              imgClassName="rounded-3xl"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 2. LIVE TRANSPARENT PLATFORM STATS STRIP (PART 9 COMPLIANT) */}
+      <section className="bg-white border-b border-slate-200 py-6 px-4 select-none">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Stat 1: Districts */}
+            <div className="p-4 rounded-2xl bg-[#fafaf5] border border-slate-200 text-center flex flex-col justify-between">
+              <div>
+                <div className="text-2xl sm:text-3xl font-black text-[#14532d]">
+                  {formatNumber(24)}
+                </div>
+                <div className="text-xs font-bold text-slate-700 mt-0.5">
+                  {t("home", "stats.districts")}
+                </div>
+              </div>
+              <SourceNote registryId="stat-registered-districts" compact={true} />
             </div>
-          </section>
-        </main>
-      )}
 
-      {/* ── 13. GLOBAL FOOTER ── */}
-      <Footer
-        lang={lang}
-        onScrollToSection={scrollToSection}
-        onOpenListEquipment={() => setListEquipmentModalOpen(true)}
-      />
+            {/* Stat 2: Verified Machines */}
+            <div className="p-4 rounded-2xl bg-[#fafaf5] border border-slate-200 text-center flex flex-col justify-between">
+              <div>
+                <div className="text-2xl sm:text-3xl font-black text-[#14532d]">
+                  {formatNumber(120)}
+                </div>
+                <div className="text-xs font-bold text-slate-700 mt-0.5">
+                  {t("home", "stats.verifiedMachines")}
+                </div>
+              </div>
+              <SourceNote registryId="stat-verified-machines" compact={true} />
+            </div>
 
-      {/* ── 14. INTERACTIVE MODALS & DRAWERS ── */}
+            {/* Stat 3: Rental Hours */}
+            <div className="p-4 rounded-2xl bg-[#fafaf5] border border-slate-200 text-center flex flex-col justify-between">
+              <div>
+                <div className="text-2xl sm:text-3xl font-black text-[#14532d]">
+                  {formatNumber(1450)}+
+                </div>
+                <div className="text-xs font-bold text-slate-700 mt-0.5">
+                  {t("home", "stats.hours")}
+                </div>
+              </div>
+              <SourceNote registryId="stat-completed-hours" compact={true} />
+            </div>
+
+            {/* Stat 4: Average Savings */}
+            <div className="p-4 rounded-2xl bg-[#fafaf5] border border-slate-200 text-center flex flex-col justify-between">
+              <div>
+                <div className="text-2xl sm:text-3xl font-black text-[#d97706]">
+                  22% – 35%
+                </div>
+                <div className="text-xs font-bold text-slate-700 mt-0.5">
+                  {t("home", "stats.savings")}
+                </div>
+              </div>
+              <SourceNote registryId="stat-average-savings" compact={true} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. 14 AGRICULTURAL CATEGORIES GRID */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full select-none">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+          <div>
+            <div className="inline-block h-1 w-12 bg-[#d97706] mb-2 rounded-full" />
+            <h2 className="text-2xl sm:text-3xl font-black text-[#1e3a5f] tracking-tight">
+              {t("home", "categories.sectionTitle")}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              {t("home", "categories.sectionSubtitle")}
+            </p>
+          </div>
+          <Link
+            href="/equipment"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#14532d] hover:underline shrink-0"
+          >
+            <span>सभी श्रेणियां देखें (View All)</span>
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
+          {EQUIPMENT_TAXONOMY.slice(0, 10).map((cat) => (
+            <CategoryCard
+              key={cat.id}
+              category={cat}
+              isSelected={selectedCategory === cat.slug}
+              onSelect={(item) => router.push(`/equipment?category=${encodeURIComponent(item.name)}`)}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* 4. HOW IT WORKS (3 SIMPLE STEPS) */}
+      <section className="bg-white border-y border-slate-200 py-12 px-4 sm:px-6 lg:px-8 select-none">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <div className="inline-block h-1 w-12 bg-[#d97706] mb-2 rounded-full" />
+            <h2 className="text-2xl sm:text-3xl font-black text-[#1e3a5f] tracking-tight">
+              {t("home", "howItWorks.sectionTitle")}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              {t("home", "howItWorks.sectionSubtitle")}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Step 1 */}
+            <div className="p-6 rounded-2xl bg-[#fafaf5] border-2 border-slate-200 text-left relative flex flex-col justify-between">
+              <div>
+                <AppImage
+                  imageId="how-step-1"
+                  className="w-full mb-4 rounded-xl overflow-hidden shadow-2xs"
+                  showCredit={false}
+                />
+                <span className="w-9 h-9 rounded-xl bg-[#14532d] text-white font-black text-sm flex items-center justify-center mb-3">
+                  1
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  {t("home", "howItWorks.step1Title")}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t("home", "howItWorks.step1Desc")}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="p-6 rounded-2xl bg-[#fafaf5] border-2 border-slate-200 text-left relative flex flex-col justify-between">
+              <div>
+                <AppImage
+                  imageId="how-step-2"
+                  className="w-full mb-4 rounded-xl overflow-hidden shadow-2xs"
+                  showCredit={false}
+                />
+                <span className="w-9 h-9 rounded-xl bg-[#14532d] text-white font-black text-sm flex items-center justify-center mb-3">
+                  2
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  {t("home", "howItWorks.step2Title")}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t("home", "howItWorks.step2Desc")}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="p-6 rounded-2xl bg-[#fafaf5] border-2 border-slate-200 text-left relative flex flex-col justify-between">
+              <div>
+                <AppImage
+                  imageId="how-step-3"
+                  className="w-full mb-4 rounded-xl overflow-hidden shadow-2xs"
+                  showCredit={false}
+                />
+                <span className="w-9 h-9 rounded-xl bg-[#14532d] text-white font-black text-sm flex items-center justify-center mb-3">
+                  3
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  {t("home", "howItWorks.step3Title")}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t("home", "howItWorks.step3Desc")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. REGION-FEATURED EQUIPMENT LISTINGS */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full select-none">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+          <div>
+            <div className="inline-block h-1 w-12 bg-[#d97706] mb-2 rounded-full" />
+            <h2 className="text-2xl sm:text-3xl font-black text-[#1e3a5f] tracking-tight">
+              सत्यापित उपलब्ध मशीनें (Verified Regional Listings)
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Real-time available equipment near {locationQuery}.
+            </p>
+          </div>
+          <Link
+            href="/equipment"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#14532d] hover:bg-[#16a34a] shadow-xs transition-colors shrink-0"
+          >
+            <span>Explore All 300+ Listings</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Regional Agricultural Focus Banner */}
+        <div className="mb-6 p-4 rounded-3xl bg-white border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center gap-5">
+          <div className="w-full sm:w-56 shrink-0">
+            <AppImage
+              imageId={getRegionImageId(locationQuery, locale)}
+              className="w-full rounded-2xl overflow-hidden"
+              imgClassName="rounded-2xl"
+              showCredit={true}
+            />
+          </div>
+          <div className="flex-1 text-xs text-slate-600">
+            <span className="inline-block px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-bold text-[10px] uppercase tracking-wider mb-1">
+              Active Agronomic Zone
+            </span>
+            <h3 className="font-bold text-slate-900 text-sm">
+              Regional Machinery Deployment for {locationQuery}
+            </h3>
+            <p className="mt-1 leading-relaxed">
+              Prioritized implements matched to seasonal soil tillage and harvesting timelines in this agrarian district.
+            </p>
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="h-80 rounded-2xl bg-slate-200 animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {equipmentItems.map((eq) => (
+              <EquipmentCard
+                key={eq.id}
+                equipment={eq}
+                onBookNow={(item) => {
+                  setSelectedBookingEq(item);
+                  setBookingOpen(true);
+                }}
+                onViewDetails={(item) => {
+                  setSelectedDetailsEq(item);
+                  setDetailsOpen(true);
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* 6. OWNER CALL TO ACTION BANNER */}
+      <section className="bg-[#14532d] text-white py-12 px-4 sm:px-6 lg:px-8 my-6 select-none">
+        <div className="max-w-5xl mx-auto bg-[#1e3a5f] p-8 sm:p-10 rounded-3xl border-2 border-amber-400 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+          <div className="space-y-2 text-center md:text-left flex-1">
+            <span className="text-amber-400 font-bold text-xs uppercase tracking-wider block">
+              For Tractor & Equipment Owners / कृषि यंत्र मालिकों के लिए
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-white">
+              {t("home", "ownerCta.title")}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-200 max-w-xl">
+              {t("home", "ownerCta.subtitle")}
+            </p>
+          </div>
+
+          <div className="w-full md:w-56 shrink-0">
+            <AppImage
+              imageId="owner-cta"
+              className="w-full rounded-2xl overflow-hidden shadow-md"
+              imgClassName="rounded-2xl"
+              showCredit={false}
+            />
+          </div>
+
+          <Link
+            href="/list-your-equipment"
+            className="shrink-0 px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-stone-900 font-extrabold text-xs sm:text-sm rounded-2xl shadow-lg transition-transform hover:scale-105"
+          >
+            {t("home", "ownerCta.button")}
+          </Link>
+        </div>
+      </section>
+
+      {/* Booking and Details Modals */}
       <BookingModal
-        equipment={selectedEquipmentForBooking}
-        isOpen={bookingModalOpen}
-        onClose={() => setBookingModalOpen(false)}
-        lang={lang}
+        equipment={selectedBookingEq}
+        isOpen={bookingOpen}
+        onClose={() => setBookingOpen(false)}
       />
 
       <EquipmentDetailsModal
-        equipment={selectedEquipmentForDetails}
-        isOpen={detailsModalOpen}
-        onClose={() => setDetailsModalOpen(false)}
-        onBookNow={handleBookNow}
-        lang={lang}
-      />
-
-      <ListEquipmentModal
-        isOpen={listEquipmentModalOpen}
-        onClose={() => setListEquipmentModalOpen(false)}
-        onEquipmentAdded={handleNewEquipmentAdded}
-        lang={lang}
-      />
-
-      <NotificationDrawer
-        isOpen={notificationsOpen}
-        onClose={() => setNotificationsOpen(false)}
-        notifications={MOCK_NOTIFICATIONS}
-        lang={lang}
+        equipment={selectedDetailsEq}
+        isOpen={detailsOpen}
+        onClose={() => setDetailsOpen(false)}
+        onBookNow={(item) => {
+          setSelectedBookingEq(item);
+          setBookingOpen(true);
+        }}
       />
     </div>
   );
