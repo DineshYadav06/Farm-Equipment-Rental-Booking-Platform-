@@ -1,0 +1,11 @@
+{
+  "_meta": { "locale": "en", "status": "reviewed" },
+  "sms": {
+    "bookingConfirmed": "Hello {name}, your booking #{bookingId} for {equipment} on {date} is confirmed. Amount ₹{amount} is held safely in escrow. - FarmRentHub",
+    "otpMessage": "Your FarmRentHub verification OTP is {otp}. Valid for 10 minutes. Do not share with anyone.",
+    "jobCompleted": "Hello {name}, field work for {equipment} is completed. View receipt and rate your experience: {receiptUrl} - FarmRentHub"
+  },
+  "whatsapp": {
+    "bookingSummary": "*FarmRentHub Booking Confirmation*\n\nHello {name},\nYour booking for *{equipment}* is confirmed.\n\nDate: {date}\nAmount: ₹{amount}\nStatus: 100% Escrow Protected\n\nFor helpline support: 1800-180-1551"
+  }
+}
