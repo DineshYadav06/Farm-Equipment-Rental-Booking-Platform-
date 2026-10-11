@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "or", "status": "reviewed" },
+  "_meta": {
+    "locale": "or",
+    "status": "reviewed",
+    "founderBioStatus": "needs-review"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "ସଠିକ୍ ଯନ୍ତ୍ରପାତି, ସହଜ ଚାଷ",
@@ -13,7 +17,20 @@
     "language": "ଭାଷା ବାଛନ୍ତୁ",
     "helplineLabel": "କୃଷକ ହେଲ୍ପଲାଇନ୍ (ନିଃଶୁଳ୍କ)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "ସଂଖ୍ୟା ଶୈଳୀ"
+    "digitsToggle": "ସଂଖ୍ୟା ଶୈଳୀ",
+    "textSmall": "ଛୋଟ ଅକ୍ଷର",
+    "textDefault": "ସାଧାରଣ ଅକ୍ଷର",
+    "textLarge": "ବଡ ଅକ୍ଷର",
+    "simpleMode": "ସରଳ ମୋଡ୍",
+    "normalMode": "ସାଧାରଣ ମୋଡ୍",
+    "digitsLatin": "123",
+    "digitsNative": "ଓଡ଼ିଆ ଅଙ୍କ",
+    "kisanHelpline": "କିଷାନ ହେଲ୍ପଲାଇନ୍",
+    "pauseTicker": "ସୂଚନା ବନ୍ଦ କରନ୍ତୁ",
+    "playTicker": "ସୂଚନା ଚଲାନ୍ତୁ",
+    "accessibilityMenu": "ସୁଲଭତା ମେନୁ",
+    "closeMenu": "ମେନୁ ବନ୍ଦ କରନ୍ତୁ",
+    "openMenu": "ମେନୁ ଖୋଲନ୍ତୁ"
   },
   "nav": {
     "home": "ହୋମ୍",
@@ -28,7 +45,15 @@
     "register": "ପଞ୍ଜୀକରଣ",
     "settings": "ସେଟିଂସ୍",
     "notifications": "ସୂଚନା",
-    "profile": "ପ୍ରୋଫାଇଲ୍"
+    "profile": "ପ୍ରୋଫାଇଲ୍",
+    "more": "ଅଧିକ",
+    "about": "ଆମ ବିଷୟରେ",
+    "contact": "ଯୋଗାଯୋଗ",
+    "faq": "ପ୍ରଶ୍ନୋତ୍ତର",
+    "logout": "ଲଗ୍ ଆଉଟ୍",
+    "myBookings": "ମୋର ବୁକିଂ",
+    "dashboard": "ଡ୍ୟାସବୋର୍ଡ",
+    "bookings": "ବୁକିଂ"
   },
   "actions": {
     "search": "ଖୋଜନ୍ତୁ",
@@ -73,5 +98,34 @@
     "quickLinks": "ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଲିଙ୍କ୍",
     "officialPortals": "ସରକାରୀ କୃଷି ପୋର୍ଟାଲ୍",
     "allRightsReserved": "ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ।"
+  },
+  "location": {
+    "selectLocation": "ଆପଣଙ୍କ ସ୍ଥାନ ବାଛନ୍ତୁ",
+    "useGps": "ମୋର ବର୍ତ୍ତମାନର ସ୍ଥାନ ବ୍ୟବହାର କରନ୍ତୁ",
+    "searchState": "ରାଜ୍ୟ ଖୋଜନ୍ତୁ...",
+    "searchDistrict": "ଜିଲ୍ଲା ଖୋଜନ୍ତୁ...",
+    "detecting": "ସ୍ଥାନ ଚିହ୍ନଟ ହେଉଛି...",
+    "locationDetected": "ସ୍ଥାନ ଚିହ୍ନଟ ହେଲା",
+    "detectFailed": "ସ୍ଥାନ ମିଳିଲା ନାହିଁ। ଦୟାକରି ବାଛନ୍ତୁ।",
+    "allDistricts": "ସମସ୍ତ ଜିଲ୍ଲା",
+    "stateLabel": "ରାଜ୍ୟ",
+    "districtLabel": "ଜିଲ୍ଲା",
+    "changeLocation": "ସ୍ଥାନ ବଦଳାନ୍ତୁ"
+  },
+  "search": {
+    "searchPlaceholder": "ଟ୍ରାକ୍ଟର, ହାର୍ଭେଷ୍ଟର ଖୋଜନ୍ତୁ...",
+    "voiceListening": "ଶୁଣୁଛି... କୁହନ୍ତୁ",
+    "voiceError": "ଭଏସ୍ ସନ୍ଧାନ ଉପଲବ୍ଧ ନାହିଁ",
+    "closeSearch": "ସନ୍ଧାନ ବନ୍ଦ କରନ୍ତୁ",
+    "openSearch": "ଉପକରଣ ଖୋଜନ୍ତୁ",
+    "searchButton": "ଖୋଜନ୍ତୁ"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "ପ୍ରତିଷ୍ଠାତା ଏବଂ ଫୁଲ୍-ଷ୍ଟାକ୍ ଡେଭଲପର୍",
+    "founderBio": "Dinesh Kumar Yadav ହେଉଛନ୍ତି FarmRentHub ର ପ୍ରତିଷ୍ଠାତା ଏବଂ ଫୁଲ୍-ଷ୍ଟାକ୍ ଡେଭଲପର୍। ସେ ଭାରତୀୟ କୃଷକମାନଙ୍କ ପାଇଁ ସ୍ୱଚ୍ଛ ଯନ୍ତ୍ରପାତି ଭଡ଼ା ଏବଂ ସୁରକ୍ଷିତ ବୁକିଂ ନିଶ୍ଚିତ କରିବାକୁ ଏହି ପ୍ଲାଟଫର୍ମ ନିର୍ମାଣ କରିଛନ୍ତି।",
+    "builtByTitle": "ଅନ୍ୟାନ୍ୟ ପ୍ରକଳ୍ପ",
+    "builtBySubtitle": "ପ୍ରତିଷ୍ଠାତାଙ୍କ ଦ୍ୱାରା ନିର୍ମିତ ୱେବ୍ ପ୍ରକଳ୍ପ",
+    "photoAlt": "Dinesh Kumar Yadav ଙ୍କ ଫଟୋ, FarmRentHub ର ପ୍ରତିଷ୍ଠାତା"
   }
 }
