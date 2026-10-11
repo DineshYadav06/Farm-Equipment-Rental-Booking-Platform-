@@ -1,0 +1,11 @@
+{
+  "_meta": { "locale": "hi", "status": "reviewed" },
+  "sms": {
+    "bookingConfirmed": "नमस्ते {name}, आपकी बुकिंग संख्या {bookingId} {equipment} के लिए {date} को स्वीकार कर ली गई है। राशि ₹{amount} एस्क्रो में सुरक्षित है। - FarmRentHub",
+    "otpMessage": "FarmRentHub सत्यापन कोड: {otp}। यह कोड 10 मिनट के लिए मान्य है। किसी के साथ साझा न करें।",
+    "jobCompleted": "नमस्ते {name}, {equipment} का कार्य पूरा हो गया है। कृपया रसीद देखें और प्रतिक्रिया दें: {receiptUrl} - FarmRentHub"
+  },
+  "whatsapp": {
+    "bookingSummary": "*FarmRentHub बुकिंग पुष्टि*\n\nनमस्ते {name} जी,\nआपके खेत के लिए *{equipment}* सफलतापूर्वक बुक हो गया है।\n\nतिथि: {date}\nकुल राशि: ₹{amount}\nस्थिति: 100% एस्क्रो सुरक्षित\n\nसहायता के लिए कॉल करें: 1800-180-1551"
+  }
+}
