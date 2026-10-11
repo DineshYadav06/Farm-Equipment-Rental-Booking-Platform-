@@ -58,7 +58,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setBookingId(generatedId);
       setStep(4);
     } else {
-      setStep((prev) => (prev + 1) as any);
+      setStep((prev) => Math.min(prev + 1, 4) as 1 | 2 | 3 | 4);
     }
   };
 
@@ -525,7 +525,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             {step > 1 ? (
               <button
                 type="button"
-                onClick={() => setStep((prev) => (prev - 1) as any)}
+                onClick={() => setStep((prev) => Math.max(prev - 1, 1) as 1 | 2 | 3 | 4)}
                 className="text-xs font-bold text-slate-600 hover:text-slate-900 px-3 py-2 rounded-xl transition-colors"
               >
                 {isHi ? "← पीछे" : "← Back"}
