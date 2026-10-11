@@ -296,9 +296,63 @@ INITIAL_EQUIPMENT: List[Dict[str, Any]] = [
     }
 ]
 
+from app.core.database import get_collection, EQUIPMENT_COLLECTION, is_mongo_connected
+from app.utils.geo import create_geopoint, compute_public_point
+from app.utils.money import rupees_to_paise, paise_to_rupees
+
+SYNONYM_MAP = {
+    "tractor": ["tractor", "ट्रैक्टर", "ਟਰੈਕਟਰ", "டிராக்டர்", "ట్రాక్టర్", "traktar", "50 hp"],
+    "harvester": ["harvester", "combine", "कंबाइन", "हार्वेस्टर", "ਕੰਬਾਈਨ", "அறுவடை", "reaper"],
+    "rotavator": ["rotavator", "rotary tiller", "रोटावेटर", "ਰੋਟਾਵੇਟਰ", "जुताई"],
+    "cultivator": ["cultivator", "कल्टीवेटर", "हल", "plough"],
+    "sprayer": ["sprayer", "स्प्रेयर", "छिड़काव"],
+    "seed drill": ["seed drill", "सीड ड्रिल", "बुवाई", "planter"],
+    "thresher": ["thresher", "थ्रेशर", "गहाई"]
+}
+
+def generate_keywords(title: str, category: str, city: str, local_name: str = "") -> List[str]:
+    words = set([title.lower(), category.lower(), city.lower()])
+    if local_name:
+        words.add(local_name.lower())
+    for token in title.lower().split():
+        words.add(token)
+    for k, syns in SYNONYM_MAP.items():
+        if k in category.lower() or k in title.lower():
+            words.update([s.lower() for s in syns])
+    return list(words)
+
 class EquipmentRepository:
     def __init__(self):
-        self.memory_store = {item["id"]: item.copy() for item in INITIAL_EQUIPMENT}
+        # Enrich initial equipment with GeoPoints, keywords and paise pricing
+        self.memory_store = {}
+        for item in INITIAL_EQUIPMENT:
+            e = item.copy()
+            lat = float(e.get("latitude", 30.9010))
+            lon = float(e.get("longitude", 75.8573))
+            e["location"] = {
+                "exact": create_geopoint(lon, lat),
+                "public": compute_public_point(lat, lon, seed_key=e["id"]),
+                "stateCode": e.get("state", "Punjab"),
+                "districtCode": e.get("city", "Ludhiana")
+            }
+            e["pricing"] = {
+                "perHour": rupees_to_paise(e.get("hourly_rate", 450)),
+                "perDay": rupees_to_paise(e.get("daily_rate", 3200)),
+                "currency": "INR"
+            }
+            e["searchKeywords"] = generate_keywords(e.get("title", ""), e.get("category", ""), e.get("city", ""))
+            e["version"] = 1
+            e["deletedAt"] = None
+            self.memory_store[e["id"]] = e
+
+    def filter_public(self, doc: Dict[str, Any]) -> Dict[str, Any]:
+        """Strip private fields (exact GPS, rcDocKey) before public exposure."""
+        res = doc.copy()
+        if "location" in res and isinstance(res["location"], dict):
+            # Only public point is exposed
+            res["location"] = {"public": res["location"].get("public")}
+        res.pop("rcDocKey", None)
+        return res
 
     async def get_all(
         self,
@@ -308,25 +362,65 @@ class EquipmentRepository:
         min_rating: Optional[float] = None,
         search_query: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
+        col = get_collection(EQUIPMENT_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                query: Dict[str, Any] = {"deletedAt": None, "is_available": True}
+                if category and category.lower() != "all":
+                    query["category"] = {"$regex": f"^{category}$", "$options": "i"}
+                if city:
+                    query["city"] = {"$regex": city, "$options": "i"}
+                if min_rating:
+                    query["average_rating"] = {"$gte": min_rating}
+                if search_query:
+                    q = search_query.lower()
+                    query["$or"] = [
+                        {"title": {"$regex": q, "$options": "i"}},
+                        {"category": {"$regex": q, "$options": "i"}},
+                        {"city": {"$regex": q, "$options": "i"}},
+                        {"searchKeywords": {"$in": [q]}}
+                    ]
+                docs = await col.find(query).to_list(length=100)
+                if docs:
+                    for d in docs:
+                        d["id"] = str(d.get("_id", d.get("id")))
+                    return [self.filter_public(d) for d in docs]
+            except Exception:
+                pass
+
         results = list(self.memory_store.values())
         if category and category.lower() != "all":
             results = [e for e in results if e["category"].lower() == category.lower()]
         if city:
             results = [e for e in results if city.lower() in e["city"].lower()]
         if max_price:
-            results = [e for e in results if e["daily_rate"] <= max_price or e["hourly_rate"] <= max_price]
+            results = [e for e in results if e.get("daily_rate", 0) <= max_price or e.get("hourly_rate", 0) <= max_price]
         if min_rating:
-            results = [e for e in results if e["average_rating"] >= min_rating]
+            results = [e for e in results if e.get("average_rating", 0) >= min_rating]
         if search_query:
-            q = search_query.lower()
+            q = search_query.lower().strip()
             results = [
                 e for e in results
-                if q in e["title"].lower() or q in e["brand"].lower() or q in e["category"].lower() or q in e["city"].lower()
+                if q in e["title"].lower()
+                or q in e.get("brand", "").lower()
+                or q in e["category"].lower()
+                or q in e["city"].lower()
+                or any(q in kw for kw in e.get("searchKeywords", []))
             ]
-        return results
+        return [self.filter_public(e) for e in results]
 
     async def get_by_id(self, equipment_id: str) -> Optional[Dict[str, Any]]:
-        return self.memory_store.get(equipment_id)
+        col = get_collection(EQUIPMENT_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                doc = await col.find_one({"$or": [{"_id": equipment_id}, {"id": equipment_id}], "deletedAt": None})
+                if doc:
+                    doc["id"] = str(doc.get("_id", doc.get("id")))
+                    return self.filter_public(doc)
+            except Exception:
+                pass
+        item = self.memory_store.get(equipment_id)
+        return self.filter_public(item) if item else None
 
     async def get_nearby(
         self,
@@ -335,13 +429,39 @@ class EquipmentRepository:
         radius_km: float = 50.0,
         category: Optional[str] = None
     ) -> List[Dict[str, Any]]:
+        col = get_collection(EQUIPMENT_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                # $geoNear aggregation
+                geo_stage = {
+                    "$geoNear": {
+                        "near": {"type": "Point", "coordinates": [lon, lat]},
+                        "distanceField": "distance_meters",
+                        "maxDistance": radius_km * 1000.0,
+                        "spherical": True,
+                        "query": {"deletedAt": None, "is_available": True}
+                    }
+                }
+                pipeline = [geo_stage]
+                if category and category.lower() != "all":
+                    pipeline.append({"$match": {"category": {"$regex": f"^{category}$", "$options": "i"}}})
+                items = await col.aggregate(pipeline).to_list(length=100)
+                if items:
+                    for it in items:
+                        it["id"] = str(it.get("_id", it.get("id")))
+                        it["distance_km"] = round(it.get("distance_meters", 0) / 1000.0, 1)
+                    return [self.filter_public(it) for it in items]
+            except Exception:
+                pass
+
+        # In-memory Haversine distance fallback
         items = await self.get_all(category=category)
         nearby_items = []
         for item in items:
             d = calculate_haversine_distance(lat, lon, item["latitude"], item["longitude"])
             if d <= radius_km:
                 item_copy = item.copy()
-                item_copy["distance_km"] = d
+                item_copy["distance_km"] = round(d, 1)
                 nearby_items.append(item_copy)
         
         nearby_items.sort(key=lambda x: x["distance_km"])
@@ -349,27 +469,67 @@ class EquipmentRepository:
 
     async def create(self, data: Dict[str, Any], owner: Dict[str, Any]) -> Dict[str, Any]:
         new_id = generate_id("eq")
+        lat = float(data.get("latitude", 30.9010))
+        lon = float(data.get("longitude", 75.8573))
+        hourly = float(data.get("hourly_rate", 450))
+        daily = float(data.get("daily_rate", 3000))
+
         item = {
             **data,
             "id": new_id,
+            "_id": new_id,
             "owner_id": owner.get("id", "usr_owner_01"),
             "owner_name": owner.get("name", "Farm Equipment Owner"),
             "owner_phone": owner.get("phone", "+919876543210"),
+            "location": {
+                "exact": create_geopoint(lon, lat),
+                "public": compute_public_point(lat, lon, seed_key=new_id),
+                "stateCode": data.get("state", "Punjab"),
+                "districtCode": data.get("city", "Ludhiana")
+            },
+            "pricing": {
+                "perHour": rupees_to_paise(hourly),
+                "perDay": rupees_to_paise(daily),
+                "currency": "INR"
+            },
+            "searchKeywords": generate_keywords(
+                data.get("title", ""),
+                data.get("category", ""),
+                data.get("city", ""),
+                data.get("localName", "")
+            ),
             "is_available": True,
             "average_rating": 5.0,
             "total_reviews": 0,
             "total_bookings": 0,
+            "version": 1,
+            "deletedAt": None,
             "created_at": datetime.now(timezone.utc),
             "updated_at": datetime.now(timezone.utc)
         }
+        col = get_collection(EQUIPMENT_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                await col.insert_one(item)
+            except Exception:
+                pass
         self.memory_store[new_id] = item
-        return item
+        return self.filter_public(item)
 
     async def update(self, equipment_id: str, updates: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        updates["updated_at"] = datetime.now(timezone.utc)
+        col = get_collection(EQUIPMENT_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                await col.update_one(
+                    {"$or": [{"_id": equipment_id}, {"id": equipment_id}]},
+                    {"$set": updates, "$inc": {"version": 1}}
+                )
+            except Exception:
+                pass
         if equipment_id in self.memory_store:
             self.memory_store[equipment_id].update(updates)
-            self.memory_store[equipment_id]["updated_at"] = datetime.now(timezone.utc)
-            return self.memory_store[equipment_id]
+            return self.filter_public(self.memory_store[equipment_id])
         return None
 
 equipment_repo = EquipmentRepository()
