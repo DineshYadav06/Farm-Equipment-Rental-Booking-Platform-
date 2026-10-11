@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "ml", "status": "reviewed" },
+  "_meta": {
+    "locale": "ml",
+    "status": "reviewed",
+    "founderBioStatus": "needs-review"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "ശരിയായ യന്ത്രം, എളുപ്പമുള്ള കൃഷി",
@@ -13,7 +17,20 @@
     "language": "ഭാഷ തിരഞ്ഞെടുക്കുക",
     "helplineLabel": "കർഷക ഹെൽപ്പ് ലൈൻ (സൗജന്യം)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "അക്കങ്ങളുടെ ശൈലി"
+    "digitsToggle": "അക്കങ്ങളുടെ ശൈലി",
+    "textSmall": "ചെറിയ അക്ഷരം",
+    "textDefault": "സാധാരണ അക്ഷരം",
+    "textLarge": "വലിയ അക്ഷരം",
+    "simpleMode": "ലളിത മോഡ്",
+    "normalMode": "സാധാരണ മോഡ്",
+    "digitsLatin": "123",
+    "digitsNative": "മലയാള അക്കങ്ങൾ",
+    "kisanHelpline": "കിസാൻ ഹെൽപ്പ്‌ലൈൻ",
+    "pauseTicker": "അറിയിപ്പ് നിർത്തുക",
+    "playTicker": "അറിയിപ്പ് തുടരുക",
+    "accessibilityMenu": "ആക്സസിബിലിറ്റി മെനു",
+    "closeMenu": "മെനു അടയ്ക്കുക",
+    "openMenu": "മെനു തുറക്കുക"
   },
   "nav": {
     "home": "ഹോം",
@@ -28,7 +45,15 @@
     "register": "രജിസ്ട്രേഷൻ",
     "settings": "ക്രമീകരണങ്ങൾ",
     "notifications": "അറിയിപ്പുകൾ",
-    "profile": "പ്രൊഫൈൽ"
+    "profile": "പ്രൊഫൈൽ",
+    "more": "കൂടുതൽ",
+    "about": "ഞങ്ങളെക്കുറിച്ച്",
+    "contact": "ബന്ധപ്പെടുക",
+    "faq": "ചോദ്യോത്തരങ്ങൾ",
+    "logout": "ലോഗ് ഔട്ട്",
+    "myBookings": "എന്റെ ബുക്കിംഗുകൾ",
+    "dashboard": "ഡാഷ്‌ബോർഡ്",
+    "bookings": "ബുക്കിംഗുകൾ"
   },
   "actions": {
     "search": "തിരയുക",
@@ -73,5 +98,34 @@
     "quickLinks": "പ്രധാന ലിങ്കുകൾ",
     "officialPortals": "ഔദ്യോഗിക സർക്കാർ പോർട്ടലുകൾ",
     "allRightsReserved": "എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം."
+  },
+  "location": {
+    "selectLocation": "നിങ്ങളുടെ സ്ഥലം തിരഞ്ഞെടുക്കുക",
+    "useGps": "എന്റെ ഇപ്പോഴത്തെ സ്ഥലം ഉപയോഗിക്കുക",
+    "searchState": "സംസ്ഥാനം തിരയുക...",
+    "searchDistrict": "ജില്ല തിരയുക...",
+    "detecting": "ലൊക്കേഷൻ കണ്ടെത്തുന്നു...",
+    "locationDetected": "ലൊക്കേഷൻ കണ്ടെത്തി",
+    "detectFailed": "ലൊക്കേഷൻ കണ്ടെത്താനായില്ല. സ്വയം തിരഞ്ഞെടുക്കുക.",
+    "allDistricts": "എല്ലാ ജില്ലകളും",
+    "stateLabel": "സംസ്ഥാനം",
+    "districtLabel": "ജില്ല",
+    "changeLocation": "സ്ഥലം മാറ്റുക"
+  },
+  "search": {
+    "searchPlaceholder": "ട്രാക്ടർ, ഹാർവെസ്റ്റർ തിരയുക...",
+    "voiceListening": "കേൾക്കുന്നു... സംസാരിക്കൂ",
+    "voiceError": "വോയ്സ് സേർച്ച് ലഭ്യമല്ല",
+    "closeSearch": "തിരച്ചിൽ അടയ്ക്കുക",
+    "openSearch": "ഉപകരണങ്ങൾ തിരയുക",
+    "searchButton": "തിരയുക"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "സ്ഥാപകനും ഫുൾ-സ്റ്റാക്ക് ഡെവലപ്പറും",
+    "founderBio": "Dinesh Kumar Yadav, FarmRentHub-ന്റെ സ്ഥാപകനും ഫുൾ-സ്റ്റാക്ക് ഡെവലപ്പറുമാണ്. ഇന്ത്യൻ കർഷകർക്ക് സുതാര്യമായ കാർഷിക യന്ത്ര വാടകയും സുരക്ഷിത ബുക്കിംഗും നൽകുന്നതിനായി ഈ പ്ലാറ്റ്‌ഫോം രൂപകൽപ്പന ചെയ്തിരിക്കുന്നു.",
+    "builtByTitle": "മറ്റ് പ്രോജക്റ്റുകൾ",
+    "builtBySubtitle": "സ്ഥാപകൻ വികസിപ്പിച്ച വെബ് പ്രോജക്റ്റുകൾ",
+    "photoAlt": "Dinesh Kumar Yadav-ന്റെ ചിത്രം, FarmRentHub സ്ഥാപകൻ"
   }
 }
