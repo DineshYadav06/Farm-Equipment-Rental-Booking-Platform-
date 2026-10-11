@@ -1,5 +1,8 @@
 {
-  "_meta": { "locale": "hi", "status": "reviewed" },
+  "_meta": {
+    "locale": "hi",
+    "status": "reviewed"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "सही मशीन, आसान खेती",
@@ -13,22 +16,43 @@
     "language": "भाषा चुनें",
     "helplineLabel": "किसान हेल्पलाइन (निःशुल्क)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "अंक शैली"
+    "digitsToggle": "अंक शैली",
+    "textSmall": "छोटा अक्षर",
+    "textDefault": "सामान्य अक्षर",
+    "textLarge": "बड़ा अक्षर",
+    "simpleMode": "सरल मोड",
+    "normalMode": "सामान्य मोड",
+    "digitsLatin": "123",
+    "digitsNative": "भारतीय अंक",
+    "kisanHelpline": "किसान हेल्पलाइन",
+    "pauseTicker": "सूचना पट्टी रोकें",
+    "playTicker": "सूचना पट्टी चलाएं",
+    "accessibilityMenu": "सुलभता मेनू",
+    "closeMenu": "मेनू बंद करें",
+    "openMenu": "मेनू खोलें"
   },
   "nav": {
     "home": "होम",
-    "equipment": "उपकरण सूची",
-    "map": "नक्शे पर खोजें",
-    "howItWorks": "यह कैसे काम करता है",
-    "schemes": "सरकारी योजनाएं व सब्सिडी",
-    "listEquipment": "अपना उपकरण जोड़ें",
+    "equipment": "उपकरण",
+    "map": "नक्शा",
+    "howItWorks": "कार्यप्रणाली",
+    "schemes": "सरकारी योजनाएं",
+    "listEquipment": "उपकरण जोड़ें",
     "farmerDashboard": "किसान डैशबोर्ड",
     "ownerDashboard": "मालिक डैशबोर्ड",
     "login": "लॉग इन",
     "register": "पंजीकरण",
     "settings": "सेटिंग्स",
     "notifications": "सूचनाएं",
-    "profile": "प्रोफ़ाइल"
+    "profile": "प्रोफ़ाइल",
+    "more": "अन्य",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क",
+    "faq": "प्रश्नोत्तरी",
+    "logout": "लॉग आउट",
+    "myBookings": "मेरी बुकिंग",
+    "dashboard": "डैशबोर्ड",
+    "bookings": "बुकिंग"
   },
   "actions": {
     "search": "खोजें",
@@ -73,5 +97,34 @@
     "quickLinks": "त्वरित लिंक",
     "officialPortals": "महत्वपूर्ण सरकारी पोर्टल",
     "allRightsReserved": "सर्वाधिकार सुरक्षित।"
+  },
+  "location": {
+    "selectLocation": "अपना स्थान चुनें",
+    "useGps": "मेरा वर्तमान स्थान चुनें (GPS)",
+    "searchState": "राज्य खोजें...",
+    "searchDistrict": "जिला खोजें...",
+    "detecting": "GPS स्थान की पहचान की जा रही है...",
+    "locationDetected": "स्थान की पहचान सफल",
+    "detectFailed": "स्थान की पहचान नहीं हो सकी। कृपया सूची से चुनें।",
+    "allDistricts": "सभी जिले",
+    "stateLabel": "राज्य",
+    "districtLabel": "जिला",
+    "changeLocation": "स्थान बदलें"
+  },
+  "search": {
+    "searchPlaceholder": "ट्रैक्टर, कंबाइन, रोटावेटर खोजें...",
+    "voiceListening": "सुन रहे हैं... बोलिए",
+    "voiceError": "आवाज से खोज समर्थित नहीं है या अनुमति नहीं मिली",
+    "closeSearch": "खोज बंद करें",
+    "openSearch": "उपकरण खोजें",
+    "searchButton": "खोजें"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "संस्थापक एवं फुल-स्टैक डेवलपर",
+    "founderBio": "Dinesh Kumar Yadav, FarmRentHub के संस्थापक और फुल-स्टैक डेवलपर हैं। उन्होंने भारतीय किसानों और उपकरण मालिकों के लिए पारदर्शी मशीनरी किराया, क्षेत्रीय भाषा पहुंच और सुरक्षित एस्क्रो बुकिंग सुनिश्चित करने के लिए इस मंच का निर्माण किया है।",
+    "builtByTitle": "अन्य परियोजनाएं",
+    "builtBySubtitle": "संस्थापक द्वारा विकसित चुनिंदा वेब इंजीनियरिंग परियोजनाएं",
+    "photoAlt": "दिनेश कुमार यादव का चित्र, FarmRentHub के संस्थापक और फुल-स्टैक डेवलपर"
   }
 }
