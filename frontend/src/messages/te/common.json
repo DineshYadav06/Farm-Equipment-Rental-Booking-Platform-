@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "te", "status": "reviewed" },
+  "_meta": {
+    "locale": "te",
+    "status": "reviewed",
+    "founderBioStatus": "needs-review"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "సరైన యంత్రం, సులభమైన సాగు",
@@ -13,7 +17,20 @@
     "language": "భాషను ఎంచుకోండి",
     "helplineLabel": "కిసాన్ హెల్ప్‌లైన్ (ఉచితం)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "అంకెల శైలి"
+    "digitsToggle": "అంకెల శైలి",
+    "textSmall": "చిన్న అక్షరాలు",
+    "textDefault": "సాధారణ అక్షరాలు",
+    "textLarge": "పెద్ద అక్షరాలు",
+    "simpleMode": "సరళ విధానం",
+    "normalMode": "సాధారణ విధానం",
+    "digitsLatin": "123",
+    "digitsNative": "తెలుగు అంకెలు",
+    "kisanHelpline": "కిసాన్ హెల్ప్‌లైన్",
+    "pauseTicker": "ప్రకటన ఆపు",
+    "playTicker": "ప్రకటన ప్రారంభించు",
+    "accessibilityMenu": "యాక్సెసిబిలిటీ మెనూ",
+    "closeMenu": "మెనూ మూసివేయి",
+    "openMenu": "మెనూ తెరువు"
   },
   "nav": {
     "home": "హోమ్",
@@ -28,7 +45,15 @@
     "register": "రిజిస్టర్",
     "settings": "సెట్టింగ్‌లు",
     "notifications": "నోటిఫికేషన్‌లు",
-    "profile": "ప్రొఫైల్"
+    "profile": "ప్రొఫైల్",
+    "more": "మరిన్ని",
+    "about": "మా గురించి",
+    "contact": "సంప్రదించండి",
+    "faq": "ప్రశ్నోత్తరాలు",
+    "logout": "లాగ్ అవుట్",
+    "myBookings": "నా బుకింగ్‌లు",
+    "dashboard": "డాష్‌బోర్డ్",
+    "bookings": "బుకింగ్‌లు"
   },
   "actions": {
     "search": "వెతకండి",
@@ -73,5 +98,34 @@
     "quickLinks": "ముఖ్యమైన లింకులు",
     "officialPortals": "అధికారిక ప్రభుత్వ పోర్టల్స్",
     "allRightsReserved": "సర్వహక్కులు ప్రత్యేకించబడ్డాయి."
+  },
+  "location": {
+    "selectLocation": "మీ ప్రాంతాన్ని ఎంచుకోండి",
+    "useGps": "నా ప్రస్తుత స్థానాన్ని ఉపయోగించండి",
+    "searchState": "రాష్ట్రం శోధించండి...",
+    "searchDistrict": "జిల్లా శోధించండి...",
+    "detecting": "స్థానాన్ని గుర్తిస్తోంది...",
+    "locationDetected": "స్థానం గుర్తించబడింది",
+    "detectFailed": "స్థానం గుర్తించలేకపోయాము. దయచేసి ఎంచుకోండి.",
+    "allDistricts": "అన్ని జిల్లాలు",
+    "stateLabel": "రాష్ట్రం",
+    "districtLabel": "జిల్లా",
+    "changeLocation": "స్థానాన్ని మార్చండి"
+  },
+  "search": {
+    "searchPlaceholder": "ట్రాక్టర్లు, హార్వెస్టర్లు శోధించండి...",
+    "voiceListening": "వింటోంది... మాట్లాడండి",
+    "voiceError": "వాయిస్ శోధనకు మద్దతు లేదు",
+    "closeSearch": "శోధన మూసివేయి",
+    "openSearch": "పరికరాలు శోధించండి",
+    "searchButton": "శోధించు"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "వ్యవస్థాపకుడు మరియు ఫుల్-స్టాక్ డెవలపర్",
+    "founderBio": "Dinesh Kumar Yadav, FarmRentHub వ్యవస్థాపకుడు మరియు ఫుల్-స్టాక్ డెవలపర్. భారతీయ రైతులకు పారదర్శక యంత్రాల అద్దె మరియు సురక్షిత బుకింగ్ అందించడానికి ఈ వేదికను రూపొందించారు.",
+    "builtByTitle": "ఇతర ప్రాజెక్టులు",
+    "builtBySubtitle": "వ్యవస్థాపకుడు అభివృద్ధి చేసిన వెబ్ ప్రాజెక్టులు",
+    "photoAlt": "Dinesh Kumar Yadav చిత్రం, FarmRentHub వ్యవస్థాపకుడు"
   }
 }
