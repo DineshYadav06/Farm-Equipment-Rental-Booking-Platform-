@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" fill="none" role="img" aria-hidden="true">
+  <rect width="400" height="300" rx="16" fill="#fafaf5"/>
+  
+  <!-- Field Landscape with furrows -->
+  <path d="M30 220 C 120 200, 280 200, 370 220 L 370 270 L 30 270 Z" fill="#14532d" opacity="0.9"/>
+  <path d="M50 235 C 140 225, 260 225, 350 235" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M70 250 C 150 242, 250 242, 330 250" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Sprouting seed in field center -->
+  <g transform="translate(190, 160)">
+    <path d="M10 35 Q 10 15 10 5" stroke="#14532d" stroke-width="3" stroke-linecap="round"/>
+    <path d="M10 12 C 0 5, -8 18, 10 24" fill="#16a34a"/>
+    <path d="M10 7 C 20 0, 28 13, 10 19" fill="#16a34a"/>
+  </g>
+
+  <!-- Large Magnifier Scanning the Field -->
+  <g transform="translate(140, 60)">
+    <!-- Handle -->
+    <rect x="95" y="100" width="16" height="65" rx="8" transform="rotate(-45 95 100)" fill="#1e3a5f"/>
+    <!-- Glass Rim -->
+    <circle cx="65" cy="65" r="55" stroke="#1e3a5f" stroke-width="9" fill="none"/>
+    <!-- Lens reflection -->
+    <path d="M 35 45 A 40 40 0 0 1 85 25" stroke="#d97706" stroke-width="4" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
