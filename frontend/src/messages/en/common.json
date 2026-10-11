@@ -1,5 +1,8 @@
 {
-  "_meta": { "locale": "en", "status": "reviewed" },
+  "_meta": {
+    "locale": "en",
+    "status": "reviewed"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "Rent the Right Equipment. Grow with Ease.",
@@ -13,22 +16,43 @@
     "language": "Select Language",
     "helplineLabel": "Kisan Helpline (Toll-Free)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "Digit Style"
+    "digitsToggle": "Digit Style",
+    "textSmall": "Small Text",
+    "textDefault": "Standard Text",
+    "textLarge": "Large Text",
+    "simpleMode": "Simple Mode",
+    "normalMode": "Standard Mode",
+    "digitsLatin": "123",
+    "digitsNative": "Native Digits",
+    "kisanHelpline": "Kisan Helpline",
+    "pauseTicker": "Pause announcement ticker",
+    "playTicker": "Play announcement ticker",
+    "accessibilityMenu": "Accessibility Menu",
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu"
   },
   "nav": {
     "home": "Home",
-    "equipment": "Equipment Catalog",
-    "map": "Search on Map",
+    "equipment": "Equipment",
+    "map": "Map",
     "howItWorks": "How It Works",
-    "schemes": "Government Schemes & Subsidies",
-    "listEquipment": "List Your Equipment",
+    "schemes": "Govt Schemes",
+    "listEquipment": "List Equipment",
     "farmerDashboard": "Farmer Dashboard",
     "ownerDashboard": "Owner Dashboard",
     "login": "Sign In",
     "register": "Register",
     "settings": "Settings",
     "notifications": "Notifications",
-    "profile": "Profile"
+    "profile": "Profile",
+    "more": "More",
+    "about": "About Us",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "logout": "Log Out",
+    "myBookings": "My Bookings",
+    "dashboard": "Dashboard",
+    "bookings": "Bookings"
   },
   "actions": {
     "search": "Search",
@@ -73,5 +97,34 @@
     "quickLinks": "Quick Links",
     "officialPortals": "Official Agricultural Portals",
     "allRightsReserved": "All rights reserved."
+  },
+  "location": {
+    "selectLocation": "Select Your Location",
+    "useGps": "Use my current location",
+    "searchState": "Search state...",
+    "searchDistrict": "Search district...",
+    "detecting": "Detecting GPS location...",
+    "locationDetected": "Location detected successfully",
+    "detectFailed": "Could not detect location. Please select manually.",
+    "allDistricts": "All Districts",
+    "stateLabel": "State",
+    "districtLabel": "District",
+    "changeLocation": "Change Location"
+  },
+  "search": {
+    "searchPlaceholder": "Search tractors, harvesters, rotavators...",
+    "voiceListening": "Listening... speak now",
+    "voiceError": "Voice input not supported or permission denied",
+    "closeSearch": "Close search",
+    "openSearch": "Search equipment",
+    "searchButton": "Search"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "Founder and Full-Stack Developer",
+    "founderBio": "Dinesh Kumar Yadav is the Founder and Full-Stack Developer of FarmRentHub. He designed and engineered the platform to bring transparent machinery hiring, native Indic language accessibility, and secure escrow booking to farmers and equipment owners across India.",
+    "builtByTitle": "Other Projects",
+    "builtBySubtitle": "Select web engineering projects developed by the founder",
+    "photoAlt": "Portrait photo of Dinesh Kumar Yadav, Founder and Full-Stack Developer of FarmRentHub"
   }
 }
