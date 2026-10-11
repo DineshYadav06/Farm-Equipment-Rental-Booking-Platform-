@@ -46,3 +46,33 @@ async def get_owner_stats():
         average_rating=4.9,
         total_reviews=38
     )
+
+@router.post("/me/delete-request")
+async def request_user_deletion():
+    from datetime import datetime, timezone
+    import hashlib
+    from app.models.audit import audit_repo
+
+    user = await user_repo.get_by_id("usr_farmer_01")
+    if not user:
+        raise NotFoundException("User", "usr_farmer_01")
+
+    now = datetime.now(timezone.utc)
+    anon_email = f"deleted_{hashlib.sha256(user['email'].encode()).hexdigest()[:12]}@farmrenthub.in"
+    anon_phone = f"+9190000{hashlib.sha256(user['phone'].encode()).hexdigest()[:5]}"
+
+    updates = {
+        "name": "Deleted user",
+        "email": anon_email,
+        "phone": anon_phone,
+        "address": {"country": "IN", "stateCode": "", "districtCode": "", "line": "", "pincode": ""},
+        "anonymizedAt": now,
+        "deletedAt": now
+    }
+    await user_repo.update("usr_farmer_01", updates)
+    await audit_repo.log_action("usr_farmer_01", "farmer", "user.delete_request", "users", "usr_farmer_01")
+
+    return {
+        "status": "anonymized",
+        "message": "User personal data anonymized in compliance with DPDP act. Historical transaction records retained for statutory compliance."
+    }
