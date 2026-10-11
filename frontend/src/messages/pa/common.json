@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "pa", "status": "reviewed" },
+  "_meta": {
+    "locale": "pa",
+    "status": "reviewed",
+    "founderBioStatus": "needs-review"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "ਸਹੀ ਮਸ਼ੀਨ, ਸੌਖੀ ਖੇਤੀ",
@@ -13,7 +17,20 @@
     "language": "ਭਾਸ਼ਾ ਚੁਣੋ",
     "helplineLabel": "ਕਿਸਾਨ ਹੈਲਪਲਾਈਨ (ਮੁਫ਼ਤ)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "ਅੰਕ ਸ਼ੈਲੀ"
+    "digitsToggle": "ਅੰਕ ਸ਼ੈਲੀ",
+    "textSmall": "ਛੋਟਾ ਅੱਖਰ",
+    "textDefault": "ਸਧਾਰਨ ਅੱਖਰ",
+    "textLarge": "ਵੱਡਾ ਅੱਖਰ",
+    "simpleMode": "ਸਰਲ ਮੋਡ",
+    "normalMode": "ਸਧਾਰਨ ਮੋਡ",
+    "digitsLatin": "123",
+    "digitsNative": "ਦੇਸੀ ਅੰਕ",
+    "kisanHelpline": "ਕਿਸਾਨ ਹੈਲਪਲਾਈਨ",
+    "pauseTicker": "ਸੂਚਨਾ ਰੋਕੋ",
+    "playTicker": "ਸੂਚਨਾ ਚਲਾਓ",
+    "accessibilityMenu": "ਪਹੁੰਚਯੋਗਤਾ ਮੀਨੂ",
+    "closeMenu": "ਮੀਨੂ ਬੰਦ ਕਰੋ",
+    "openMenu": "ਮੀਨੂ ਖੋਲ੍ਹੋ"
   },
   "nav": {
     "home": "ਹੋਮ",
@@ -28,7 +45,15 @@
     "register": "ਰਜਿਸਟਰ",
     "settings": "ਸੈਟਿੰਗਜ਼",
     "notifications": "ਸੂਚਨਾਵਾਂ",
-    "profile": "ਪ੍ਰੋਫ਼ਾਈਲ"
+    "profile": "ਪ੍ਰੋਫ਼ਾਈਲ",
+    "more": "ਹੋਰ",
+    "about": "ਸਾਡੇ ਬਾਰੇ",
+    "contact": "ਸੰਪਰਕ",
+    "faq": "ਸਵਾਲ-ਜਵਾਬ",
+    "logout": "ਲਾਗ ਆਉਟ",
+    "myBookings": "ਮੇਰੀਆਂ ਬੁਕਿੰਗਾਂ",
+    "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+    "bookings": "ਬੁਕਿੰਗ"
   },
   "actions": {
     "search": "ਖੋਜੋ",
@@ -73,5 +98,34 @@
     "quickLinks": "ਜ਼ਰੂਰੀ ਲਿੰਕ",
     "officialPortals": "ਅਧਿਕਾਰਤ ਸਰਕਾਰੀ ਪੋਰਟਲ",
     "allRightsReserved": "ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।"
+  },
+  "location": {
+    "selectLocation": "ਆਪਣਾ ਸਥਾਨ ਚੁਣੋ",
+    "useGps": "ਮੇਰਾ ਮੌਜੂਦਾ ਸਥਾਨ ਵਰਤੋਂ",
+    "searchState": "ਰਾਜ ਖੋਜੋ...",
+    "searchDistrict": "ਜ਼ਿਲ੍ਹਾ ਖੋਜੋ...",
+    "detecting": "ਜੀਪੀਐਸ ਸਥਾਨ ਲੱਭ ਰਿਹਾ ਹੈ...",
+    "locationDetected": "ਸਥਾਨ ਲੱਭਿਆ ਗਿਆ",
+    "detectFailed": "ਸਥਾਨ ਨਹੀਂ ਮਿਲਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਹੱਥੀਂ ਚੁਣੋ।",
+    "allDistricts": "ਸਾਰੇ ਜ਼ਿਲ੍ਹੇ",
+    "stateLabel": "ਰਾਜ",
+    "districtLabel": "ਜ਼ਿਲ੍ਹਾ",
+    "changeLocation": "ਸਥਾਨ ਬਦਲੋ"
+  },
+  "search": {
+    "searchPlaceholder": "ਟਰੈਕਟਰ, ਕੰਬਾਈਨ, ਰੋਟਾਵੇਟਰ ਖੋਜੋ...",
+    "voiceListening": "ਸੁਣ ਰਿਹਾ ਹੈ... ਬੋਲੋ",
+    "voiceError": "ਆਵਾਜ਼ ਖੋਜ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+    "closeSearch": "ਖੋਜ ਬੰਦ ਕਰੋ",
+    "openSearch": "ਉਪਕਰਣ ਖੋਜੋ",
+    "searchButton": "ਖੋਜੋ"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "ਸੰਸਥਾਪਕ ਅਤੇ ਫੁੱਲ-ਸਟੈਕ ਡਿਵੈਲਪਰ",
+    "founderBio": "Dinesh Kumar Yadav, FarmRentHub ਦੇ ਸੰਸਥਾਪਕ ਅਤੇ ਫੁੱਲ-ਸਟੈਕ ਡਿਵੈਲਪਰ ਹਨ। ਉਹਨਾਂ ਨੇ ਭਾਰਤੀ ਕਿਸਾਨਾਂ ਲਈ ਪਾਰਦਰਸ਼ੀ ਮਸ਼ੀਨਰੀ ਕਿਰਾਇਆ ਅਤੇ ਸੁਰੱਖਿਅਤ ਬੁਕਿੰਗ ਲਈ ਇਸ ਪਲੇਟਫਾਰਮ ਦਾ ਨਿਰਮਾਣ ਕੀਤਾ ਹੈ।",
+    "builtByTitle": "ਹੋਰ ਪ੍ਰੋਜੈਕਟ",
+    "builtBySubtitle": "ਸੰਸਥਾਪਕ ਦੁਆਰਾ ਬਣਾਏ ਗਏ ਵੈੱਬ ਪ੍ਰੋਜੈਕਟ",
+    "photoAlt": "Dinesh Kumar Yadav ਦੀ ਤਸਵੀਰ, FarmRentHub ਦੇ ਸੰਸਥਾਪਕ"
   }
 }
