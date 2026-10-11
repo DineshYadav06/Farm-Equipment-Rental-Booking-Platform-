@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "as", "status": "reviewed" },
+  "_meta": {
+    "locale": "as",
+    "status": "reviewed",
+    "founderBioStatus": "needs-review"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "সঠিক সা-সঁজুলি, সহজ খেতি",
@@ -13,7 +17,20 @@
     "language": "ভাষা বাছনি কৰক",
     "helplineLabel": "কৃষক হেল্পলাইন (বিনামূলীয়া)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "সংখ্যাৰ শৈলী"
+    "digitsToggle": "সংখ্যাৰ শৈলী",
+    "textSmall": "সৰু আখৰ",
+    "textDefault": "সাধাৰণ আখৰ",
+    "textLarge": "ডাঙৰ আখৰ",
+    "simpleMode": "সহজ মোড",
+    "normalMode": "সাধাৰণ মোড",
+    "digitsLatin": "123",
+    "digitsNative": "অসমীয়া সংখ্যা",
+    "kisanHelpline": "কিষাণ হেল্পলাইন",
+    "pauseTicker": "জাননী বন্ধ কৰক",
+    "playTicker": "জাননী চলাওক",
+    "accessibilityMenu": "প্ৰৱেশাধিকাৰ মেনু",
+    "closeMenu": "মেনু বন্ধ কৰক",
+    "openMenu": "মেনু খোলক"
   },
   "nav": {
     "home": "গৃহ",
@@ -28,7 +45,15 @@
     "register": "পঞ্জীয়ন",
     "settings": "ছেটিংছ",
     "notifications": "বিজ্ঞপ্তি",
-    "profile": "প্ৰফাইল"
+    "profile": "প্ৰফাইল",
+    "more": "অধিক",
+    "about": "আমাৰ বিষয়ে",
+    "contact": "যোগাযোগ",
+    "faq": "প্ৰশ্নোত্তৰ",
+    "logout": "লগ আউট",
+    "myBookings": "মোৰ বুকিং",
+    "dashboard": "ডেশ্ববৰ্ড",
+    "bookings": "বুকিং"
   },
   "actions": {
     "search": "সন্ধান কৰক",
@@ -73,5 +98,34 @@
     "quickLinks": "প্ৰয়োজনীয় সংযোগ",
     "officialPortals": "চৰকাৰী কৃষি পৰ্টেল",
     "allRightsReserved": "সকলো অধিকাৰ সংৰক্ষিত।"
+  },
+  "location": {
+    "selectLocation": "আপোনাৰ স্থান বাছনি কৰক",
+    "useGps": "মোৰ বৰ্তমান স্থান ব্যৱহাৰ কৰক",
+    "searchState": "ৰাজ্য সন্ধান কৰক...",
+    "searchDistrict": "জিলা সন্ধান কৰক...",
+    "detecting": "স্থান চিনাক্ত কৰা হৈছে...",
+    "locationDetected": "স্থান চিনাক্ত হ'ল",
+    "detectFailed": "স্থান পোৱা নগ'ল। অনুগ্ৰহ কৰি বাছক।",
+    "allDistricts": "সকলো জিলা",
+    "stateLabel": "ৰাজ্য",
+    "districtLabel": "জিলা",
+    "changeLocation": "স্থান সলনি কৰক"
+  },
+  "search": {
+    "searchPlaceholder": "ট্ৰেক্টৰ, কম্বাইন সন্ধান কৰক...",
+    "voiceListening": "শুনি আছোঁ... কওক",
+    "voiceError": "ভইচ সন্ধান উপলব্ধ নহয়",
+    "closeSearch": "সন্ধান বন্ধ কৰক",
+    "openSearch": "সঁজুলি সন্ধান কৰক",
+    "searchButton": "সন্ধান"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "প্রতিষ্ঠাপক আৰু ফুল-ষ্টেক ডেভেলপাৰ",
+    "founderBio": "Dinesh Kumar Yadav হ'ল FarmRentHub ৰ প্রতিষ্ঠাপক আৰু ফুল-ষ্টেক ডেভেলপাৰ। তেওঁ ভাৰতীয় কৃষকসকলৰ বাবে স্বচ্ছ কৃষি যন্ত্রপাতি ভাড়া আৰু সুৰক্ষিত বুকিং প্ৰদানৰ বাবে এই মঞ্চ নির্মাণ কৰিছে।",
+    "builtByTitle": "অন্যান্য প্রকল্পসমূহ",
+    "builtBySubtitle": "প্রতিষ্ঠাপকে নির্মাণ কৰা ৱেব প্রকল্পসমূহ",
+    "photoAlt": "Dinesh Kumar Yadav ৰ ফটো, FarmRentHub ৰ প্রতিষ্ঠাপক"
   }
 }
