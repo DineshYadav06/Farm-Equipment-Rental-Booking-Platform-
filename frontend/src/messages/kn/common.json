@@ -1,5 +1,9 @@
 {
-  "_meta": { "locale": "kn", "status": "reviewed" },
+  "_meta": {
+    "locale": "kn",
+    "status": "reviewed",
+    "founderBioStatus": "needs-review"
+  },
   "brand": {
     "name": "FarmRentHub",
     "tagline": "ಸರಿಯಾದ ಯಂತ್ರ, ಸುಲಭ ಬೇಸಾಯ",
@@ -13,7 +17,20 @@
     "language": "ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ",
     "helplineLabel": "ರೈತ ಸಹಾಯವಾಣಿ (ಉಚಿತ)",
     "helplineNumber": "1800-180-1551",
-    "digitsToggle": "ಅಂಕಿ ಶೈಲಿ"
+    "digitsToggle": "ಅಂಕಿ ಶೈಲಿ",
+    "textSmall": "ಸಣ್ಣ ಅಕ್ಷರ",
+    "textDefault": "ಸಾಮಾನ್ಯ ಅಕ್ಷರ",
+    "textLarge": "ದೊಡ್ಡ ಅಕ್ಷರ",
+    "simpleMode": "ಸರಳ ಮೋಡ್",
+    "normalMode": "ಸಾಮಾನ್ಯ ಮೋಡ್",
+    "digitsLatin": "123",
+    "digitsNative": "ಕನ್ನಡ ಅಂಕಿಗಳು",
+    "kisanHelpline": "ಕಿಸಾನ್ ಸಹಾಯವಾಣಿ",
+    "pauseTicker": "ಸೂಚನೆ ನಿಲ್ಲಿಸಿ",
+    "playTicker": "ಸೂಚನೆ ಚಲಾಯಿಸಿ",
+    "accessibilityMenu": "ಪ್ರವೇಶಸಾಧ್ಯತೆ ಮೆನು",
+    "closeMenu": "ಮೆನು ಮುಚ್ಚಿ",
+    "openMenu": "ಮೆನು ತೆರೆಯಿರಿ"
   },
   "nav": {
     "home": "ಮುಖಪುಟ",
@@ -28,7 +45,15 @@
     "register": "ನೋಂದಣಿ",
     "settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
     "notifications": "ಸೂಚನೆಗಳು",
-    "profile": "ಪ್ರೊಫೈಲ್"
+    "profile": "ಪ್ರೊಫೈಲ್",
+    "more": "ಇನ್ನಷ್ಟು",
+    "about": "ನಮ್ಮ ಬಗ್ಗೆ",
+    "contact": "ಸಂಪರ್ಕಿಸಿ",
+    "faq": "ಪ್ರಶ್ನೋತ್ತರ",
+    "logout": "ಲಾಗ್ ಔಟ್",
+    "myBookings": "ನನ್ನ ಬುಕಿಂಗ್‌ಗಳು",
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "bookings": "ಬುಕಿಂಗ್"
   },
   "actions": {
     "search": "ಹುಡುಕಿ",
@@ -73,5 +98,34 @@
     "quickLinks": "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
     "officialPortals": "ಅಧಿಕೃತ ಸರ್ಕಾರಿ ಪೋರ್ಟಲ್‌ಗಳು",
     "allRightsReserved": "ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ."
+  },
+  "location": {
+    "selectLocation": "ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "useGps": "ನನ್ನ ಪ್ರಸ್ತುತ ಸ್ಥಳವನ್ನು ಬಳಸಿ",
+    "searchState": "ರಾಜ್ಯ ಹುಡುಕಿ...",
+    "searchDistrict": "ಜಿಲ್ಲೆ ಹುಡುಕಿ...",
+    "detecting": "ಜಿಪಿಎಸ್ ಸ್ಥಳ ಪತ್ತೆಹಚ್ಚಲಾಗುತ್ತಿದೆ...",
+    "locationDetected": "ಸ್ಥಳ ಪತ್ತೆಯಾಗಿದೆ",
+    "detectFailed": "ಸ್ಥಳ ಪತ್ತೆಯಾಗಿಲ್ಲ. ದಯವಿಟ್ಟು ಆಯ್ಕೆಮಾಡಿ.",
+    "allDistricts": "ಎಲ್ಲಾ ಜಿಲ್ಲೆಗಳು",
+    "stateLabel": "ರಾಜ್ಯ",
+    "districtLabel": "ಜಿಲ್ಲೆ",
+    "changeLocation": "ಸ್ಥಳ ಬದಲಾಯಿಸಿ"
+  },
+  "search": {
+    "searchPlaceholder": "ಟ್ರಾಕ್ಟರ್, ಹಾರ್ವೆಸ್ಟರ್ ಹುಡುಕಿ...",
+    "voiceListening": "ಕೇಳಿಸಿಕೊಳ್ಳುತ್ತಿದೆ... ಮಾತನಾಡಿ",
+    "voiceError": "ಧ್ವನಿ ಹುಡುಕಾಟ ಲಭ್ಯವಿಲ್ಲ",
+    "closeSearch": "ಹುಡುಕಾಟ ಮುಚ್ಚಿ",
+    "openSearch": "ಉಪಕರಣ ಹುಡುಕಿ",
+    "searchButton": "ಹುಡುಕಿ"
+  },
+  "about": {
+    "founderName": "Dinesh Kumar Yadav",
+    "founderTitle": "ಸಂಸ್ಥಾಪಕ ಮತ್ತು ಫುಲ್-ಸ್ಟ್ಯಾಕ್ ಡೆವಲಪರ್",
+    "founderBio": "Dinesh Kumar Yadav, FarmRentHub ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ಫುಲ್-ಸ್ಟ್ಯಾಕ್ ಡೆವಲಪರ್. ಭಾರತೀಯ ರೈತರಿಗೆ ಪಾರದರ್ಶಕ ಯಂತ್ರೋಪಕರಣಗಳ ಬಾಡಿಗೆ ಮತ್ತು ಸುರಕ್ಷಿತ ಬುಕಿಂಗ್ ಒದಗಿಸಲು ಈ ವೇದಿಕೆಯನ್ನು ನಿರ್ಮಿಸಿದ್ದಾರೆ.",
+    "builtByTitle": "ಇತರ ಯೋಜನೆಗಳು",
+    "builtBySubtitle": "ಸಂಸ್ಥಾಪಕರು ಅಭಿವೃದ್ಧಿಪಡಿಸಿದ ವೆಬ್ ಯೋಜನೆಗಳು",
+    "photoAlt": "Dinesh Kumar Yadav ಅವರ ಭಾವಚಿತ್ರ, FarmRentHub ಸಂಸ್ಥಾಪಕರು"
   }
 }
