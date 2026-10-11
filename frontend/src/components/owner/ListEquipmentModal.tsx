@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import { X, CheckCircle2, ShieldCheck, Upload, AlertCircle } from "lucide-react";
-import { EquipmentCategory } from "@/types";
+import { EquipmentCategory, Equipment } from "@/types";
 
 interface ListEquipmentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onEquipmentAdded?: (newEq: any) => void;
+  onEquipmentAdded?: (newEq: Equipment) => void;
   lang?: "en" | "hi";
 }
 
