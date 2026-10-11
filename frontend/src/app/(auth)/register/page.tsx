@@ -2,159 +2,167 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "@/i18n/context";
+import { LOCALES_LIST } from "@/i18n/config";
 import { Logo } from "@/components/ui/Logo";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ShieldCheck, ArrowRight, UserCheck } from "lucide-react";
 
 export default function RegisterPage() {
+  const router = useRouter();
+  const { t, locale, localeMeta } = useTranslation();
+
   const [role, setRole] = useState<"farmer" | "owner">("farmer");
-  const [name, setName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [city, setCity] = useState("Ludhiana");
-  const [password, setPassword] = useState("");
+  const [state, setState] = useState("Punjab");
+  const [district, setDistrict] = useState("Ludhiana");
+  const [preferredLang, setPreferredLang] = useState(locale);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Account created for ${name} as ${role}!`);
-    window.location.href = "/";
+    if (role === "owner") {
+      router.push("/owner/dashboard");
+    } else {
+      router.push("/farmer/dashboard");
+    }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-[85vh] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 select-none">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link href="/" className="inline-block">
-          <Logo showTagline={true} size="lg" />
+          <Logo variant="horizontal" size="lg" tagline={localeMeta.tagline} />
         </Link>
-        <h2 className="mt-6 text-2xl font-black text-slate-900 tracking-tight">
-          Join FarmRentHub Network
-        </h2>
+        <h1 className="mt-6 text-2xl font-black text-slate-900 tracking-tight">
+          Create New Account (नया खाता बनाएं)
+        </h1>
         <p className="mt-1 text-xs text-slate-500">
-          Connect with 12,000+ verified farmers and machinery providers
+          Join India&apos;s verified agricultural equipment network
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-6 shadow-xl rounded-3xl border border-slate-200 sm:px-10">
           {/* Role Selector Tabs */}
           <div className="flex bg-slate-100 p-1 rounded-2xl mb-6 border border-slate-200">
             <button
               type="button"
               onClick={() => setRole("farmer")}
-              className={`w-1/2 py-2 text-xs font-bold rounded-xl transition-all ${
+              className={`w-1/2 py-2.5 text-xs font-bold rounded-xl transition-all ${
                 role === "farmer"
-                  ? "bg-white text-emerald-800 shadow-xs"
+                  ? "bg-[#14532d] text-white shadow-xs"
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
-              I am a Farmer
+              किसान (Farmer)
             </button>
             <button
               type="button"
               onClick={() => setRole("owner")}
-              className={`w-1/2 py-2 text-xs font-bold rounded-xl transition-all ${
+              className={`w-1/2 py-2.5 text-xs font-bold rounded-xl transition-all ${
                 role === "owner"
-                  ? "bg-emerald-700 text-white shadow-xs"
+                  ? "bg-[#14532d] text-white shadow-xs"
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
-              I am an Equipment Owner
+              उपकरण मालिक (Owner)
             </button>
           </div>
 
-          <form className="space-y-3.5" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-4 text-xs">
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Full Name
+              <label className="block font-bold text-slate-700 mb-1">
+                Full Name (पूरा नाम)
               </label>
               <input
                 type="text"
                 required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Ramesh Kumar Patel"
-                className="w-full px-3 py-2.5 border border-slate-300 rounded-xl text-xs font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-hidden"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="उदा. सुखविंदर सिंह / Ramesh Patel"
+                className="w-full px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#16a34a] focus:outline-hidden"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Mobile Number (for SMS & OTP)
+              <label className="block font-bold text-slate-700 mb-1">
+                Mobile Number (10 डिजिट मोबाइल नंबर)
               </label>
-              <input
-                type="tel"
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="+91 98765 43210"
-                className="w-full px-3 py-2.5 border border-slate-300 rounded-xl text-xs font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-hidden"
-              />
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center font-bold text-slate-500">
+                  +91
+                </span>
+                <input
+                  type="tel"
+                  required
+                  pattern="[0-9]{10}"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                  placeholder="98765 43210"
+                  className="w-full pl-12 pr-3 py-2.5 border border-slate-300 rounded-xl font-medium focus:ring-2 focus:ring-[#16a34a] focus:outline-hidden"
+                />
+              </div>
             </div>
 
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">State (राज्य)</label>
+                <input
+                  type="text"
+                  required
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-medium"
+                />
+              </div>
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">District (जिला)</label>
+                <input
+                  type="text"
+                  required
+                  value={district}
+                  onChange={(e) => setDistrict(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-medium"
+                />
+              </div>
+            </div>
+
+            {/* Preferred Language Field */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Email Address
+              <label className="block font-bold text-slate-700 mb-1">
+                Preferred Notification Language (पसंदीदा भाषा)
               </label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your.email@example.com"
-                className="w-full px-3 py-2.5 border border-slate-300 rounded-xl text-xs font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-hidden"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Village / District / Tehsil
-              </label>
-              <input
-                type="text"
-                required
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="e.g. Ludhiana, Punjab"
-                className="w-full px-3 py-2.5 border border-slate-300 rounded-xl text-xs font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-hidden"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Password
-              </label>
-              <input
-                type="password"
-                required
-                minLength={8}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Minimum 8 characters"
-                className="w-full px-3 py-2.5 border border-slate-300 rounded-xl text-xs font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-hidden"
-              />
-            </div>
-
-            <div className="flex items-center gap-2 pt-1 text-slate-500 text-[11px]">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>We never share your farm data or mobile with third parties.</span>
+              <select
+                value={preferredLang}
+                onChange={(e) => setPreferredLang(e.target.value as typeof locale)}
+                className="w-full px-3 py-2.5 border border-slate-300 rounded-xl font-semibold bg-white"
+              >
+                {LOCALES_LIST.map((l) => (
+                  <option key={l.code} value={l.code}>
+                    {l.nativeName} ({l.name})
+                  </option>
+                ))}
+              </select>
             </div>
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs py-3 rounded-xl shadow-xs transition-colors mt-2"
+              className="w-full flex items-center justify-center gap-2 bg-[#14532d] hover:bg-[#16a34a] text-white font-bold py-3 rounded-xl shadow-xs transition-colors mt-2"
             >
-              <span>Register Account</span>
+              <span>Create Account (पंजीकरण पूर्ण करें)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
 
           <div className="mt-6 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">
             Already have an account?{" "}
-            <Link href="/login" className="font-bold text-emerald-700 hover:underline">
-              Sign In
+            <Link href="/login" className="font-bold text-[#14532d] hover:underline">
+              Sign In (लॉग इन)
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
