@@ -1,0 +1,19 @@
+{
+  "name": "FarmRentHub - राष्ट्रीय कृषि उपकरण किराया मंच",
+  "short_name": "FarmRentHub",
+  "description": "National Agricultural Equipment Rental & Custom Hiring Service",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf5",
+  "theme_color": "#14532d",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "lang": "hi",
+  "dir": "ltr"
+}
