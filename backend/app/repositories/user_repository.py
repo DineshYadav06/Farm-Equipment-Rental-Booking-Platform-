@@ -1,94 +1,149 @@
 from typing import Optional, Dict, Any, List
-from app.core.security import hash_password
-from app.utils.helpers import generate_id
 from datetime import datetime, timezone
+from app.core.database import get_collection, USERS_COLLECTION, is_mongo_connected
+from app.utils.helpers import generate_id
 
-DEMO_USERS: List[Dict[str, Any]] = [
+INITIAL_USERS: List[Dict[str, Any]] = [
     {
         "id": "usr_farmer_01",
         "name": "Rajesh Kumar Sharma",
         "email": "rajesh.farmer@example.com",
+        "emailVerified": True,
         "phone": "+919876543211",
-        "hashed_password": hash_password("Password@123"),
+        "phoneVerified": True,
         "role": "farmer",
+        "language": "hi",
+        "address": {
+            "country": "IN",
+            "stateCode": "PB",
+            "districtCode": "PB-LDH",
+            "blockCode": "PB-LDH-01",
+            "line": "Farm #12, Near Canal Road",
+            "village": "Samrala",
+            "pincode": "141114"
+        },
+        "kycStatus": "verified",
+        "is18Confirmed": True,
         "city": "Ludhiana",
         "state": "Punjab",
-        "latitude": 30.9010,
-        "longitude": 75.8573,
         "is_active": True,
         "is_phone_verified": True,
         "verification_status": "verified",
-        "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
-        "created_at": datetime.now(timezone.utc)
+        "createdAt": datetime.now(timezone.utc),
+        "updatedAt": datetime.now(timezone.utc)
     },
     {
         "id": "usr_owner_01",
         "name": "Gurpreet Singh Gill",
         "email": "gurpreet.owner@example.com",
+        "emailVerified": True,
         "phone": "+919876543210",
-        "hashed_password": hash_password("Password@123"),
+        "phoneVerified": True,
         "role": "owner",
+        "language": "pa",
+        "address": {
+            "country": "IN",
+            "stateCode": "PB",
+            "districtCode": "PB-LDH",
+            "blockCode": "PB-LDH-02",
+            "line": "Gill Agricultural Machinery Works, GT Road",
+            "village": "Sahnewal",
+            "pincode": "141120"
+        },
+        "kycStatus": "verified",
+        "is18Confirmed": True,
         "city": "Ludhiana",
         "state": "Punjab",
-        "latitude": 30.9010,
-        "longitude": 75.8573,
         "is_active": True,
         "is_phone_verified": True,
         "verification_status": "verified",
-        "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
-        "created_at": datetime.now(timezone.utc)
-    },
-    {
-        "id": "usr_admin_01",
-        "name": "FarmRentHub Admin",
-        "email": "admin@farmrenthub.in",
-        "phone": "+919999999999",
-        "hashed_password": hash_password("Admin@12345"),
-        "role": "admin",
-        "city": "New Delhi",
-        "state": "Delhi",
-        "latitude": 28.6139,
-        "longitude": 77.2090,
-        "is_active": True,
-        "is_phone_verified": True,
-        "verification_status": "verified",
-        "avatar_url": None,
-        "created_at": datetime.now(timezone.utc)
+        "createdAt": datetime.now(timezone.utc),
+        "updatedAt": datetime.now(timezone.utc)
     }
 ]
 
 class UserRepository:
     def __init__(self):
-        self.memory_store = {u["id"]: u.copy() for u in DEMO_USERS}
+        self.memory_store = {u["id"]: u.copy() for u in INITIAL_USERS}
 
     async def get_by_id(self, user_id: str) -> Optional[Dict[str, Any]]:
-        return self.memory_store.get(user_id)
+        col = get_collection(USERS_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                doc = await col.find_one({"$or": [{"_id": user_id}, {"id": user_id}], "deletedAt": None})
+                if doc:
+                    doc["id"] = str(doc.get("_id", doc.get("id")))
+                    return doc
+            except Exception:
+                pass
+        user = self.memory_store.get(user_id)
+        if user and user.get("deletedAt") is None:
+            return user
+        return None
 
-    async def get_by_email_or_phone(self, identifier: str) -> Optional[Dict[str, Any]]:
-        for user in self.memory_store.values():
-            if user["email"].lower() == identifier.lower() or user["phone"] == identifier:
-                return user
+    async def get_by_phone(self, phone: str) -> Optional[Dict[str, Any]]:
+        col = get_collection(USERS_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                doc = await col.find_one({"phone": phone, "deletedAt": None})
+                if doc:
+                    doc["id"] = str(doc.get("_id", doc.get("id")))
+                    return doc
+            except Exception:
+                pass
+        for u in self.memory_store.values():
+            if u.get("phone") == phone and u.get("deletedAt") is None:
+                return u
+        return None
+
+    async def get_by_email(self, email: str) -> Optional[Dict[str, Any]]:
+        col = get_collection(USERS_COLLECTION)
+        normalized = email.strip().lower()
+        if is_mongo_connected and col is not None:
+            try:
+                doc = await col.find_one({"email": normalized, "deletedAt": None})
+                if doc:
+                    doc["id"] = str(doc.get("_id", doc.get("id")))
+                    return doc
+            except Exception:
+                pass
+        for u in self.memory_store.values():
+            if u.get("email", "").lower() == normalized and u.get("deletedAt") is None:
+                return u
         return None
 
     async def create(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        new_id = generate_id("usr")
-        user = {
+        user_id = data.get("id") or generate_id("usr")
+        doc = {
             **data,
-            "id": new_id,
-            "is_active": True,
-            "is_phone_verified": False,
-            "verification_status": "pending",
-            "avatar_url": None,
-            "created_at": datetime.now(timezone.utc),
-            "updated_at": datetime.now(timezone.utc)
+            "id": user_id,
+            "_id": user_id,
+            "createdAt": datetime.now(timezone.utc),
+            "updatedAt": datetime.now(timezone.utc),
+            "deletedAt": None
         }
-        self.memory_store[new_id] = user
-        return user
+        col = get_collection(USERS_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                await col.insert_one(doc)
+            except Exception:
+                pass
+        self.memory_store[user_id] = doc
+        return doc
 
     async def update(self, user_id: str, updates: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        updates["updatedAt"] = datetime.now(timezone.utc)
+        col = get_collection(USERS_COLLECTION)
+        if is_mongo_connected and col is not None:
+            try:
+                await col.update_one(
+                    {"$or": [{"_id": user_id}, {"id": user_id}]},
+                    {"$set": updates}
+                )
+            except Exception:
+                pass
         if user_id in self.memory_store:
             self.memory_store[user_id].update(updates)
-            self.memory_store[user_id]["updated_at"] = datetime.now(timezone.utc)
             return self.memory_store[user_id]
         return None
 
