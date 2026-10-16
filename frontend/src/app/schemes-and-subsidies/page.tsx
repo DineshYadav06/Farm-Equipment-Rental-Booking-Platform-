@@ -64,11 +64,11 @@ export default function SchemesAndSubsidiesPage() {
       </div>
 
       {/* Mandatory Statutory Notice Banner */}
-      <div className="bg-[#fef3c7] border-2 border-amber-400 p-4 sm:p-5 rounded-2xl flex items-start gap-3 text-xs text-[#78350f]">
+      <div className="bg-[#fef3c7] dark:bg-[#3a2c0a] border-2 border-amber-400 p-4 sm:p-5 rounded-2xl flex items-start gap-3 text-xs text-[#78350f] dark:text-[#fbbf24]">
         <ShieldAlert className="w-5 h-5 text-[#d97706] shrink-0 mt-0.5" />
         <div className="space-y-1">
           <strong className="font-black uppercase tracking-wide block">
-            Important Guidance / महत्वपूर्ण सूचना:
+            {locale === "hi" ? "महत्वपूर्ण सूचना:" : "Important Guidance:"}
           </strong>
           <p className="leading-relaxed">
             FarmRentHub is a private information & rental marketplace and does not distribute government funds.

@@ -37,7 +37,7 @@ export const GovFooter: React.FC = () => {
             <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-black text-amber-300 uppercase tracking-wide block mb-0.5">
-                Statutory Notice / वैधानिक सूचना:
+                {t("common", "footer.statutoryNotice") || (locale === "hi" ? "वैधानिक सूचना:" : "Statutory Notice:")}
               </span>
               <p className="text-slate-100 font-medium leading-relaxed">
                 {t("common", "footer.statutoryDisclaimer")}
@@ -99,13 +99,28 @@ export const GovFooter: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-amber-300 transition-colors">
-                  Contact & District Helpdesk
+                <Link href="/tools/cost-estimator" className="hover:text-amber-300 transition-colors">
+                  Cost Estimator
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="hover:text-amber-300 transition-colors">
-                  Frequently Asked Questions (FAQ)
+                <Link href="/tools/land-converter" className="hover:text-amber-300 transition-colors">
+                  Land Unit Converter
+                </Link>
+              </li>
+              <li>
+                <Link href="/season-guide" className="hover:text-amber-300 transition-colors">
+                  Cropping Season Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/mandi" className="hover:text-amber-300 transition-colors">
+                  Daily Mandi Prices
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-amber-300 transition-colors">
+                  Contact & District Helpdesk
                 </Link>
               </li>
             </ul>

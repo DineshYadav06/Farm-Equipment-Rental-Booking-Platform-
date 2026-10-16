@@ -6,6 +6,7 @@ import { formatCurrency, formatIndianNumber, formatLocalizedDate } from "./forma
 import { UserNotification } from "@/types";
 import { MOCK_NOTIFICATIONS } from "@/constants/data";
 import { SITE_CONFIG } from "@/content/site-config";
+import { getStoredLocation } from "@/services/location";
 
 // Common bundled dictionaries
 import hiCommon from "@/messages/hi/common.json";
@@ -46,6 +47,9 @@ export interface UserSession {
 export interface LocationState {
   state: string;
   district: string;
+  block?: string;
+  lat2?: number;
+  lng2?: number;
 }
 
 interface TranslationContextType {
@@ -139,19 +143,26 @@ export const TranslationProvider: React.FC<{
     district: SITE_CONFIG.defaultDistrict
   });
 
-  // Auth / Session State (defaults to guest, can be toggled)
+  // Auth / Session State
   const [user, setUser] = useState<UserSession | null>(null);
 
   // Notification Drawer State
   const [isNotificationDrawerOpen, setIsNotificationDrawerOpen] = useState<boolean>(false);
   const [notifications] = useState<UserNotification[]>(MOCK_NOTIFICATIONS || []);
 
-  // Initialize from localStorage on mount
+  // Initialize from URL / localStorage on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const timer = setTimeout(() => {
-      try {
+    try {
+      // 1. Check URL first for locale (/en/..., /hi/...)
+      const pathSegments = window.location.pathname.split("/").filter(Boolean);
+      const urlLocale = pathSegments[0] as LocaleCode;
+
+      if (urlLocale && SUPPORTED_LOCALES[urlLocale]) {
+        setLocaleState(urlLocale);
+      } else {
+        // 2. Check localStorage / cookie
         const savedLocale = localStorage.getItem("farmrenthub_locale") as LocaleCode;
         if (savedLocale && SUPPORTED_LOCALES[savedLocale]) {
           setLocaleState(savedLocale);
@@ -161,34 +172,27 @@ export const TranslationProvider: React.FC<{
             setLocaleState(browserLang as LocaleCode);
           }
         }
-
-        const savedDigits = localStorage.getItem("farmrenthub_native_digits");
-        if (savedDigits === "true") setUseNativeDigits(true);
-
-        const savedContrast = localStorage.getItem("farmrenthub_contrast");
-        if (savedContrast === "high") {
-          setHighContrast(true);
-          document.documentElement.classList.add("high-contrast");
-        }
-
-        const savedSimple = localStorage.getItem("farmrenthub_simple");
-        if (savedSimple === "true") setSimpleMode(true);
-
-        const savedLoc = localStorage.getItem("farmrenthub_location");
-        if (savedLoc) {
-          try {
-            const parsed = JSON.parse(savedLoc);
-            if (parsed.state && parsed.district) setSelectedLocationState(parsed);
-          } catch {
-            // ignore
-          }
-        }
-      } catch {
-        // Storage unavailable
       }
-    }, 0);
 
-    return () => clearTimeout(timer);
+      const savedDigits = localStorage.getItem("farmrenthub_native_digits");
+      if (savedDigits === "true") setUseNativeDigits(true);
+
+      const savedContrast = localStorage.getItem("farmrenthub_contrast");
+      if (savedContrast === "high") {
+        setHighContrast(true);
+        document.documentElement.classList.add("high-contrast");
+      }
+
+      const savedSimple = localStorage.getItem("farmrenthub_simple");
+      if (savedSimple === "true") setSimpleMode(true);
+
+      const savedLoc = getStoredLocation();
+      if (savedLoc && savedLoc.state && savedLoc.district) {
+        setSelectedLocationState(savedLoc);
+      }
+    } catch {
+      // Storage unavailable
+    }
   }, []);
 
   // Sync HTML lang, dir, root font size
@@ -218,6 +222,23 @@ export const TranslationProvider: React.FC<{
     try {
       localStorage.setItem("farmrenthub_locale", newLocale);
       document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+
+      // Update URL without page reload/resetting scroll or state
+      if (typeof window !== "undefined") {
+        const segments = window.location.pathname.split("/").filter(Boolean);
+        let newPathname = window.location.pathname;
+
+        if (segments.length > 0 && SUPPORTED_LOCALES[segments[0] as LocaleCode]) {
+          // Replace existing locale in URL
+          segments[0] = newLocale;
+          newPathname = "/" + segments.join("/") + window.location.search;
+        } else {
+          // Prepend new locale
+          newPathname = "/" + newLocale + (window.location.pathname === "/" ? "" : window.location.pathname) + window.location.search;
+        }
+
+        window.history.replaceState(null, "", newPathname);
+      }
     } catch {
       // Ignore
     }
@@ -225,11 +246,6 @@ export const TranslationProvider: React.FC<{
 
   const setSelectedLocation = (loc: LocationState) => {
     setSelectedLocationState(loc);
-    try {
-      localStorage.setItem("farmrenthub_location", JSON.stringify(loc));
-    } catch {
-      // Ignore
-    }
   };
 
   const getNestedValue = (obj: unknown, path: string): string | undefined => {
@@ -247,30 +263,44 @@ export const TranslationProvider: React.FC<{
   };
 
   const t = (namespace: string, path: string, params?: Record<string, string | number>): string => {
-    let rawText: string | undefined;
+    let dict = COMMON_MESSAGES[locale];
+    if (namespace === "home") dict = HOME_MESSAGES[locale] || HOME_MESSAGES.hi;
+    if (namespace === "images") dict = IMAGES_MESSAGES[locale] || IMAGES_MESSAGES.hi;
 
-    if (namespace === "home") {
-      rawText =
-        getNestedValue(HOME_MESSAGES[locale], path) ||
-        getNestedValue(HOME_MESSAGES.hi, path) ||
-        getNestedValue(HOME_MESSAGES.en, path);
-    } else if (namespace === "images") {
-      rawText =
-        getNestedValue(IMAGES_MESSAGES[locale], path) ||
-        getNestedValue(IMAGES_MESSAGES.hi, path) ||
-        getNestedValue(IMAGES_MESSAGES.en, path);
-    } else {
-      rawText =
-        getNestedValue(COMMON_MESSAGES[locale], path) ||
-        getNestedValue(COMMON_MESSAGES.hi, path) ||
-        getNestedValue(COMMON_MESSAGES.en, path);
+    let rawText = getNestedValue(dict, path);
+    let isFallback = false;
+
+    // Fallback chain: selected -> hi -> en
+    if (!rawText && locale !== "hi") {
+      const hiDict =
+        namespace === "home"
+          ? HOME_MESSAGES.hi
+          : namespace === "images"
+          ? IMAGES_MESSAGES.hi
+          : COMMON_MESSAGES.hi;
+      rawText = getNestedValue(hiDict, path);
+      if (rawText) isFallback = true;
+    }
+
+    if (!rawText && locale !== "en") {
+      const enDict =
+        namespace === "home"
+          ? HOME_MESSAGES.en
+          : namespace === "images"
+          ? IMAGES_MESSAGES.en
+          : COMMON_MESSAGES.en;
+      rawText = getNestedValue(enDict, path);
+      if (rawText) isFallback = true;
     }
 
     if (!rawText) {
-      rawText = path.split(".").pop() || path;
+      const lastPart = path.split(".").pop() || path;
+      rawText = lastPart.replace(/([A-Z])/g, " $1").replace(/_/g, " ").trim();
+    } else if (isFallback && typeof window !== "undefined" && process.env.NODE_ENV !== "production") {
+      console.warn(`[i18n fallback] "${namespace}.${path}" not found for "${locale}", fell back gracefully.`);
     }
 
-    if (params) {
+    if (params && rawText) {
       for (const [key, val] of Object.entries(params)) {
         rawText = rawText.replace(new RegExp(`\\{${key}\\}`, "g"), String(val));
       }

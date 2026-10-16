@@ -91,7 +91,7 @@ export const LanguageModal: React.FC = () => {
       aria-modal="true"
       aria-labelledby="lang-modal-title"
     >
-      <div className="bg-[#fafaf5] rounded-3xl max-w-3xl w-full border-2 border-[#14532d] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="bg-[var(--surface)] text-[var(--text)] rounded-3xl max-w-3xl w-full border-2 border-[var(--border)] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Modal Top Header */}
         <div className="bg-[#14532d] text-white p-5 sm:p-6 flex items-start justify-between">
           <div className="flex items-center gap-3">
@@ -100,16 +100,18 @@ export const LanguageModal: React.FC = () => {
             </div>
             <div>
               <h2 id="lang-modal-title" className="text-xl sm:text-2xl font-bold tracking-tight">
-                अपनी भाषा चुनें / Select Your Language
+                {t("common", "utility.language")}
               </h2>
               <p className="text-xs sm:text-sm text-emerald-100 mt-0.5">
-                FarmRentHub supports 12 Indian regional languages.
+                {locale === "hi"
+                  ? "FarmRentHub 12 भारतीय क्षेत्रीय भाषाओं का समर्थन करता है।"
+                  : "FarmRentHub supports 12 Indian regional languages."}
               </p>
             </div>
           </div>
           <button
             onClick={() => setIsLanguageModalOpen(false)}
-            className="p-1.5 rounded-full hover:bg-white/20 text-white transition-colors"
+            className="p-1.5 rounded-full hover:bg-white/20 text-white transition-colors cursor-pointer"
             aria-label="Close language selector"
           >
             <X className="w-5 h-5" />
@@ -117,18 +119,21 @@ export const LanguageModal: React.FC = () => {
         </div>
 
         {/* Location Auto-Suggest Helper Strip */}
-        <div className="bg-[#fef3c7] border-b border-[#d97706]/20 px-6 py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-[#78350f] font-medium">
+        <div className="bg-[#fef3c7] dark:bg-[#3a2c0a] border-b border-[#d97706]/30 px-6 py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-[#78350f] dark:text-[#fbbf24] font-medium">
             <MapPin className="w-4 h-4 text-[#d97706] shrink-0" />
             <span>
-              {detectingState || "राज्य के अनुसार भाषा स्वतः चुनें (Auto-suggest based on location):"}
+              {detectingState ||
+                (locale === "hi"
+                  ? "स्थान के अनुसार भाषा स्वतः चुनें:"
+                  : "Auto-suggest language based on location:")}
             </span>
           </div>
           <button
             onClick={handleDetectLocation}
-            className="px-3 py-1 rounded-xl bg-[#d97706] text-white font-bold hover:bg-[#b45309] transition-colors"
+            className="px-3 py-1 rounded-xl bg-[#d97706] text-white font-bold hover:bg-[#b45309] transition-colors cursor-pointer"
           >
-            Detect State
+            {t("common", "location.useGps")}
           </button>
         </div>
 
@@ -143,17 +148,17 @@ export const LanguageModal: React.FC = () => {
                   setLocale(l.code);
                   setIsLanguageModalOpen(false);
                 }}
-                className={`p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all group relative ${
+                className={`p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all group relative cursor-pointer ${
                   isSelected
-                    ? "bg-[#dcfce7] border-[#16a34a] shadow-md ring-2 ring-[#16a34a]/30"
-                    : "bg-white border-[#e2e8f0] hover:border-[#16a34a] hover:bg-[#fafaf5]"
+                    ? "bg-[#dcfce7] dark:bg-[#143d22] border-[#16a34a] shadow-md ring-2 ring-[#16a34a]/30"
+                    : "bg-[var(--surface)] border-[var(--border)] hover:border-[#16a34a] hover:bg-[var(--bg-wheat)]"
                 }`}
               >
                 {/* Audio Pronunciation Button */}
                 <button
                   type="button"
                   onClick={(e) => playLanguageAudio(l, e)}
-                  className="absolute top-2.5 right-2.5 p-1 rounded-full text-[#78716c] hover:text-[#14532d] hover:bg-emerald-100 transition-colors"
+                  className="absolute top-2.5 right-2.5 p-1 rounded-full text-[var(--muted)] hover:text-[#14532d] dark:hover:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 transition-colors"
                   title={`Listen to ${l.name} name`}
                   aria-label={`Listen to ${l.name} pronunciation`}
                 >
@@ -161,15 +166,15 @@ export const LanguageModal: React.FC = () => {
                 </button>
 
                 <div>
-                  <div className="text-xl sm:text-2xl font-black text-[#14532d] leading-tight">
+                  <div className="text-xl sm:text-2xl font-black text-[#14532d] dark:text-emerald-400 leading-tight">
                     {l.nativeName}
                   </div>
-                  <div className="text-xs font-semibold text-[#44403c] mt-0.5">
+                  <div className="text-xs font-semibold text-[var(--muted)] mt-0.5">
                     {l.name}
                   </div>
                 </div>
 
-                <div className="mt-3 pt-2 border-t border-slate-100 text-[11px] text-[#78716c] flex items-center justify-between">
+                <div className="mt-3 pt-2 border-t border-[var(--border)] text-[11px] text-[var(--muted)] flex items-center justify-between">
                   <span>{l.defaultRegion.split("/")[0]}</span>
                   {isSelected && <Check className="w-4 h-4 text-[#16a34a] font-black" />}
                 </div>
@@ -179,9 +184,11 @@ export const LanguageModal: React.FC = () => {
         </div>
 
         {/* Modal Footer Note */}
-        <div className="bg-[#f5f5ed] border-t border-[#e2e8f0] px-6 py-3.5 text-center text-xs text-[#78716c]">
+        <div className="bg-[var(--topbar-bg)] border-t border-[var(--border)] px-6 py-3.5 text-center text-xs text-[var(--muted)]">
           <span>
-            You can change your language anytime using the language button in the top bar.
+            {locale === "hi"
+              ? "आप शीर्ष पट्टी में भाषा बटन का उपयोग करके किसी भी समय अपनी भाषा बदल सकते हैं।"
+              : "You can change your language anytime using the language button in the top bar."}
           </span>
         </div>
       </div>

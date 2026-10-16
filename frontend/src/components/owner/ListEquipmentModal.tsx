@@ -121,7 +121,7 @@ export const ListEquipmentModal: React.FC<ListEquipmentModalProps> = ({
           <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1">
-                {isHi ? "मशीन का शीर्षक / नाम" : "Equipment Title"}
+                {isHi ? "मशीन का नाम" : "Equipment Title"}
               </label>
               <input
                 type="text"
@@ -156,7 +156,7 @@ export const ListEquipmentModal: React.FC<ListEquipmentModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {isHi ? "ब्रांड / कंपनी" : "Brand"}
+                  {isHi ? "ब्रांड" : "Brand"}
                 </label>
                 <input
                   type="text"
@@ -202,7 +202,7 @@ export const ListEquipmentModal: React.FC<ListEquipmentModalProps> = ({
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {isHi ? "तहसील / शहर" : "City / Block"}
+                  {isHi ? "तहसील या शहर" : "City or Block"}
                 </label>
                 <input
                   type="text"
@@ -215,7 +215,7 @@ export const ListEquipmentModal: React.FC<ListEquipmentModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {isHi ? "चालक / ऑपरेटर" : "Operator Option"}
+                  {isHi ? "चालक विकल्प" : "Operator Option"}
                 </label>
                 <select
                   value={withDriver ? "yes" : "no"}

@@ -14,6 +14,8 @@ import { SourceNote } from "@/components/ui/SourceNote";
 import { AppImage } from "@/components/ui/AppImage";
 import { fetchEquipmentList } from "@/services/api";
 import { Equipment } from "@/types";
+import { MandiWidget } from "@/components/mandi/MandiWidget";
+import { CompareBar } from "@/components/equipment/CompareBar";
 
 function getRegionImageId(location: string, locale: string): string {
   const locLower = (location || "").toLowerCase();
@@ -338,7 +340,7 @@ export default function HomePage() {
             href="/equipment"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-[#14532d] hover:underline shrink-0"
           >
-            <span>सभी श्रेणियां देखें (View All)</span>
+            <span>{locale === "hi" ? "सभी श्रेणियां देखें" : "View All Categories"}</span>
             <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
@@ -438,17 +440,19 @@ export default function HomePage() {
           <div>
             <div className="inline-block h-1 w-12 bg-[#d97706] mb-2 rounded-full" />
             <h2 className="text-2xl sm:text-3xl font-black text-[#1e3a5f] tracking-tight">
-              सत्यापित उपलब्ध मशीनें (Verified Regional Listings)
+              {locale === "hi" ? "सत्यापित उपलब्ध मशीनें" : "Verified Available Machinery"}
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 mt-1">
-              Real-time available equipment near {locationQuery}.
+              {locale === "hi"
+                ? `${locationQuery} के पास उपलब्ध कृषि मशीनरी।`
+                : `Real-time available equipment near ${locationQuery}.`}
             </p>
           </div>
           <Link
             href="/equipment"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#14532d] hover:bg-[#16a34a] shadow-xs transition-colors shrink-0"
           >
-            <span>Explore All 300+ Listings</span>
+            <span>{locale === "hi" ? "सभी 300+ मशीनें देखें" : "Explore All 300+ Listings"}</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -465,13 +469,17 @@ export default function HomePage() {
           </div>
           <div className="flex-1 text-xs text-slate-600">
             <span className="inline-block px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-bold text-[10px] uppercase tracking-wider mb-1">
-              Active Agronomic Zone
+              {locale === "hi" ? "सक्रिय कृषि क्षेत्र" : "Active Agronomic Zone"}
             </span>
             <h3 className="font-bold text-slate-900 text-sm">
-              Regional Machinery Deployment for {locationQuery}
+              {locale === "hi"
+                ? `${locationQuery} हेतु क्षेत्रीय मशीनरी वितरण`
+                : `Regional Machinery Deployment for ${locationQuery}`}
             </h3>
             <p className="mt-1 leading-relaxed">
-              Prioritized implements matched to seasonal soil tillage and harvesting timelines in this agrarian district.
+              {locale === "hi"
+                ? "इस कृषि ज़िले में मौसमी जुताई और कटाई की आवश्यकताओं के अनुसार सत्यापित उपकरण।"
+                : "Prioritized implements matched to seasonal soil tillage and harvesting timelines in this agrarian district."}
             </p>
           </div>
         </div>
@@ -502,12 +510,64 @@ export default function HomePage() {
         )}
       </section>
 
+      {/* 5.5 LIVE APMC MANDI RATES & FARMER TOOLS (A7) */}
+      <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full select-none">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="lg:col-span-1">
+            <MandiWidget compact={true} />
+          </div>
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between space-y-3">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                  Planning & Budgeting
+                </span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">
+                  Machinery Rental Cost Estimator
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                  Calculate estimated machine rental expenditure for your farm size and duration in hourly or daily rates.
+                </p>
+              </div>
+              <Link
+                href="/tools/cost-estimator"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#14532d] dark:text-emerald-400 hover:underline pt-2"
+              >
+                <span>Calculate Rental Cost</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between space-y-3">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                  Agronomic Calendar
+                </span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">
+                  Kharif, Rabi & Zaid Cropping Guide
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                  Recommended tractor and harvester operations mapped to seasonal stages from ICAR cropping calendars.
+                </p>
+              </div>
+              <Link
+                href="/season-guide"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#14532d] dark:text-emerald-400 hover:underline pt-2"
+              >
+                <span>Explore Seasonal Calendar</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 6. OWNER CALL TO ACTION BANNER */}
       <section className="bg-[#14532d] text-white py-12 px-4 sm:px-6 lg:px-8 my-6 select-none">
         <div className="max-w-5xl mx-auto bg-[#1e3a5f] p-8 sm:p-10 rounded-3xl border-2 border-amber-400 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-2 text-center md:text-left flex-1">
             <span className="text-amber-400 font-bold text-xs uppercase tracking-wider block">
-              For Tractor & Equipment Owners / कृषि यंत्र मालिकों के लिए
+              {t("home", "ownerCta.badge")}
             </span>
             <h3 className="text-2xl sm:text-3xl font-black text-white">
               {t("home", "ownerCta.title")}
@@ -534,6 +594,9 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* Floating Compare Bar (A1) */}
+      <CompareBar />
 
       {/* Booking and Details Modals */}
       <BookingModal

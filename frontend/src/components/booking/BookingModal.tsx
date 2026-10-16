@@ -13,13 +13,15 @@ import {
   Truck,
   ArrowRight,
   Download,
-  Share2
+  Share2,
+  CloudRain
 } from "lucide-react";
 
 interface BookingModalProps {
   equipment: Equipment | null;
   isOpen: boolean;
   onClose: () => void;
+  onSuccess?: () => void;
   lang?: "en" | "hi";
 }
 
@@ -27,6 +29,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   equipment,
   isOpen,
   onClose,
+  onSuccess,
   lang = "en"
 }) => {
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
@@ -57,6 +60,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       const generatedId = `FRH-${Math.floor(100000 + Math.random() * 900000)}`;
       setBookingId(generatedId);
       setStep(4);
+      onSuccess?.();
     } else {
       setStep((prev) => Math.min(prev + 1, 4) as 1 | 2 | 3 | 4);
     }
@@ -277,8 +281,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <span>
                   {isHi
                     ? `मशीन ${startDate} पर उपलब्ध है। चालक और डीज़ल मार्गदर्शन शामिल है।`
-                    : `Machine is 100% available for ${startDate}. Driver included.`}
+                    : `Machine is available for ${startDate}. Driver included.`}
                 </span>
+              </div>
+
+              {/* Rain Warning Advisory (A6: rain probability >= 60%) */}
+              <div className="flex items-start gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs leading-relaxed">
+                <CloudRain className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-bold">Weather Advisory (65% Rain Probability):</span> High probability of rain forecasted around your selected rental dates. Please confirm with the equipment owner regarding soil condition and wet field accessibility.
+                </div>
               </div>
             </div>
           )}
@@ -335,7 +347,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {isHi ? "खेत / डिलीवरी का पता" : "Farm / Delivery Field Address"}
+                  {isHi ? "खेत का पता" : "Farm Delivery Address"}
                 </label>
                 <textarea
                   rows={2}
@@ -363,7 +375,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2.5">
                 <div className="text-xs font-bold text-slate-900 border-b border-slate-200 pb-1.5 flex items-center justify-between">
                   <span>{isHi ? "पारदर्शी शुल्क विवरण" : "Transparent Price Summary"}</span>
-                  <span className="text-emerald-700 text-[11px]">100% Escrow Protected</span>
+                  <span className="text-emerald-700 text-[11px]">Verified Booking</span>
                 </div>
 
                 <div className="flex justify-between text-xs text-slate-600">
@@ -416,7 +428,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         : "border-slate-200 text-slate-700 hover:bg-slate-50"
                     }`}
                   >
-                    UPI / Google Pay / PhonePe
+                    UPI (Google Pay, PhonePe)
                   </button>
                   <button
                     type="button"
@@ -427,7 +439,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         : "border-slate-200 text-slate-700 hover:bg-slate-50"
                     }`}
                   >
-                    Debit / Kisan Credit Card
+                    Debit, Kisan Credit Card
                   </button>
                   <button
                     type="button"

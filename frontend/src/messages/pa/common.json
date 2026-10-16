@@ -110,7 +110,21 @@
     "allDistricts": "ਸਾਰੇ ਜ਼ਿਲ੍ਹੇ",
     "stateLabel": "ਰਾਜ",
     "districtLabel": "ਜ਼ਿਲ੍ਹਾ",
-    "changeLocation": "ਸਥਾਨ ਬਦਲੋ"
+    "changeLocation": "ਸਥਾਨ ਬਦਲੋ",
+    "promptTitle": "ਨੇੜਲੀਆਂ ਮਸ਼ੀਨਾਂ ਅਤੇ ਮੌਸਮ ਵੇਖੋ",
+    "promptDesc": "ਨੇੜਲੀਆਂ ਖੇਤੀ ਮਸ਼ੀਨਾਂ ਅਤੇ ਸਥਾਨਕ ਮੌਸਮ ਦੇਖਣ ਲਈ ਸਥਾਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ।",
+    "allowLocation": "ਸਥਾਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ",
+    "chooseManually": "ਖ਼ੁਦ ਚੁਣੋ",
+    "forget": "ਸਥਾਨ ਹਟਾਓ",
+    "forgotten": "ਸਥਾਨ ਜਾਣਕਾਰੀ ਸਾਫ਼ ਕਰ ਦਿੱਤੀ ਗਈ",
+    "privacyNote": "ਲਗਭਗ 1 ਕਿਲੋਮੀਟਰ ਤੱਕ ਸੁਰੱਖਿਅਤ। ਕਦੇ ਸਾਂਝਾ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ।",
+    "geoUnsupported": "ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਲੋਕੇਸ਼ਨ ਸੇਵਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
+    "outOfIndia": "ਸਥਾਨ ਭਾਰਤ ਤੋਂ ਬਾਹਰ ਜਾਪਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜ਼ਿਲ੍ਹਾ ਚੁਣੋ।",
+    "permissionDenied": "ਸਥਾਨ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਮਿਲੀ।",
+    "timeout": "ਸਥਾਨ ਜਾਂਚ ਦਾ ਸਮਾਂ ਸਮਾਪਤ ਹੋ ਗਿਆ।",
+    "unavailable": "ਲੋਕੇਸ਼ਨ ਸੇਵਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
+    "noDistricts": "ਕੋਈ ਜ਼ਿਲ੍ਹਾ ਨਹੀਂ ਮਿਲਿਆ।",
+    "change": "ਸਥਾਨ ਬਦਲੋ"
   },
   "search": {
     "searchPlaceholder": "ਟਰੈਕਟਰ, ਕੰਬਾਈਨ, ਰੋਟਾਵੇਟਰ ਖੋਜੋ...",
@@ -127,5 +141,35 @@
     "builtByTitle": "ਹੋਰ ਪ੍ਰੋਜੈਕਟ",
     "builtBySubtitle": "ਸੰਸਥਾਪਕ ਦੁਆਰਾ ਬਣਾਏ ਗਏ ਵੈੱਬ ਪ੍ਰੋਜੈਕਟ",
     "photoAlt": "Dinesh Kumar Yadav ਦੀ ਤਸਵੀਰ, FarmRentHub ਦੇ ਸੰਸਥਾਪਕ"
+  },
+  "theme": {
+    "title": "ਥੀਮ",
+    "light": "ਲਾਈਟ",
+    "dark": "ਡਾਰਕ",
+    "system": "ਸਿਸਟਮ",
+    "toggle": "ਥੀਮ ਬਦਲੋ",
+    "choose": "ਥੀਮ ਚੁਣੋ"
+  },
+  "weather": {
+    "label": "ਮੌਸਮ",
+    "title": "ਖੇਤੀਬਾੜੀ ਮੌਸਮ ਅਨੁਮਾਨ",
+    "clear": "ਸਾਫ਼ ਅਸਮਾਨ",
+    "partlyCloudy": "ਅੰਸ਼ਕ ਬੱਦਲਵਾਈ",
+    "cloudy": "ਬੱਦਲਵਾਈ",
+    "overcast": "ਘਣੇ ਬੱਦਲ",
+    "fog": "ਧੁੰਦ",
+    "drizzle": "ਬੂੰਦਾ-ਬਾਂਦੀ",
+    "rain": "ਮੀਂਹ",
+    "snow": "ਬਰਫ਼ਬਾਰੀ",
+    "showers": "ਫੁਹਾਰਾਂ",
+    "thunderstorm": "ਗਰਜ ਨਾਲ ਮੀਂਹ",
+    "feelsLike": "ਮਹਿਸੂਸ",
+    "rainChance": "ਮੀਂਹ",
+    "humidity": "ਨਮੀ",
+    "windSpeed": "ਹਵਾ",
+    "threeDay": "3-ਦਿਨਾ ਅਨੁਮਾਨ",
+    "today": "ਅੱਜ",
+    "updated": "ਤਾਜ਼ਾ",
+    "unavailable": "ਮੌਸਮ ਜਾਣਕਾਰੀ ਇਸ ਵੇਲੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
   }
 }

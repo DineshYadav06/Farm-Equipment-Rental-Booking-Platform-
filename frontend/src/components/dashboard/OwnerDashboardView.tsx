@@ -239,7 +239,7 @@ export const OwnerDashboardView: React.FC<OwnerDashboardViewProps> = ({
                 {/* Live Availability Toggle Switch */}
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold text-slate-600">
-                    {eq.isAvailable ? "Open for Rental" : "Paused / In Service"}
+                    {eq.isAvailable ? "Open for Rental" : "Under Service"}
                   </span>
                   <button
                     onClick={() => toggleAvailability(eq.id)}

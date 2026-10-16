@@ -4,10 +4,12 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "@/i18n/context";
+import { useTheme } from "@/components/theme/ThemeContext";
 import { SITE_CONFIG } from "@/content/site-config";
-import { LOCALES_LIST, LocaleCode } from "@/i18n/config";
+import { LOCALES_LIST } from "@/i18n/config";
 import { LocationChip } from "./LocationChip";
 import { Logo } from "@/components/ui/Logo";
+import { ThemeMode } from "@/constants/tokens";
 import {
   X,
   Home,
@@ -21,8 +23,10 @@ import {
   Info,
   Globe,
   Accessibility,
-  Eye,
-  Check
+  Check,
+  Sun,
+  Moon,
+  Laptop
 } from "lucide-react";
 
 interface MobileDrawerProps {
@@ -43,11 +47,10 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     highContrast,
     setHighContrast,
     simpleMode,
-    setSimpleMode,
-    useNativeDigits,
-    setUseNativeDigits
+    setSimpleMode
   } = useTranslation();
 
+  const { theme, setTheme } = useTheme();
   const pathname = usePathname() || "/";
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -64,7 +67,6 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         return;
       }
 
-      // Simple focus trap
       if (e.key === "Tab" && drawerRef.current) {
         const focusable = Array.from(
           drawerRef.current.querySelectorAll<HTMLElement>(
@@ -106,27 +108,27 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   if (!isOpen) return null;
 
   const navLinks = [
-    { href: "/", label: t("common", "nav.home"), icon: <Home className="w-4 h-4" /> },
-    { href: "/equipment", label: t("common", "nav.equipment"), icon: <Layers className="w-4 h-4" /> },
-    { href: "/map", label: t("common", "nav.map"), icon: <MapPin className="w-4 h-4" /> },
-    { href: "/schemes-and-subsidies", label: t("common", "nav.schemes"), icon: <FileText className="w-4 h-4" /> },
-    { href: "/how-it-works", label: t("common", "nav.howItWorks"), icon: <HelpCircle className="w-4 h-4" /> },
-    { href: "/about", label: t("common", "nav.about"), icon: <Info className="w-4 h-4" /> },
-    { href: "/contact", label: t("common", "nav.contact"), icon: <Phone className="w-4 h-4" /> },
-    { href: "/faq", label: t("common", "nav.faq"), icon: <HelpCircle className="w-4 h-4" /> },
-    { href: "/settings", label: t("common", "nav.settings"), icon: <Settings className="w-4 h-4" /> }
+    { href: "/", label: t("common", "nav.home") || "Home", icon: <Home className="w-4 h-4" /> },
+    { href: "/equipment", label: t("common", "nav.equipment") || "Equipment", icon: <Layers className="w-4 h-4" /> },
+    { href: "/map", label: t("common", "nav.map") || "Map", icon: <MapPin className="w-4 h-4" /> },
+    { href: "/schemes-and-subsidies", label: t("common", "nav.schemes") || "Schemes", icon: <FileText className="w-4 h-4" /> },
+    { href: "/how-it-works", label: t("common", "nav.howItWorks") || "How It Works", icon: <HelpCircle className="w-4 h-4" /> },
+    { href: "/about", label: t("common", "nav.about") || "About", icon: <Info className="w-4 h-4" /> },
+    { href: "/contact", label: t("common", "nav.contact") || "Contact", icon: <Phone className="w-4 h-4" /> },
+    { href: "/faq", label: t("common", "nav.faq") || "FAQ", icon: <HelpCircle className="w-4 h-4" /> },
+    { href: "/settings", label: t("common", "nav.settings") || "Settings", icon: <Settings className="w-4 h-4" /> }
   ];
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-hidden bg-black/50 select-none flex"
+      className="fixed inset-0 z-50 overflow-hidden bg-black/60 select-none flex"
       role="dialog"
       aria-modal="true"
-      aria-label="Navigation Drawer"
+      aria-label={t("common", "utility.navigationDrawer") || "Navigation Drawer"}
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 transition-opacity"
+        className="fixed inset-0 bg-black/60 transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -134,10 +136,10 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       {/* Drawer Container */}
       <div
         ref={drawerRef}
-        className="relative w-full max-w-xs sm:max-w-sm bg-white h-full shadow-2xl flex flex-col z-10 overflow-hidden animate-in slide-in-from-start duration-200"
+        className="relative w-full max-w-xs sm:max-w-sm bg-white dark:bg-[#1a211b] text-slate-800 dark:text-slate-200 h-full shadow-2xl flex flex-col z-10 overflow-hidden animate-in slide-in-from-start duration-200"
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[#e5e5df] bg-[#fafaf5]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#151b16]">
           <Link href="/" onClick={onClose} className="focus:outline-hidden">
             <Logo variant="horizontal" size="sm" />
           </Link>
@@ -145,8 +147,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            aria-label={t("common", "utility.closeMenu")}
-            className="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-xl text-[#78716c] hover:text-[#1e3a5f] hover:bg-black/5"
+            aria-label={t("common", "utility.close") || "Close"}
+            className="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-xl text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-black/5 dark:hover:bg-white/5"
           >
             <X className="w-6 h-6" />
           </button>
@@ -156,8 +158,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {/* Location Chip */}
           <div>
-            <span className="block text-[11px] font-semibold text-[#78716c] mb-1.5">
-              {t("common", "location.selectLocation")}
+            <span className="block text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-1.5">
+              {t("common", "location.selectLocation") || "Location"}
             </span>
             <LocationChip variant="mobile" />
           </div>
@@ -166,14 +168,14 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           <Link
             href="/list-your-equipment"
             onClick={onClose}
-            className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-2xl bg-[#dcfce7] text-[#14532d] border border-[#14532d]/30 font-bold text-xs hover:bg-[#bbf7d0] transition-colors min-h-[48px]"
+            className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 font-bold text-xs hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors min-h-[48px]"
           >
-            <PlusCircle className="w-4 h-4 text-[#16a34a]" />
-            <span>{t("common", "nav.listEquipment")}</span>
+            <PlusCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>{t("common", "nav.listEquipment") || "List Equipment"}</span>
           </Link>
 
           {/* Nav Links */}
-          <div className="border-t border-[#e5e5df] pt-3 space-y-1">
+          <div className="border-t border-slate-200 dark:border-slate-800 pt-3 space-y-1">
             {navLinks.map((item) => {
               const active =
                 item.href === "/"
@@ -187,11 +189,11 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                   aria-current={active ? "page" : undefined}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold min-h-[48px] transition-colors ${
                     active
-                      ? "bg-[#f3f4f0] text-[#14532d] font-bold"
-                      : "text-[#1e3a5f] hover:bg-[#fafaf5]"
+                      ? "bg-slate-100 dark:bg-slate-800 text-emerald-800 dark:text-emerald-400 font-bold"
+                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50"
                   }`}
                 >
-                  <span className={active ? "text-[#14532d]" : "text-[#78716c]"}>
+                  <span className={active ? "text-emerald-700 dark:text-emerald-400" : "text-slate-400"}>
                     {item.icon}
                   </span>
                   <span>{item.label}</span>
@@ -200,36 +202,62 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             })}
           </div>
 
+          {/* Theme Selection Toggle */}
+          <div className="border-t border-slate-200 dark:border-slate-800 pt-3 space-y-2">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
+              {t("common", "theme.title") || "Theme Mode"}
+            </span>
+            <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+              {(["light", "dark", "system"] as ThemeMode[]).map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => setTheme(mode)}
+                  className={`flex-1 py-2 rounded-lg text-xs font-bold min-h-[44px] inline-flex items-center justify-center gap-1 transition-colors ${
+                    theme === mode
+                      ? "bg-white dark:bg-[#14532d] text-emerald-800 dark:text-white shadow-xs"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-700"
+                  }`}
+                >
+                  {mode === "light" && <Sun className="w-3.5 h-3.5 text-amber-600" />}
+                  {mode === "dark" && <Moon className="w-3.5 h-3.5 text-amber-400" />}
+                  {mode === "system" && <Laptop className="w-3.5 h-3.5 text-slate-400" />}
+                  <span className="capitalize">{t("common", `theme.${mode}`) || mode}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Kisan Helpline */}
-          <div className="border-t border-[#e5e5df] pt-3">
+          <div className="border-t border-slate-200 dark:border-slate-800 pt-3">
             <a
               href={SITE_CONFIG.helplineTel}
-              className="flex items-center justify-between p-3 rounded-2xl bg-[#f3f4f0] text-[#1e3a5f] hover:bg-[#e5e5df] transition-colors min-h-[48px]"
+              className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-[#151b16] text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors min-h-[48px]"
             >
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#14532d]" />
-                <span className="text-xs font-bold">{t("common", "utility.kisanHelpline")}</span>
+                <Phone className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+                <span className="text-xs font-bold">{t("common", "utility.kisanHelpline") || "Helpline"}</span>
               </div>
-              <span className="text-xs font-extrabold text-[#14532d]">
+              <span className="text-xs font-extrabold text-emerald-700 dark:text-emerald-400">
                 {SITE_CONFIG.helplineNumber}
               </span>
             </a>
           </div>
 
           {/* Accessibility Controls */}
-          <div className="border-t border-[#e5e5df] pt-3 space-y-2">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a5f]">
-              <Accessibility className="w-4 h-4 text-[#14532d]" />
-              <span>{t("common", "utility.accessibilityMenu")}</span>
+          <div className="border-t border-slate-200 dark:border-slate-800 pt-3 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
+              <Accessibility className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+              <span>{t("common", "utility.accessibilityMenu") || "Accessibility"}</span>
             </div>
 
             {/* Font size */}
-            <div className="flex items-center gap-2 bg-[#f3f4f0] p-1 rounded-xl">
+            <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
               <button
                 type="button"
                 onClick={() => setTextSize("sm")}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold min-h-[44px] ${
-                  textSize === "sm" ? "bg-white text-[#14532d] shadow-xs" : "text-[#1e3a5f]"
+                  textSize === "sm" ? "bg-white dark:bg-[#14532d] text-emerald-800 dark:text-white shadow-xs" : "text-slate-600 dark:text-slate-400"
                 }`}
               >
                 A-
@@ -238,7 +266,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                 type="button"
                 onClick={() => setTextSize("md")}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold min-h-[44px] ${
-                  textSize === "md" ? "bg-white text-[#14532d] shadow-xs" : "text-[#1e3a5f]"
+                  textSize === "md" ? "bg-white dark:bg-[#14532d] text-emerald-800 dark:text-white shadow-xs" : "text-slate-600 dark:text-slate-400"
                 }`}
               >
                 A
@@ -247,7 +275,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                 type="button"
                 onClick={() => setTextSize("lg")}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold min-h-[44px] ${
-                  textSize === "lg" ? "bg-white text-[#14532d] shadow-xs" : "text-[#1e3a5f]"
+                  textSize === "lg" ? "bg-white dark:bg-[#14532d] text-emerald-800 dark:text-white shadow-xs" : "text-slate-600 dark:text-slate-400"
                 }`}
               >
                 A+
@@ -261,31 +289,31 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                 onClick={() => setHighContrast(!highContrast)}
                 className={`py-2 px-3 rounded-xl text-xs font-bold min-h-[44px] border ${
                   highContrast
-                    ? "bg-[#14532d] text-white border-[#14532d]"
-                    : "bg-[#f3f4f0] text-[#1e3a5f] border-[#e5e5df]"
+                    ? "bg-emerald-700 text-white border-emerald-700"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700"
                 }`}
               >
-                {t("common", "utility.highContrast")}
+                {t("common", "utility.highContrast") || "High Contrast"}
               </button>
               <button
                 type="button"
                 onClick={() => setSimpleMode(!simpleMode)}
                 className={`py-2 px-3 rounded-xl text-xs font-bold min-h-[44px] border ${
                   simpleMode
-                    ? "bg-[#14532d] text-white border-[#14532d]"
-                    : "bg-[#f3f4f0] text-[#1e3a5f] border-[#e5e5df]"
+                    ? "bg-emerald-700 text-white border-emerald-700"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700"
                 }`}
               >
-                {t("common", "utility.simpleMode")}
+                {t("common", "utility.simpleMode") || "Simple Mode"}
               </button>
             </div>
           </div>
 
           {/* Language Selection List */}
-          <div className="border-t border-[#e5e5df] pt-3 space-y-2">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#1e3a5f]">
-              <Globe className="w-4 h-4 text-[#14532d]" />
-              <span>{t("common", "utility.language")}</span>
+          <div className="border-t border-slate-200 dark:border-slate-800 pt-3 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
+              <Globe className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+              <span>{t("common", "utility.language") || "Language"}</span>
             </div>
             <div className="grid grid-cols-2 gap-1.5">
               {LOCALES_LIST.map((lang) => {
@@ -297,8 +325,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                     onClick={() => setLocale(lang.code)}
                     className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium min-h-[48px] text-start transition-colors ${
                       isSelected
-                        ? "bg-[#14532d] text-white font-bold"
-                        : "bg-[#f3f4f0] text-[#1e3a5f] hover:bg-[#e5e5df]"
+                        ? "bg-emerald-700 text-white font-bold"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
                     }`}
                   >
                     <span>{lang.nativeName}</span>

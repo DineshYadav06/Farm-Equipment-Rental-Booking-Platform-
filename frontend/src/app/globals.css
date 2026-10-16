@@ -1,12 +1,46 @@
 @import "tailwindcss";
 
-:root {
-  --background: #fafaf5;
-  --foreground: #1c1917;
-  --primary-green: #16a34a;
+:root,
+[data-theme="light"] {
+  --bg-color: #fafaf5;
+  --bg-wheat: #f6f1e3;
+  --bg-leaf: #eef6ee;
+  --surface: #ffffff;
+  --topbar: #f3f4f0;
+  --border: #e5e5df;
+  --text: #1c1917;
+  --muted: #57534e;
+  --heading: #1e3a5f;
+  --link-green: #15803d;
   --deep-green: #14532d;
-  --amber-gold: #d97706;
-  --navy: #1e3a5f;
+  --amber-text: #b45309;
+  --amber-fill: #d97706;
+  --amber-soft: #fef3c7;
+  --error: #b91c1c;
+
+  --primary-btn-bg: #15803d;
+  --primary-btn-text: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg-color: #101512;
+  --bg-wheat: #171d17;
+  --bg-leaf: #141c16;
+  --surface: #1a211b;
+  --topbar: #151b16;
+  --border: #2e382f;
+  --text: #ecefe8;
+  --muted: #a8b0a4;
+  --heading: #c7d7ee;
+  --link-green: #4ade80;
+  --deep-green: #0b2e1a;
+  --amber-text: #fbbf24;
+  --amber-fill: #fbbf24;
+  --amber-soft: #3a2c0a;
+  --error: #f87171;
+
+  --primary-btn-bg: #22c55e;
+  --primary-btn-text: #052e16;
 }
 
 html,
@@ -14,26 +48,44 @@ body {
   overflow-x: hidden;
   max-width: 100vw;
   width: 100%;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg-color);
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
 }
 
-/* Indic Script Line-Height Tuning (Part 4.4) */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body,
+  * {
+    transition: none !important;
+  }
+}
+
+/* Indic Script Line-Height Tuning */
 :lang(hi), :lang(mr), :lang(pa), :lang(ta), :lang(te), :lang(kn), :lang(ml), :lang(bn), :lang(as), :lang(gu), :lang(or) {
   line-height: 1.75;
   letter-spacing: 0;
 }
 
+/* Dark Mode Elements Polish */
+[data-theme="dark"] img {
+  filter: brightness(0.9);
+}
+
+[data-theme="dark"] .leaflet-tile-pane,
+[data-theme="dark"] .map-tiles {
+  filter: brightness(0.7) invert(0.9) hue-rotate(180deg) contrast(1.1);
+}
+
 /* High Contrast Mode Toggle */
 .high-contrast {
-  --background: #000000;
-  --foreground: #ffffff;
+  --bg-color: #000000;
+  --surface: #111111;
+  --text: #ffffff;
+  --border: #facc15;
   background-color: #000000 !important;
   color: #ffffff !important;
 }
@@ -51,6 +103,27 @@ body {
 .high-contrast a,
 .high-contrast button {
   color: #facc15 !important;
+}
+
+/* Print and Receipt Rules: ALWAYS LIGHT (Black on White) */
+@media print {
+  html,
+  body,
+  [data-theme="dark"],
+  [data-theme="light"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+.receipt-screen,
+.print-receipt {
+  background-color: #ffffff !important;
+  color: #000000 !important;
 }
 
 /* Accessible Ticker Marquee Animation */

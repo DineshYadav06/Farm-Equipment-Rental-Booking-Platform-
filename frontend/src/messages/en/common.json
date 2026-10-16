@@ -109,7 +109,21 @@
     "allDistricts": "All Districts",
     "stateLabel": "State",
     "districtLabel": "District",
-    "changeLocation": "Change Location"
+    "changeLocation": "Change Location",
+    "promptTitle": "Find Equipment & Weather Nearby",
+    "promptDesc": "Allow location to show nearby machines and live agricultural weather.",
+    "allowLocation": "Allow Location",
+    "chooseManually": "Choose Manually",
+    "forget": "Forget my location",
+    "forgotten": "Location preference cleared",
+    "privacyNote": "Rounded to ~1 km. Never shared.",
+    "geoUnsupported": "Geolocation is not supported by your browser.",
+    "outOfIndia": "Location appears outside India. Please select manually.",
+    "permissionDenied": "Location permission was denied. Please select manually.",
+    "timeout": "Location request timed out. Please select manually.",
+    "unavailable": "Location service unavailable.",
+    "noDistricts": "No districts found.",
+    "change": "Change Location"
   },
   "search": {
     "searchPlaceholder": "Search tractors, harvesters, rotavators...",
@@ -126,5 +140,35 @@
     "builtByTitle": "Other Projects",
     "builtBySubtitle": "Select web engineering projects developed by the founder",
     "photoAlt": "Portrait photo of Dinesh Kumar Yadav, Founder and Full-Stack Developer of FarmRentHub"
+  },
+  "theme": {
+    "title": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Switch theme",
+    "choose": "Choose theme"
+  },
+  "weather": {
+    "label": "Weather",
+    "title": "Agricultural Weather",
+    "clear": "Clear Sky",
+    "partlyCloudy": "Partly Cloudy",
+    "cloudy": "Cloudy",
+    "overcast": "Overcast",
+    "fog": "Fog / Mist",
+    "drizzle": "Drizzle",
+    "rain": "Rain",
+    "snow": "Snow",
+    "showers": "Showers",
+    "thunderstorm": "Thunderstorm",
+    "feelsLike": "Feels like",
+    "rainChance": "Rain",
+    "humidity": "Humidity",
+    "windSpeed": "Wind",
+    "threeDay": "3-Day Forecast",
+    "today": "Today",
+    "updated": "Updated",
+    "unavailable": "Weather is not available right now"
   }
 }

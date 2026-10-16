@@ -110,7 +110,21 @@
     "allDistricts": "ಎಲ್ಲಾ ಜಿಲ್ಲೆಗಳು",
     "stateLabel": "ರಾಜ್ಯ",
     "districtLabel": "ಜಿಲ್ಲೆ",
-    "changeLocation": "ಸ್ಥಳ ಬದಲಾಯಿಸಿ"
+    "changeLocation": "ಸ್ಥಳ ಬದಲಾಯಿಸಿ",
+    "promptTitle": "ಹತ್ತಿರದ ಯಂತ್ರೋಪಕರಣ ಮತ್ತು ಹವಾಮಾನ",
+    "promptDesc": "ಹತ್ತಿರದ ಕೃಷಿ ಯಂತ್ರಗಳು ಮತ್ತು ಸ್ಥಳೀಯ ಹವಾಮಾನ ನೋಡಲು ಸ್ಥಳವನ್ನು ಅನುಮತಿಸಿ.",
+    "allowLocation": "ಸ್ಥಳವನ್ನು ಅನುಮತಿಸಿ",
+    "chooseManually": "ಕೈಯಾರೆ ಆಯ್ಕೆಮಾಡಿ",
+    "forget": "ಸ್ಥಳ ಅಳಿಸಿ",
+    "forgotten": "ಸ್ಥಳ ಮಾಹಿತಿ ತೆರವುಗೊಳಿಸಲಾಗಿದೆ",
+    "privacyNote": "ಸುಮಾರು 1 ಕಿ.ಮೀ ಸುರಕ್ಷಿತ. ಹಂಚಿಕೊಳ್ಳುವುದಿಲ್ಲ.",
+    "geoUnsupported": "ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಸ್ಥಳ ಸೇವೆ ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.",
+    "outOfIndia": "ಸ್ಥಳ ಭಾರತದ ಹೊರಗೆ ಕಾಣುತ್ತದೆ.",
+    "permissionDenied": "ಸ್ಥಳ ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ.",
+    "timeout": "ಸಮಯ ಮೀರಿದೆ.",
+    "unavailable": "ಸ್ಥಳ ಸೇವೆ ಲಭ್ಯವಿಲ್ಲ.",
+    "noDistricts": "ಯಾವುದೇ ಜಿಲ್ಲೆ ಕಂಡುಬಂದಿಲ್ಲ.",
+    "change": "ಸ್ಥಳ ಬದಲಿಸಿ"
   },
   "search": {
     "searchPlaceholder": "ಟ್ರಾಕ್ಟರ್, ಹಾರ್ವೆಸ್ಟರ್ ಹುಡುಕಿ...",
@@ -127,5 +141,35 @@
     "builtByTitle": "ಇತರ ಯೋಜನೆಗಳು",
     "builtBySubtitle": "ಸಂಸ್ಥಾಪಕರು ಅಭಿವೃದ್ಧಿಪಡಿಸಿದ ವೆಬ್ ಯೋಜನೆಗಳು",
     "photoAlt": "Dinesh Kumar Yadav ಅವರ ಭಾವಚಿತ್ರ, FarmRentHub ಸಂಸ್ಥಾಪಕರು"
+  },
+  "theme": {
+    "title": "ಥೀಮ್",
+    "light": "ಲೈಟ್",
+    "dark": "ಡಾರ್ಕ್",
+    "system": "ಸಿಸ್ಟಮ್",
+    "toggle": "ಥೀಮ್ ಬದಲಿಸಿ",
+    "choose": "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "weather": {
+    "label": "ಹವಾಮಾನ",
+    "title": "ಕೃಷಿ ಹವಾಮಾನ ಮುನ್ಸೂಚನೆ",
+    "clear": "ಸ್ವಚ್ಛ ಆಕಾಶ",
+    "partlyCloudy": "ಭಾಗಶಃ ಮೋಡ",
+    "cloudy": "ಮೋಡ ಕವಿದ",
+    "overcast": "ದಟ್ಟ ಮೋಡ",
+    "fog": "ಮಂಜು",
+    "drizzle": "ತುಂತುರು ಮಳೆ",
+    "rain": "ಮಳೆ",
+    "snow": "ಹಿಮಪಾತ",
+    "showers": "ಮಳೆಯ ಸಿಂಚನ",
+    "thunderstorm": "ಗುಡುಗು ಸಹಿತ ಮಳೆ",
+    "feelsLike": "ಅನುಭವವಾಗುವ",
+    "rainChance": "ಮಳೆ",
+    "humidity": "ಆರ್ದ್ರತೆ",
+    "windSpeed": "ಗಾಳಿ",
+    "threeDay": "3 ದಿನಗಳ ಮುನ್ಸೂಚನೆ",
+    "today": "ಇಂದು",
+    "updated": "ನವೀಕರಿಸಲಾಗಿದೆ",
+    "unavailable": "ಹವಾಮಾನ ಮಾಹಿತಿ ಪ್ರಸ್ತುತ ಲಭ್ಯವಿಲ್ಲ"
   }
 }

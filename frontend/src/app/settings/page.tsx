@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "@/i18n/context";
 import { LOCALES_LIST } from "@/i18n/config";
-import { LAND_UNITS } from "@/i18n/formatters";
+import { ALL_LAND_UNITS } from "@/content/land-units";
+import { searchAlertsService, SearchAlert } from "@/services/alerts";
 import {
   Globe,
   Hash,
@@ -12,7 +13,9 @@ import {
   CheckCircle2,
   MapPin,
   Eye,
-  ShieldCheck
+  ShieldCheck,
+  Bell,
+  Trash2
 } from "lucide-react";
 
 export default function SettingsPage() {
@@ -32,6 +35,30 @@ export default function SettingsPage() {
 
   const [selectedLandUnit, setSelectedLandUnit] = useState("acre");
   const [saveToast, setSaveToast] = useState(false);
+  const [alerts, setAlerts] = useState<SearchAlert[]>([]);
+
+  const loadAlerts = async () => {
+    const list = await searchAlertsService.getAlerts();
+    setAlerts(list);
+  };
+
+  useEffect(() => {
+    loadAlerts();
+
+    const handleAlertsChanged = () => {
+      loadAlerts();
+    };
+
+    window.addEventListener("farmrenthub_alerts_changed", handleAlertsChanged);
+    return () => {
+      window.removeEventListener("farmrenthub_alerts_changed", handleAlertsChanged);
+    };
+  }, []);
+
+  const handleDeleteAlert = async (id: string) => {
+    await searchAlertsService.deleteAlert(id);
+    loadAlerts();
+  };
 
   const handleSave = () => {
     setSaveToast(true);
@@ -43,20 +70,20 @@ export default function SettingsPage() {
       {/* Title */}
       <div>
         <div className="inline-block h-1 w-12 bg-[#d97706] mb-2 rounded-full" />
-        <h1 className="text-2xl sm:text-3xl font-black text-[#1e3a5f] tracking-tight">
-          {t("common", "nav.settings")} (प्राथमिकताएं व सेटिंग्स)
+        <h1 className="text-2xl sm:text-3xl font-black text-[#1e3a5f] dark:text-white tracking-tight">
+          {t("common", "nav.settings")}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-600 mt-1">
-          Customize your display language, numeral scripts, text scaling, and regional land measurement units.
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+          Customize your display language, numeral scripts, text scaling, regional land measurement units, and saved search notifications.
         </p>
       </div>
 
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6 text-xs">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6 text-xs">
         {/* 1. Language Preference */}
-        <div className="space-y-2 border-b border-slate-100 pb-5">
-          <label className="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <Globe className="w-4 h-4 text-[#14532d]" />
-            <span>Platform Language (मंच की भाषा - 12 भारतीय भाषाएं)</span>
+        <div className="space-y-2 border-b border-slate-100 dark:border-slate-800 pb-5">
+          <label className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+            <Globe className="w-4 h-4 text-[#14532d] dark:text-emerald-400" />
+            <span>Platform Language</span>
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2">
             {LOCALES_LIST.map((l) => (
@@ -66,8 +93,8 @@ export default function SettingsPage() {
                 onClick={() => setLocale(l.code)}
                 className={`p-3 rounded-xl border text-left transition-all ${
                   locale === l.code
-                    ? "bg-[#dcfce7] border-[#16a34a] font-bold text-[#14532d]"
-                    : "border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+                    ? "bg-[#dcfce7] dark:bg-emerald-950/60 border-[#16a34a] font-bold text-[#14532d] dark:text-emerald-400"
+                    : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200"
                 }`}
               >
                 <div className="text-sm font-bold">{l.nativeName}</div>
@@ -78,16 +105,16 @@ export default function SettingsPage() {
         </div>
 
         {/* 2. Number Digit Style Toggle (123 vs Indic Digits) */}
-        <div className="space-y-2 border-b border-slate-100 pb-5">
-          <label className="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <Hash className="w-4 h-4 text-[#14532d]" />
-            <span>Number Display Style (अंकों की शैली)</span>
+        <div className="space-y-2 border-b border-slate-100 dark:border-slate-800 pb-5">
+          <label className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+            <Hash className="w-4 h-4 text-[#14532d] dark:text-emerald-400" />
+            <span>Number Display Style</span>
           </label>
-          <p className="text-slate-500 text-xs">
-            Choose whether to show numbers and prices in Latin numerals (123) or local Indic script (१२३ / ੧੨੩).
+          <p className="text-slate-500 dark:text-slate-400 text-xs">
+            Choose whether to show numbers and prices in standard Latin numerals (123) or local Indic script digits.
           </p>
-          <div className="flex gap-4 pt-2">
-            <label className="flex items-center gap-2 cursor-pointer font-medium text-slate-800">
+          <div className="flex flex-col sm:flex-row gap-4 pt-2">
+            <label className="flex items-center gap-2 cursor-pointer font-medium text-slate-800 dark:text-slate-200">
               <input
                 type="radio"
                 name="digits"
@@ -95,9 +122,9 @@ export default function SettingsPage() {
                 onChange={() => setUseNativeDigits(false)}
                 className="text-[#14532d]"
               />
-              <span>Standard Latin Digits: 1, 2, 3, 4 (Recommended for prices)</span>
+              <span>Standard Latin Digits: 1, 2, 3, 4</span>
             </label>
-            <label className="flex items-center gap-2 cursor-pointer font-medium text-slate-800">
+            <label className="flex items-center gap-2 cursor-pointer font-medium text-slate-800 dark:text-slate-200">
               <input
                 type="radio"
                 name="digits"
@@ -105,48 +132,51 @@ export default function SettingsPage() {
                 onChange={() => setUseNativeDigits(true)}
                 className="text-[#14532d]"
               />
-              <span>Native Script Digits: ०, १, २, ३</span>
+              <span>Native Indic Script Digits</span>
             </label>
           </div>
         </div>
 
-        {/* 3. Text Scaling & Simple Mode */}
-        <div className="space-y-4 border-b border-slate-100 pb-5">
-          <label className="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <Type className="w-4 h-4 text-[#14532d]" />
-            <span>Accessibility & Reading Size (अक्षर आकार व सरल मोड)</span>
+        {/* 3. Accessibility & Display Mode */}
+        <div className="space-y-4 border-b border-slate-100 dark:border-slate-800 pb-5">
+          <label className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-[#14532d] dark:text-emerald-400" />
+            <span>Accessibility & Visual Modes</span>
           </label>
 
-          <div className="flex items-center gap-4">
-            <span className="font-medium text-slate-700">Text Size:</span>
-            <div className="inline-flex rounded-xl border border-slate-300 p-1 bg-slate-50">
-              <button
-                type="button"
-                onClick={() => setTextSize("sm")}
-                className={`px-3 py-1 rounded-lg font-bold text-xs ${
-                  textSize === "sm" ? "bg-[#14532d] text-white" : "text-slate-700"
-                }`}
-              >
-                Small (A-)
-              </button>
-              <button
-                type="button"
-                onClick={() => setTextSize("md")}
-                className={`px-3 py-1 rounded-lg font-bold text-xs ${
-                  textSize === "md" ? "bg-[#14532d] text-white" : "text-slate-700"
-                }`}
-              >
-                Standard (A)
-              </button>
-              <button
-                type="button"
-                onClick={() => setTextSize("lg")}
-                className={`px-3 py-1 rounded-lg font-bold text-xs ${
-                  textSize === "lg" ? "bg-[#14532d] text-white" : "text-slate-700"
-                }`}
-              >
-                Large (A+)
-              </button>
+          <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex items-center gap-2">
+              <Type className="w-4 h-4 text-slate-400" />
+              <span className="font-bold text-slate-700 dark:text-slate-300">Text Scaling:</span>
+              <div className="flex gap-1">
+                {(["sm", "md", "lg"] as const).map((sz) => (
+                  <button
+                    key={sz}
+                    type="button"
+                    onClick={() => setTextSize(sz)}
+                    className={`px-3 py-1 rounded-lg border uppercase font-bold text-xs ${
+                      textSize === sz
+                        ? "bg-[#14532d] text-white border-[#14532d]"
+                        : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                    }`}
+                  >
+                    {sz}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 ms-auto">
+              <Eye className="w-4 h-4 text-slate-400" />
+              <label className="flex items-center gap-2 cursor-pointer font-bold text-slate-700 dark:text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={highContrast}
+                  onChange={(e) => setHighContrast(e.target.checked)}
+                  className="w-4 h-4 text-[#14532d] rounded"
+                />
+                <span>High Contrast Mode</span>
+              </label>
             </div>
           </div>
 
@@ -158,47 +188,94 @@ export default function SettingsPage() {
               className="w-4 h-4 text-[#14532d] rounded"
             />
             <div>
-              <span className="font-bold text-slate-900 block">
-                Enable Simple Mode (सरल मोड - बड़े बटन व आसान लेआउट)
+              <span className="font-bold text-slate-900 dark:text-white block">
+                Enable Simple Mode
               </span>
-              <span className="text-slate-500">
-                Optimized high-clarity interface with fewer choices per screen for low-literacy farmers.
+              <span className="text-slate-500 dark:text-slate-400">
+                Optimized high-clarity interface with fewer choices per screen for ease of use.
               </span>
             </div>
           </label>
         </div>
 
         {/* 4. Regional Land Measurement Unit */}
-        <div className="space-y-2">
-          <label className="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-[#14532d]" />
-            <span>Default Land Unit for Machine Quotes (भूमि मापक इकाई)</span>
+        <div className="space-y-2 border-b border-slate-100 dark:border-slate-800 pb-5">
+          <label className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-[#14532d] dark:text-emerald-400" />
+            <span>Default Land Unit for Machine Quotes</span>
           </label>
           <select
             value={selectedLandUnit}
             onChange={(e) => setSelectedLandUnit(e.target.value)}
-            className="w-full sm:w-80 px-3 py-2 border border-slate-300 rounded-xl font-semibold bg-white"
+            className="w-full sm:w-80 px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-xl font-semibold bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
           >
-            {Object.values(LAND_UNITS).map((u) => (
-              <option key={u.key} value={u.key}>
-                {u.key.toUpperCase()} ({u.regions.join(", ")})
+            {ALL_LAND_UNITS.map((u) => (
+              <option key={u.unitKey} value={u.unitKey}>
+                {u.name} {u.stateName ? `(${u.stateName})` : ""}
               </option>
             ))}
           </select>
         </div>
 
+        {/* 5. Saved Search Alerts (A10) */}
+        <div className="space-y-3 border-b border-slate-100 dark:border-slate-800 pb-5">
+          <div className="flex items-center justify-between">
+            <label className="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+              <Bell className="w-4 h-4 text-[#14532d] dark:text-emerald-400" />
+              <span>Saved Search Alerts ({alerts.length})</span>
+            </label>
+          </div>
+          <p className="text-slate-500 dark:text-slate-400 text-xs">
+            Receive notification alerts when new machinery is registered matching your search criteria.
+          </p>
+
+          {alerts.length === 0 ? (
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-xs text-center">
+              No active search alerts. You can save alerts on empty catalog search results.
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {alerts.map((alert) => (
+                <div
+                  key={alert.id}
+                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3"
+                >
+                  <div>
+                    <div className="font-bold text-slate-900 dark:text-white text-xs">
+                      {alert.query}
+                    </div>
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                      {alert.category ? `Category: ${alert.category} • ` : ""}
+                      Created: {new Date(alert.createdAt).toLocaleDateString()}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteAlert(alert.id)}
+                    aria-label="Delete alert"
+                    className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* Save Button */}
-        <div className="pt-4 flex items-center justify-between border-t border-slate-100">
+        <div className="pt-2 flex items-center justify-between">
           <button
             type="button"
             onClick={handleSave}
             className="px-6 py-2.5 bg-[#14532d] hover:bg-[#16a34a] text-white font-bold rounded-xl shadow-xs transition-colors"
           >
-            Save Preferences (सेटिंग्स सहेजें)
+            Save Preferences
           </button>
 
           {saveToast && (
-            <span className="text-emerald-700 font-bold flex items-center gap-1">
+            <span className="text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-1">
               <CheckCircle2 className="w-4 h-4" />
               <span>Preferences saved!</span>
             </span>

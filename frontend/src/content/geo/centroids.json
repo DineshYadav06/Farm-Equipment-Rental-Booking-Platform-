@@ -1,0 +1,322 @@
+[
+  {
+    "stateCode": "PB",
+    "state": "Punjab",
+    "districtCode": "PB-LDH",
+    "district": "Ludhiana",
+    "blockCode": "PB-LDH-01",
+    "block": "Samrala",
+    "lat": 30.90,
+    "lng": 75.85
+  },
+  {
+    "stateCode": "PB",
+    "state": "Punjab",
+    "districtCode": "PB-PTL",
+    "district": "Patiala",
+    "blockCode": "PB-PTL-01",
+    "block": "Nabha",
+    "lat": 30.34,
+    "lng": 76.38
+  },
+  {
+    "stateCode": "PB",
+    "state": "Punjab",
+    "districtCode": "PB-ASR",
+    "district": "Amritsar",
+    "blockCode": "PB-ASR-01",
+    "block": "Ajnala",
+    "lat": 31.63,
+    "lng": 74.87
+  },
+  {
+    "stateCode": "PB",
+    "state": "Punjab",
+    "districtCode": "PB-BTI",
+    "district": "Bathinda",
+    "blockCode": "PB-BTI-01",
+    "block": "Talwandi Sabo",
+    "lat": 30.21,
+    "lng": 74.95
+  },
+  {
+    "stateCode": "HR",
+    "state": "Haryana",
+    "districtCode": "HR-KRN",
+    "district": "Karnal",
+    "blockCode": "HR-KRN-01",
+    "block": "Gharaunda",
+    "lat": 29.69,
+    "lng": 76.98
+  },
+  {
+    "stateCode": "HR",
+    "state": "Haryana",
+    "districtCode": "HR-AMB",
+    "district": "Ambala",
+    "blockCode": "HR-AMB-01",
+    "block": "Barara",
+    "lat": 30.38,
+    "lng": 76.78
+  },
+  {
+    "stateCode": "HR",
+    "state": "Haryana",
+    "districtCode": "HR-HSR",
+    "district": "Hisar",
+    "blockCode": "HR-HSR-01",
+    "block": "Hansi",
+    "lat": 29.15,
+    "lng": 75.72
+  },
+  {
+    "stateCode": "UP",
+    "state": "Uttar Pradesh",
+    "districtCode": "UP-MRT",
+    "district": "Meerut",
+    "blockCode": "UP-MRT-01",
+    "block": "Mawana",
+    "lat": 28.98,
+    "lng": 77.71
+  },
+  {
+    "stateCode": "UP",
+    "state": "Uttar Pradesh",
+    "districtCode": "UP-VNS",
+    "district": "Varanasi",
+    "blockCode": "UP-VNS-01",
+    "block": "Pindra",
+    "lat": 25.32,
+    "lng": 82.97
+  },
+  {
+    "stateCode": "UP",
+    "state": "Uttar Pradesh",
+    "districtCode": "UP-LKO",
+    "district": "Lucknow",
+    "blockCode": "UP-LKO-01",
+    "block": "Bakshi Ka Talab",
+    "lat": 26.85,
+    "lng": 80.95
+  },
+  {
+    "stateCode": "UP",
+    "state": "Uttar Pradesh",
+    "districtCode": "UP-MZF",
+    "district": "Muzaffarnagar",
+    "blockCode": "UP-MZF-01",
+    "block": "Khatauli",
+    "lat": 29.47,
+    "lng": 77.70
+  },
+  {
+    "stateCode": "MH",
+    "state": "Maharashtra",
+    "districtCode": "MH-NSK",
+    "district": "Nashik",
+    "blockCode": "MH-NSK-01",
+    "block": "Niphad",
+    "lat": 19.99,
+    "lng": 73.79
+  },
+  {
+    "stateCode": "MH",
+    "state": "Maharashtra",
+    "districtCode": "MH-PUN",
+    "district": "Pune",
+    "blockCode": "MH-PUN-01",
+    "block": "Baramati",
+    "lat": 18.52,
+    "lng": 73.86
+  },
+  {
+    "stateCode": "MH",
+    "state": "Maharashtra",
+    "districtCode": "MH-KOP",
+    "district": "Kolhapur",
+    "blockCode": "MH-KOP-01",
+    "block": "Kagal",
+    "lat": 16.70,
+    "lng": 74.24
+  },
+  {
+    "stateCode": "GJ",
+    "state": "Gujarat",
+    "districtCode": "GJ-RJK",
+    "district": "Rajkot",
+    "blockCode": "GJ-RJK-01",
+    "block": "Gondal",
+    "lat": 22.30,
+    "lng": 70.80
+  },
+  {
+    "stateCode": "GJ",
+    "state": "Gujarat",
+    "districtCode": "GJ-AMD",
+    "district": "Ahmedabad",
+    "blockCode": "GJ-AMD-01",
+    "block": "Sanand",
+    "lat": 23.02,
+    "lng": 72.57
+  },
+  {
+    "stateCode": "RJ",
+    "state": "Rajasthan",
+    "districtCode": "RJ-JPR",
+    "district": "Jaipur",
+    "blockCode": "RJ-JPR-01",
+    "block": "Chomu",
+    "lat": 26.91,
+    "lng": 75.79
+  },
+  {
+    "stateCode": "RJ",
+    "state": "Rajasthan",
+    "districtCode": "RJ-KOT",
+    "district": "Kota",
+    "blockCode": "RJ-KOT-01",
+    "block": "Ramganj Mandi",
+    "lat": 25.18,
+    "lng": 75.83
+  },
+  {
+    "stateCode": "RJ",
+    "state": "Rajasthan",
+    "districtCode": "RJ-GNG",
+    "district": "Ganganagar",
+    "blockCode": "RJ-GNG-01",
+    "block": "Suratgarh",
+    "lat": 29.90,
+    "lng": 73.88
+  },
+  {
+    "stateCode": "MP",
+    "state": "Madhya Pradesh",
+    "districtCode": "MP-IND",
+    "district": "Indore",
+    "blockCode": "MP-IND-01",
+    "block": "Depalpur",
+    "lat": 22.72,
+    "lng": 75.86
+  },
+  {
+    "stateCode": "MP",
+    "state": "Madhya Pradesh",
+    "districtCode": "MP-BPL",
+    "district": "Bhopal",
+    "blockCode": "MP-BPL-01",
+    "block": "Berasia",
+    "lat": 23.26,
+    "lng": 77.41
+  },
+  {
+    "stateCode": "BR",
+    "state": "Bihar",
+    "districtCode": "BR-PAT",
+    "district": "Patna",
+    "blockCode": "BR-PAT-01",
+    "block": "Bihta",
+    "lat": 25.59,
+    "lng": 85.14
+  },
+  {
+    "stateCode": "BR",
+    "state": "Bihar",
+    "districtCode": "BR-MZP",
+    "district": "Muzaffarpur",
+    "blockCode": "BR-MZP-01",
+    "block": "Kanti",
+    "lat": 26.12,
+    "lng": 85.39
+  },
+  {
+    "stateCode": "WB",
+    "state": "West Bengal",
+    "districtCode": "WB-BRD",
+    "district": "Burdwan",
+    "blockCode": "WB-BRD-01",
+    "block": "Kalna",
+    "lat": 23.23,
+    "lng": 87.86
+  },
+  {
+    "stateCode": "TN",
+    "state": "Tamil Nadu",
+    "districtCode": "TN-THJ",
+    "district": "Thanjavur",
+    "blockCode": "TN-THJ-01",
+    "block": "Kumbakonam",
+    "lat": 10.79,
+    "lng": 79.14
+  },
+  {
+    "stateCode": "TN",
+    "state": "Tamil Nadu",
+    "districtCode": "TN-CBE",
+    "district": "Coimbatore",
+    "blockCode": "TN-CBE-01",
+    "block": "Pollachi",
+    "lat": 11.02,
+    "lng": 76.96
+  },
+  {
+    "stateCode": "AP",
+    "state": "Andhra Pradesh",
+    "districtCode": "AP-GNT",
+    "district": "Guntur",
+    "blockCode": "AP-GNT-01",
+    "block": "Tenali",
+    "lat": 16.31,
+    "lng": 80.44
+  },
+  {
+    "stateCode": "TG",
+    "state": "Telangana",
+    "districtCode": "TG-WRG",
+    "district": "Warangal",
+    "blockCode": "TG-WRG-01",
+    "block": "Jangaon",
+    "lat": 17.97,
+    "lng": 79.60
+  },
+  {
+    "stateCode": "KA",
+    "state": "Karnataka",
+    "districtCode": "KA-MYS",
+    "district": "Mysuru",
+    "blockCode": "KA-MYS-01",
+    "block": "Nanjangud",
+    "lat": 12.30,
+    "lng": 76.64
+  },
+  {
+    "stateCode": "KL",
+    "state": "Kerala",
+    "districtCode": "KL-PKD",
+    "district": "Palakkad",
+    "blockCode": "KL-PKD-01",
+    "block": "Chittur",
+    "lat": 10.78,
+    "lng": 76.65
+  },
+  {
+    "stateCode": "OR",
+    "state": "Odisha",
+    "districtCode": "OR-CTC",
+    "district": "Cuttack",
+    "blockCode": "OR-CTC-01",
+    "block": "Athagarh",
+    "lat": 20.46,
+    "lng": 85.88
+  },
+  {
+    "stateCode": "AS",
+    "state": "Assam",
+    "districtCode": "AS-NAG",
+    "district": "Nagaon",
+    "blockCode": "AS-NAG-01",
+    "block": "Kaliabor",
+    "lat": 26.35,
+    "lng": 92.68
+  }
+]

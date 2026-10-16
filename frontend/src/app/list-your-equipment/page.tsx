@@ -82,7 +82,7 @@ export default function ListYourEquipmentPage() {
 
           <div>
             <div className="flex justify-between font-bold text-slate-700 mb-1.5">
-              <span>Rental Days / Month:</span>
+              <span>Rental Days per Month:</span>
               <span className="text-[#14532d]">{rentalDaysPerMonth} Days</span>
             </div>
             <input

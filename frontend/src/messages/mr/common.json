@@ -110,7 +110,21 @@
     "allDistricts": "सर्व जिल्हे",
     "stateLabel": "राज्य",
     "districtLabel": "जिल्हा",
-    "changeLocation": "ठिकाण बदला"
+    "changeLocation": "ठिकाण बदला",
+    "promptTitle": "जवळपासची यंत्रे व हवामान पाहा",
+    "promptDesc": "जवळची कृषी यंत्रे आणि स्थानिक हवामान पाहण्यासाठी स्थानाची परवानगी द्या.",
+    "allowLocation": "स्थानाची अनुमती द्या",
+    "chooseManually": "स्वतः निवडा",
+    "forget": "स्थान हटवा",
+    "forgotten": "स्थान माहिती हटवली",
+    "privacyNote": "सुमारे १ किमी सुरक्षित. कधीही सामायिक केले जात नाही.",
+    "geoUnsupported": "ब्राउझरमध्ये स्थान सेवा उपलब्ध नाही.",
+    "outOfIndia": "स्थान भारताबाहेरील दिसते. कृपया जिल्हा निवडा.",
+    "permissionDenied": "स्थानाची अनुमती नाकारली गेली.",
+    "timeout": "वेळ संपली. कृपया स्वतः निवडा.",
+    "unavailable": "स्थान सेवा उपलब्ध नाही.",
+    "noDistricts": "जिल्हा आढळला नाही.",
+    "change": "स्थान बदला"
   },
   "search": {
     "searchPlaceholder": "ट्रॅक्टर, कम्बाइन, रोटाव्हेटर शोधा...",
@@ -127,5 +141,35 @@
     "builtByTitle": "इतर प्रकल्प",
     "builtBySubtitle": "संस्थापकाद्वारे विकसित केलेले वेब प्रकल्प",
     "photoAlt": "Dinesh Kumar Yadav यांचे छायाचित्र, FarmRentHub चे संस्थापक"
+  },
+  "theme": {
+    "title": "थीम",
+    "light": "लाइट",
+    "dark": "डार्क",
+    "system": "सिस्टम",
+    "toggle": "थीम बदला",
+    "choose": "थीम निवडा"
+  },
+  "weather": {
+    "label": "हवामान",
+    "title": "शेती हवामान अंदाज",
+    "clear": "निरभ्र आकाश",
+    "partlyCloudy": "अंशतः ढगाळ",
+    "cloudy": "ढगाळ",
+    "overcast": "दाट ढग",
+    "fog": "धुके",
+    "drizzle": "रिमझिम पाऊस",
+    "rain": "पाऊस",
+    "snow": "हिमवृष्टी",
+    "showers": "पावसाच्या सरी",
+    "thunderstorm": "वादळी पाऊस",
+    "feelsLike": "जाणवणारे",
+    "rainChance": "पाऊस",
+    "humidity": "आर्द्रता",
+    "windSpeed": "वारा",
+    "threeDay": "३ दिवसांचा अंदाज",
+    "today": "आज",
+    "updated": "अपडेट",
+    "unavailable": "हवामानाची माहिती सध्या उपलब्ध नाही"
   }
 }

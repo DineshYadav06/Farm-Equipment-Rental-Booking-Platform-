@@ -1,5 +1,6 @@
 import React from "react";
 import { RegistryItem, getRegistryItem } from "@/content/registry";
+import { useTranslation } from "@/i18n/context";
 import { ExternalLink, AlertCircle, CheckCircle2 } from "lucide-react";
 
 interface SourceNoteProps {
@@ -15,6 +16,7 @@ export const SourceNote: React.FC<SourceNoteProps> = ({
   className = "",
   compact = false
 }) => {
+  const { t } = useTranslation();
   const item = propItem || (registryId ? getRegistryItem(registryId) : null);
 
   if (!item) return null;
@@ -23,17 +25,17 @@ export const SourceNote: React.FC<SourceNoteProps> = ({
 
   return (
     <div
-      className={`inline-flex flex-wrap items-center gap-1.5 text-[11px] leading-tight text-[#44403c] mt-1 ${className}`}
+      className={`inline-flex flex-wrap items-center gap-1.5 text-[11px] leading-tight text-[var(--muted)] mt-1 ${className}`}
     >
       {/* Sample Data Badge if unverified/sample */}
       {isSample ? (
-        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 font-bold border border-amber-300 text-[10px] tracking-wide uppercase">
-          <AlertCircle className="w-3 h-3 text-amber-700 shrink-0" />
-          <span>Sample data / नमूना</span>
+        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/70 text-amber-900 dark:text-amber-200 font-bold border border-amber-300 dark:border-amber-700 text-[10px] tracking-wide uppercase">
+          <AlertCircle className="w-3 h-3 text-amber-700 dark:text-amber-400 shrink-0" />
+          <span>{t("common", "badges.sampleData")}</span>
         </span>
       ) : (
-        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300 text-[10px]">
-          <CheckCircle2 className="w-3 h-3 text-emerald-700 shrink-0" />
+        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/70 text-emerald-900 dark:text-emerald-200 font-semibold border border-emerald-300 dark:border-emerald-700 text-[10px]">
+          <CheckCircle2 className="w-3 h-3 text-emerald-700 dark:text-emerald-400 shrink-0" />
           <span>Verified Source</span>
         </span>
       )}

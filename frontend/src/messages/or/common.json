@@ -110,7 +110,21 @@
     "allDistricts": "ସମସ୍ତ ଜିଲ୍ଲା",
     "stateLabel": "ରାଜ୍ୟ",
     "districtLabel": "ଜିଲ୍ଲା",
-    "changeLocation": "ସ୍ଥାନ ବଦଳାନ୍ତୁ"
+    "changeLocation": "ସ୍ଥାନ ବଦଳାନ୍ତୁ",
+    "promptTitle": "ନିକଟସ୍ଥ ଯନ୍ତ୍ରପାତି ଓ ପାଣିପାଗ",
+    "promptDesc": "ପାଖରେ ଥିବା କୃଷି ଯନ୍ତ୍ରପାତି ଏବଂ ପାଣିପାଗ ଦେଖିବା ପାଇଁ ଲୋକେସନ୍ ଅନୁମତି ଦିଅନ୍ତୁ।",
+    "allowLocation": "ଲୋକେସନ୍ ଅନୁମତି ଦିଅନ୍ତୁ",
+    "chooseManually": "ନିଜେ ବାଛନ୍ତୁ",
+    "forget": "ଲୋକେସନ୍ ହଟାନ୍ତୁ",
+    "forgotten": "ଲୋକେସନ୍ ସୂଚନା ସଫା କରାଗଲା",
+    "privacyNote": "ପ୍ରାୟ ୧ କିମି ସୁରକ୍ଷିତ। କେବେ ସେୟାର ହୁଏ ନାହିଁ।",
+    "geoUnsupported": "ବ୍ରାଉଜରରେ ଲୋକେସନ୍ ସମର୍ଥିତ ନୁହେଁ।",
+    "outOfIndia": "ଲୋକେସନ୍ ଭାରତ ବାହାରେ ଅଛି।",
+    "permissionDenied": "ଲୋକେସନ୍ ଅନୁମତି ମିଳିଲା ନାହିଁ।",
+    "timeout": "ସମୟ ସମାପ୍ତ ହେଲା।",
+    "unavailable": "ଲୋକେସନ୍ ସେବା ଅନୁପଲବ୍ଧ।",
+    "noDistricts": "କୌଣସି ଜିଲ୍ଲା ମିଳିଲା ନାହିଁ।",
+    "change": "ଲୋକେସନ୍ ବଦଳାନ୍ତୁ"
   },
   "search": {
     "searchPlaceholder": "ଟ୍ରାକ୍ଟର, ହାର୍ଭେଷ୍ଟର ଖୋଜନ୍ତୁ...",
@@ -127,5 +141,35 @@
     "builtByTitle": "ଅନ୍ୟାନ୍ୟ ପ୍ରକଳ୍ପ",
     "builtBySubtitle": "ପ୍ରତିଷ୍ଠାତାଙ୍କ ଦ୍ୱାରା ନିର୍ମିତ ୱେବ୍ ପ୍ରକଳ୍ପ",
     "photoAlt": "Dinesh Kumar Yadav ଙ୍କ ଫଟୋ, FarmRentHub ର ପ୍ରତିଷ୍ଠାତା"
+  },
+  "theme": {
+    "title": "ଥିମ୍",
+    "light": "ଲାଇଟ୍",
+    "dark": "ଡାର୍କ",
+    "system": "ସିଷ୍ଟମ୍",
+    "toggle": "ଥିମ୍ ବଦଳାନ୍ତୁ",
+    "choose": "ଥିମ୍ ବାଛନ୍ତୁ"
+  },
+  "weather": {
+    "label": "ପାଣିପାଗ",
+    "title": "କୃଷି ପାଣିପାଗ ପୂର୍ବାନୁମାନ",
+    "clear": "ନିର୍ମଳ ଆକାଶ",
+    "partlyCloudy": "ଆଂଶିକ ମେଘୁଆ",
+    "cloudy": "ମେଘୁଆ",
+    "overcast": "ଘନ ମେଘ",
+    "fog": "କୁହୁଡ଼ି",
+    "drizzle": "ଝିପିଝିପି ବର୍ଷା",
+    "rain": "ବର୍ଷା",
+    "snow": "ତୁଷାରପାତ",
+    "showers": "ବର୍ଷା ଛିଟା",
+    "thunderstorm": "ଘଡ଼ଘଡ଼ି ସହ ବର୍ଷା",
+    "feelsLike": "ଅନୁଭୂତ",
+    "rainChance": "ବର୍ଷା",
+    "humidity": "ଆର୍ଦ୍ରତା",
+    "windSpeed": "ପବନ",
+    "threeDay": "୩ ଦିନର ପୂର୍ବାନୁମାନ",
+    "today": "ଆଜି",
+    "updated": "ଅପଡେଟ୍",
+    "unavailable": "ପାଣିପାଗ ସୂଚନା ବର୍ତ୍ତମାନ ଉପଲବ୍ଧ ନାହିଁ"
   }
 }

@@ -150,6 +150,30 @@ export const CONTENT_REGISTRY: Record<string, RegistryItem> = {
     verifiedBy: "Mock Data Generator",
     status: "sample",
     notes: "Sample rate. Real rental price set by equipment owner."
+  },
+  "mandi-agmarknet-portal": {
+    id: "mandi-agmarknet-portal",
+    category: "mandi",
+    labelKey: "mandi.officialPortal",
+    value: "Agmarknet APMC Daily Arrivals & Prices",
+    sourceName: "Ministry of Agriculture & Farmers Welfare, Directorate of Marketing & Inspection",
+    sourceUrl: "https://agmarknet.gov.in",
+    asOfDate: "2026-03-01",
+    verifiedBy: "Data.gov.in Official API",
+    status: "verified",
+    notes: "Direct feed from wholesale APMC mandis across India"
+  },
+  "guide-icar-cropping-calendar": {
+    id: "guide-icar-cropping-calendar",
+    category: "scheme",
+    labelKey: "season.officialSource",
+    value: "ICAR Crop-Implement Mechanization Calendar",
+    sourceName: "Indian Council of Agricultural Research (ICAR - CIAE Bhopal)",
+    sourceUrl: "https://ciae.icar.gov.in",
+    asOfDate: "2026-03-01",
+    verifiedBy: "Agronomy Advisory Board",
+    status: "verified",
+    notes: "General guidance on agronomic stages and appropriate tractor/implement pairings"
   }
 };
 

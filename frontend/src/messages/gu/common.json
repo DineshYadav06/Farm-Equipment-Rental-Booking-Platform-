@@ -110,7 +110,21 @@
     "allDistricts": "બધા જિલ્લા",
     "stateLabel": "રાજ્ય",
     "districtLabel": "જિલ્લો",
-    "changeLocation": "સ્થળ બદલો"
+    "changeLocation": "સ્થળ બદલો",
+    "promptTitle": "નજીકના સાધનો અને હવામાન જુઓ",
+    "promptDesc": "નજીકની કૃષિ મશીનરી અને સ્થાનિક હવામાન જોવા સ્થાનની મંજૂરી આપો.",
+    "allowLocation": "સ્થાનની મંજૂરી આપો",
+    "chooseManually": "જાતે પસંદ કરો",
+    "forget": "સ્થાન ભૂંસી નાખો",
+    "forgotten": "સ્થાન માહિતી હટાવી",
+    "privacyNote": "આશરે ૧ કિમી સુરક્ષિત. ક્યારેય શેર થતું નથી.",
+    "geoUnsupported": "બ્રાઉઝરમાં લોકેશન સપોર્ટ નથી.",
+    "outOfIndia": "સ્થાન ભારત બહારનું લાગે છે. જિલ્લો પસંદ કરો.",
+    "permissionDenied": "સ્થાન મંજૂરી નકારાઈ.",
+    "timeout": "સમય સમાપ્ત થયો.",
+    "unavailable": "સ્થાન સેવા અનુપલબ્ધ.",
+    "noDistricts": "કોઈ જિલ્લો મળ્યો નથી.",
+    "change": "સ્થાન બદલો"
   },
   "search": {
     "searchPlaceholder": "ટ્રેક્ટર, કમ્બાઇન, રોટાવેટર શોધો...",
@@ -127,5 +141,35 @@
     "builtByTitle": "અન્ય પ્રોજેક્ટ્સ",
     "builtBySubtitle": "સ્થાપક દ્વારા વિકસિત વેબ પ્રોજેક્ટ્સ",
     "photoAlt": "Dinesh Kumar Yadav નો ફોટો, FarmRentHub ના સ્થાપક"
+  },
+  "theme": {
+    "title": "થીમ",
+    "light": "લાઇટ",
+    "dark": "ડાર્ક",
+    "system": "સિસ્ટમ",
+    "toggle": "થીમ બદલો",
+    "choose": "થીમ પસંદ કરો"
+  },
+  "weather": {
+    "label": "હવામાન",
+    "title": "કૃષિ હવામાન આગાહી",
+    "clear": "સ્વચ્છ આકાશ",
+    "partlyCloudy": "અંશતઃ વાદળછાયું",
+    "cloudy": "વાદળછાયું",
+    "overcast": "ઘાટા વાદળો",
+    "fog": "ઝાકળ",
+    "drizzle": "ઝરમર વરસાદ",
+    "rain": "વરસાદ",
+    "snow": "બરફવર્ષા",
+    "showers": "વરસાદી ઝાપટાં",
+    "thunderstorm": "ગાજવીજ સાથે વરસાદ",
+    "feelsLike": "અનુભવાતું",
+    "rainChance": "વરસાદ",
+    "humidity": "ભેજ",
+    "windSpeed": "પવન",
+    "threeDay": "૩ દિવસની આગાહી",
+    "today": "આજે",
+    "updated": "અપડેટ",
+    "unavailable": "હવામાન વિગતો હાલ ઉપલબ્ધ નથી"
   }
 }

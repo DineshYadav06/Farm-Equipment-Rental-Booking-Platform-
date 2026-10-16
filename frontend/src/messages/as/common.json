@@ -110,7 +110,21 @@
     "allDistricts": "সকলো জিলা",
     "stateLabel": "ৰাজ্য",
     "districtLabel": "জিলা",
-    "changeLocation": "স্থান সলনি কৰক"
+    "changeLocation": "স্থান সলনি কৰক",
+    "promptTitle": "ওচৰৰ সা-সঁজুলি আৰু বতৰ চাওক",
+    "promptDesc": "ওচৰৰ কৃষি যন্ত্ৰপাতি আৰু স্থানীয় বতৰ চাবলৈ স্থানৰ অনুমতি দিয়ক।",
+    "allowLocation": "স্থানৰ অনুমতি দিয়ক",
+    "chooseManually": "নিজে বাছক",
+    "forget": "স্থান মচক",
+    "forgotten": "স্থান তথ্য মচি পেলোৱা হ'ল",
+    "privacyNote": "প্ৰায় ১ কিমি সুৰক্ষিত। কেতিয়াও প্ৰকাশ কৰা নহয়।",
+    "geoUnsupported": "ব্ৰাউজাৰত স্থান সমৰ্থিত নহয়।",
+    "outOfIndia": "স্থান ভাৰতৰ বাহিৰৰ। জিলা বাছক।",
+    "permissionDenied": "স্থানৰ অনুমতি অগ্ৰাহ্য কৰা হ'ল।",
+    "timeout": "সময় উকলি গ'ল।",
+    "unavailable": "স্থান সেৱা অনুপলব্ধ।",
+    "noDistricts": "কোনো জিলা পোৱা নগ'ল।",
+    "change": "স্থান সলনি কৰক"
   },
   "search": {
     "searchPlaceholder": "ট্ৰেক্টৰ, কম্বাইন সন্ধান কৰক...",
@@ -127,5 +141,35 @@
     "builtByTitle": "অন্যান্য প্রকল্পসমূহ",
     "builtBySubtitle": "প্রতিষ্ঠাপকে নির্মাণ কৰা ৱেব প্রকল্পসমূহ",
     "photoAlt": "Dinesh Kumar Yadav ৰ ফটো, FarmRentHub ৰ প্রতিষ্ঠাপক"
+  },
+  "theme": {
+    "title": "থিম",
+    "light": "লাইট",
+    "dark": "ডাৰ্ক",
+    "system": "ছিষ্টেম",
+    "toggle": "থিম সলনি কৰক",
+    "choose": "থিম বাছক"
+  },
+  "weather": {
+    "label": "বতৰ",
+    "title": "কৃষি বতৰৰ আগজাননী",
+    "clear": "পৰিষ্কাৰ আকাশ",
+    "partlyCloudy": "আংশিক ডাৱৰীয়া",
+    "cloudy": "ডাৱৰীয়া",
+    "overcast": "ঘন ডাৱৰ",
+    "fog": "কুঁৱলী",
+    "drizzle": "টোপাটোপে বৰষুণ",
+    "rain": "বৰষুণ",
+    "snow": "বৰফপাত",
+    "showers": "বৰষুণৰ জাক",
+    "thunderstorm": "ঢেৰেকণিৰ সৈতে বৰষুণ",
+    "feelsLike": "অনুভৱ",
+    "rainChance": "বৰষুণ",
+    "humidity": "আৰ্দ্ৰতা",
+    "windSpeed": "বতাহ",
+    "threeDay": "৩ দিনৰ আগজাননী",
+    "today": "আজি",
+    "updated": "আপডেট",
+    "unavailable": "বতৰৰ তথ্য এতিয়া উপলব্ধ নহয়"
   }
 }

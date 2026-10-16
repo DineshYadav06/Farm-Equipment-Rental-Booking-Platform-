@@ -69,21 +69,30 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
   onSelect,
   count = 12
 }) => {
-  const { locale, formatNumber } = useTranslation();
+  const { locale, formatNumber, t } = useTranslation();
   const IconComponent = ICON_MAP[category.iconName] || Tractor;
 
   // Localized script name for this category
   const localizedName = category.names[locale] || category.name;
   const imageId = SLUG_TO_IMAGE_ID[category.slug] || "cat-tractor";
 
+  const rateUnitKey =
+    category.defaultRateUnit === "hour"
+      ? "units.perHour"
+      : category.defaultRateUnit === "day"
+      ? "units.perDay"
+      : category.defaultRateUnit === "acre"
+      ? "units.perAcre"
+      : "units.perQuintal";
+
   return (
     <button
       type="button"
       onClick={() => onSelect(category)}
-      className={`group relative flex flex-col p-3 rounded-2xl border text-left transition-all duration-200 select-none ${
+      className={`group relative flex flex-col p-3 rounded-2xl border text-left transition-all duration-200 select-none cursor-pointer ${
         isSelected
-          ? "bg-[#dcfce7] border-[#16a34a] ring-2 ring-[#16a34a]/30 shadow-md"
-          : "bg-white border-slate-200 hover:border-[#16a34a] hover:bg-[#fafaf5] hover:shadow-xs"
+          ? "bg-[#dcfce7] dark:bg-[#143d22] border-[#16a34a] ring-2 ring-[#16a34a]/30 shadow-md"
+          : "bg-[var(--surface)] border-[var(--border)] hover:border-[#16a34a] hover:bg-[var(--bg-wheat)] hover:shadow-xs"
       }`}
     >
       {/* Category Image with Lucide Icon Overlay Badge */}
@@ -106,19 +115,16 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
         </div>
 
         <span className="absolute bottom-2 right-2 text-[10px] font-bold text-slate-700 bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded-md shadow-2xs z-10">
-          {formatNumber(count)} machines
+          {formatNumber(count)} {t("home", "stats.machines")}
         </span>
       </div>
 
-      <h4 className="font-bold text-slate-900 text-sm leading-snug group-hover:text-[#14532d]">
+      <h4 className="font-bold text-[var(--text)] text-sm leading-snug group-hover:text-[#14532d] dark:group-hover:text-emerald-400">
         {localizedName}
       </h4>
-      <span className="text-[11px] text-slate-500 font-medium mt-0.5">
-        {category.name}
-      </span>
 
-      <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-[#14532d]">
-        <span>Per {category.defaultRateUnit}</span>
+      <div className="mt-2.5 pt-2 border-t border-[var(--border)] flex items-center justify-between text-[11px] font-bold text-[#14532d] dark:text-emerald-400">
+        <span>{t("common", rateUnitKey)}</span>
         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
       </div>
     </button>

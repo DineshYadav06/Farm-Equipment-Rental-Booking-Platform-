@@ -102,7 +102,7 @@ export const EquipmentDetailsModal: React.FC<EquipmentDetailsModalProps> = ({
                 <div className="font-bold text-slate-800">{equipment.hp ? `${equipment.hp} HP` : "N/A"}</div>
               </div>
               <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                <div className="text-[11px] text-slate-500">{isHi ? "ईंधन प्रकार" : "Fuel / Drive"}</div>
+                <div className="text-[11px] text-slate-500">{isHi ? "ईंधन प्रकार" : "Fuel Type"}</div>
                 <div className="font-bold text-slate-800">{equipment.fuel_type}</div>
               </div>
               <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">

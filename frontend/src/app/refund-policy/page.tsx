@@ -54,8 +54,8 @@ export default function RefundPolicyPage() {
                 <td className="p-3 text-slate-500">Verified by platform hour-meter</td>
               </tr>
               <tr>
-                <td className="p-3 font-medium">Unseasonal Heavy Rain / IMD Advisory</td>
-                <td className="p-3 font-bold text-[#14532d]">100% Free Rescheduling / Refund</td>
+                <td className="p-3 font-medium">Unseasonal Heavy Rain or IMD Advisory</td>
+                <td className="p-3 font-bold text-[#14532d]">100% Free Rescheduling or Refund</td>
                 <td className="p-3">Nil</td>
                 <td className="p-3 text-slate-500">Protected under weather force majeure</td>
               </tr>
